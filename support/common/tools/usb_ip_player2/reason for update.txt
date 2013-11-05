@@ -1,0 +1,4 @@
+The original USB_IP_Player routes all UDP data to the first UDP port identified in the stream. Whilst fine for WMV9 content which only uses a single port,
+ material broadcast in H.264/AAC tends to use seperate UDP ports for audio and video.
+
+USB_IP_player2 will identify and route data to up to 32 different UDP ports.

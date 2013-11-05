@@ -1,0 +1,51 @@
+//***************************************************************************
+// A sizing constant defined in a SYMBOLS section.
+// Symbols defined this way are accessible in CodeScape and in scripts
+// so this can be more useful than just using #define's
+//***************************************************************************
+SYMBOLS SECTION SYMBOLS 
+    BUFSIZE:    512
+    NUM_JOBS:   2
+SECTION END
+
+//***************************************************************************
+// Data buffers used by the main program. These are located in ADATA memory.
+// Pointers to these buffers are passed as arguments to the dotProduct function.
+//***************************************************************************
+SECTION UNINITIALISED_DATA PARTIAL ADATA
+    INPUT_A:    BUFSIZE
+    INPUT_B:    BUFSIZE
+    OUT:        1
+SECTION END 
+
+//***************************************************************************
+// Initial setup data used by the main program. In this simple example, we
+// just load the initial values for SHO, MHO and AP7, which points to the
+// argument block for the first (only) function called by the main program.
+//***************************************************************************
+SECTION INITIALISED_DATA PARTIAL LDATA
+InitConsts:
+AP7:    dpArguments
+SECTION END
+
+//***************************************************************************
+// Argument blocks used by the main program. In this simple case, there is
+// only one, containing arguments for the call to the dotProduct function.
+//***************************************************************************
+SECTION INITIALISED_DATA PARTIAL ADATA
+dpArguments:
+    ARGBLOCK dotProduct
+        _INBUF1 = INPUT_A
+        _INBUF2 = INPUT_B
+        _OUTBUF = OUT
+        _LENGTH = BUFSIZE
+        _SHIFT = -3
+    ARGBLOCK END
+SECTION END
+
+//***************************************************************************
+// MCPOS job data
+//***************************************************************************
+SECTION UNINITIALISED_DATA PARTIAL ADATA
+    JOB_DATA:   MCPOS_JOB_WORDS*NUM_JOBS
+SECTION END

@@ -1,0 +1,76 @@
+;----------------------------------------------------------------------------
+; Installation file for the IMGUSB device
+; Copyright (c) Imagination Technologies 2007
+;----------------------------------------------------------------------------
+
+[Version]
+Signature=$CHICAGO$
+Class=MultiFunction
+ClassGuid={4D36E971-E325-11CE-BFC1-08002BE10318}
+Provider=%MFGNAME%
+DriverVer=07/25/2002,1.0.0.0
+
+[Manufacturer]
+%MFGNAME%=DeviceList
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+
+[SourceDisksFiles]
+imgusb.sys=1
+imgwdm.sys=1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,
+
+[DeviceList]
+%DESCRIPTION%=DriverInstall,USB\VID_149A&PID_0002
+%DESCRIPTION%=DriverInstall,USB\VID_1C5B&PID_0002
+
+;----------------------------------------------------------------------------
+;  Windows 2000 Sections
+;----------------------------------------------------------------------------
+
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+[DriverCopyFiles]
+imgusb.sys,,,2
+imgwdm.sys,,,2
+
+[DriverInstall.NT.Services]
+AddService=IMGUSB,2,DriverService
+
+[DriverService]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\imgusb.sys
+
+[DriverInstall.nt.hw]
+AddReg=DriverHwAddReg
+
+;----------------------------------------------------------------------------
+;  Windows 98 Sections
+;----------------------------------------------------------------------------
+
+[DriverInstall]
+AddReg=DriverAddReg
+CopyFiles=DriverCopyFiles
+
+[DriverAddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,imgusb.sys
+						
+[DriverInstall.hw]
+AddReg=DriverHwAddReg
+
+;----------------------------------------------------------------------------
+;  String Definitions
+;----------------------------------------------------------------------------
+
+[Strings]
+MFGNAME="Imagination Technologies"
+INSTDISK="IMGWorks USB"
+DESCRIPTION="IMGWorks USB Test"
+

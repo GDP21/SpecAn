@@ -1,0 +1,2 @@
+BINS+=/img/home/IMGSpectumAnalyser/support/specAn/application/testApp/build/smake/test_METAGCC/GRAMApp.elf
+BINS+=/img/home/IMGSpectumAnalyser/support/specAn/application/testApp/build/smake/test_METAGCC/SAapp.elf

@@ -1,0 +1,42 @@
+/* Local thread ELF files */
+EXEC  mcposBasic.elf THREAD 0 
+
+
+
+GLOBAL gram.elf
+
+GBLHEAP 0x000720
+STACK 0x004000  THREAD 0
+
+TBI INT  THREAD 0 CCB 32
+TBI BGND THREAD 0 CCB 32 
+
+
+
+LAYOUT
+{
+		/* Core RAM data */
+		/* Data area */
+		0x82000000
+		GBLHEAP
+
+    	/* External RAM ... */
+		/* ... Code area: Special region for small minim model code */
+		0x61880000
+		THREAD 0 EXEC CODE
+
+		/* ... Data area: Cached and write combined */
+		REBASE 0x38000000
+		THREAD 0 EXEC DATA
+		THREAD 0 STACK   
+
+	/* Expanded GRAM areas ... */
+		/* ... GRAM DBL */
+		0xB4000000
+		GLOBAL gram.elf  
+		
+	/* packed GRAM areas */
+		/* ... Code area: Special region for small minim model code */
+		/* ... Data area: raw/uncached/no write combiner */
+		/* ... Data area: Cached and write combined */
+}

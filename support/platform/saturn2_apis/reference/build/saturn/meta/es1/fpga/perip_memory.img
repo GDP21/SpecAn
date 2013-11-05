@@ -1,0 +1,11 @@
+METAC 2 1
+
+/* Core Memory */
+MEMORY mtp_code_ram	ORIGIN	0x80000000 SIZE 0x10000 	/* 64k  */
+MEMORY mtp_data_ram	ORIGIN	0x82000000 SIZE 0x10000 	/* 64k  */
+
+/* Internal Memory */
+MEMORY gram		ORIGIN	0xB7000000 SIZE 0x81000		/* 516k The rest has been split out to allow boot rom testing  */
+
+/* External Memory */
+MEMORY ext_dram		ORIGIN  0xB0000000 SIZE 0x02000000      /* 32MB */

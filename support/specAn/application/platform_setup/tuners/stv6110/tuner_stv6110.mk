@@ -1,0 +1,12 @@
+#
+# ST STV6110 tuner support
+#
+
+PERIPHERALS+=scbm
+
+MODS+=$(TUNERS_ROOT)/stv6110
+NEEDS_MEOS=1
+
+PLT_C_SRC+=tuner_stv6110.c
+PLT_TUNER_SRCDIRS=stv6110
+

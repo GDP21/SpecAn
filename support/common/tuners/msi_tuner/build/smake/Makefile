@@ -1,0 +1,10 @@
+UNIT_TYPE=MOD
+UNIT_NAME=msi_tuner
+
+C_SRC=msi_tuner.c
+
+UNIT_DEFINES+=__MTX_MEOS__
+GLOBAL_OPTIONS+=ERROR_ON_WARNING
+
+
+include $(SMAKE_ROOT)/smake.mk

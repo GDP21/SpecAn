@@ -1,0 +1,14 @@
+;
+; Stub driver for what would be next in the pipeline
+;
+
+driver nextStubDriver
+    params
+        use
+            outputAddressQ       as queue
+            outputCaptureLengthQ as queue
+            outputDiscardLengthQ as queue
+            outputIscrQ          as queue
+        end
+    end
+end

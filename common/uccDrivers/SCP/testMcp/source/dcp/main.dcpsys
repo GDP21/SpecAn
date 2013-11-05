@@ -1,0 +1,26 @@
+;
+; DCP system file for SCP driver test
+;
+
+pipeline scpPipeline
+    use
+        scp     as scpDevice     logThreshold=0
+        scpShim as scpShimDevice
+    end
+    connection
+        scp.outputAddressQ       => scpShim.outputAddressQ
+        scp.outputCaptureLengthQ => scpShim.outputCaptureLengthQ
+        scp.outputDiscardLengthQ => scpShim.outputDiscardLengthQ
+        scp.outputIscrQ          => scpShim.outputIscrQ
+    end
+end
+
+map
+    device
+        scpDevice     as scpDriver
+        scpShimDevice as scpMcpShimDriver
+    end
+    pipeline
+        scpPipeline0 as scpPipeline 0
+    end
+end

@@ -1,0 +1,26 @@
+;
+; Test map file
+;
+
+pipeline mcposPipeline
+	use
+		; <use> as <device>
+		mcpos as mcpos0
+		irqGen as irqGen0
+	end
+	connection
+		mcpos.finalQ => irqGen.finalQ
+	end
+end
+
+map
+	device
+		; <device> as <driver>
+		mcpos0 as mcpos0DefaultDriver
+		irqGen0 as irqGenDefaultDriver
+	end
+	pipeline
+		; <pipeline instance> as <pipeline> <priority>
+		mcposPipeline0 as mcposPipeline 0
+	end
+end

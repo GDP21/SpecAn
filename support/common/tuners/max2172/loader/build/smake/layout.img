@@ -1,0 +1,21 @@
+/* Local thread ELF files */
+EXEC  test_app.elf THREAD 0
+STACK   0x000E00  THREAD 0
+GBLHEAP 0x001000
+
+/* Create TBI data structure (used by MeOS) */
+TBI INT  THREAD 0 CCB 32
+TBI BGND THREAD 0 CCB 32
+
+LAYOUT
+{
+    0x62880000           /* Minim code */
+        THREAD 0 EXEC CODE
+    
+    REBASE 0x3F000000    /* GRAM (with cache and WC) */
+        THREAD 0 EXEC DATA
+    
+    0x82000000           /* core data memory */
+        GBLHEAP
+        THREAD 0 STACK
+}

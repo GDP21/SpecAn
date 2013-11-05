@@ -1,0 +1,26 @@
+ifneq ($(KERNELRELEASE),)
+
+EXTRA_CFLAGS += -DIMG_KERNEL_MODULE $(KO_INCLUDES) -Wno-strict-prototypes $(KMCFLAGS)
+
+obj-m := $(KO_NAME).o
+$(KO_NAME)-objs := $(notdir $(subst .c,.o,$(KO_SRC)))
+else
+
+ifneq ($(IMG_KERNEL_DIR),)
+KDIR := $(IMG_KERNEL_DIR)
+else
+KDIR := /lib/modules/$(shell uname -r)/build
+endif
+
+PWD	:= $(shell pwd)
+
+default:
+	ln -sf $(KO_SRC) ./
+	$(MAKE) -C $(KDIR)  M=$(PWD) $(KO_MAKE_FLAGS) modules
+	rm -f *.c
+	
+endif
+
+clean:
+	rm -f *.ko *.o *.c
+	

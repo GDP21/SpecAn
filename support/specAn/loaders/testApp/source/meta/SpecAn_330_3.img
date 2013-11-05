@@ -1,0 +1,60 @@
+/* Spectrum Analyser test application layout for UCCP330 config 3. */
+
+/* Local thread ELF files */
+
+EXEC SAapp.elf THREAD 0
+STACK 0x002000   THREAD 0
+HEAP 0x004000	 THREAD 0
+
+/* EXTRACT sections requiring special placement */
+EXTRACT coredata FROM EXEC THREAD 0 SECTION .coredata
+EXTRACT gramdbl FROM EXEC THREAD 0 SECTION .gramdbl
+EXTRACT extcached FROM EXEC THREAD 0 SECTION .extcached
+EXTRACT extraw FROM EXEC THREAD 0 SECTION .extraw
+
+/* place DCP/RCD memory image in GRAM */
+LOCAL GRAMApp.elf THREAD 0
+
+
+LAYOUT
+{
+	/* SDRAM */
+	/* Minim (small model) code this is aliased to 0x38000000 and 0xB0000000 */
+	0x61880000	THREAD 0 EXEC CODE
+
+	/* External memory (with cache and wc) */
+	REBASE 0x38000000
+				EXTRACT extcached BASE
+				THREAD 0 EXEC DATA
+				THREAD 0 HEAP
+
+	/* global/uncached Ext RAM region */
+	REBASE 0xB0000000
+				EXTRACT extraw BASE
+
+	/* core data memory */
+	0x82000000	THREAD 0 STACK
+				EXTRACT coredata BASE
+	
+	/* GRAM - DBL region.  Note that the MCP memory regions will be allocated out
+	of uccframeworkgrampool. */
+	0xB4000000  LOCAL GRAMApp.elf DATA /* Place this at the bottom to optimise DCP code */
+        		EXTRACT gramdbl BASE
+}
+
+/*
+* Global heap size 
+* - needs to be big enough to hold the .tbi and .tbistr sections, and not much more.
+*
+* To discover the right size, start with something very small (0x10) and then follow the
+* instructions in the ldlk error messages.
+*/
+/* Place global heap at top of ext RAM */
+GBLHEAP 0x8000 BASE 0xB0FF8000
+
+/* Declare TBI root blocks */
+TBI  BGND  THREAD 0 CCB 32
+TBI  INT   THREAD 0 CCB 32
+TBI  BGND  THREAD 1 CCB 32
+TBI  INT   THREAD 1 CCB 32
+

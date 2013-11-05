@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registerFields xmlns="http://ch.imgtec.org/uccTools/registerFields-1"
+                version="2">
+
+  <imageSet name="scpDriver"
+            paramSet="default"
+            contentVersion="0">
+
+    <dcpDriver file="scpDriver.dcp.xml"/>
+
+    <!-- SCP driver SCP capture job first fragment -->
+    <dcpDataBlockGroup driver="scpDriver" dataBlock="captureConfig" context="use">
+      <register name="EDC_PERIP_BASIC0_0">
+        <field name="MEM_BSWAP_0"
+               value="0"/>
+        <field name="DCP_PRIORITY_0"
+               value="1"/>
+        <field name="PW_0"
+               value="2"/>
+        <field name="PALIGN_0"
+               value="0"/>
+        <field name="BITREV_0"
+               value="0"/>
+        <field name="INCR_0"
+               value="0"/>
+        <field name="DISCARD_OP_0"
+               value="0"/>
+        <field name="EOP_MODE_0"
+               value="0"/>
+        <field name="TFR_MODE_0"
+               value="2"/>
+        <field name="PER_BUS_0"
+               value="0"/>
+        <field name="PULSED_RESET_0"
+               value="0"/>
+      </register>
+      <register name="EDC_PERIP_BASIC1_0">
+        <field name="TRANSFERS_0"
+               value="1"/>
+        <field name="ITEMS_0"
+               value="0x0100"/>
+      </register>
+      <register name="EDC_PERIP_BASIC2_0">
+        <field name="ECN_0"
+               value="0"/>
+        <field name="PA_0"
+               value="0x8000"/>
+      </register>
+      <register name="EDC_PERIP_AGEN4_0">
+        <field name="MODE_0"
+               value="0"/>
+        <field name="CLR_ABO_0"
+               value="1"/>
+        <field name="ITEM_BYTES_0"
+               value="2"/>
+        <field name="BUS_BYTES_0"
+               value="0"/>
+        <field name="N0_0"
+               value="0"/>
+      </register>
+      <register name="EDC_PERIP_AGEN5_0">
+        <field name="N1_0"
+               value="1"/>
+      </register>
+    </dcpDataBlockGroup>
+
+    <!-- SCP driver SCP Discard job job (DISCARD_OUTPUT and terminate on EOP set -->
+    <dcpDataBlockGroup driver="scpDriver" dataBlock="discardConfig" context="use">
+      <register name="EDC_PERIP_BASIC0_0">
+        <field name="MEM_BSWAP_0"
+               value="0"/>
+        <field name="DCP_PRIORITY_0"
+               value="1"/>
+        <field name="PW_0"
+               value="2"/>
+        <field name="PALIGN_0"
+               value="0"/>
+        <field name="BITREV_0"
+               value="0"/>
+        <field name="INCR_0"
+               value="0"/>
+        <field name="DISCARD_OP_0"
+               value="1"/>
+        <field name="EOP_MODE_0"
+               value="0"/>
+        <field name="TFR_MODE_0"
+               value="2"/>
+        <field name="PER_BUS_0"
+               value="0"/>
+        <field name="PULSED_RESET_0"
+               value="0"/>
+      </register>
+      <register name="EDC_PERIP_BASIC1_0">
+        <field name="TRANSFERS_0"
+               value="1"/>
+        <field name="ITEMS_0"
+               value="0x0100"/>
+      </register>
+      <register name="EDC_PERIP_BASIC2_0">
+        <field name="ECN_0"
+               value="0"/>
+        <field name="PA_0"
+               value="0x8000"/>
+      </register>
+      <register name="EDC_PERIP_BASIC3_0">
+        <field name="MA_0"
+               value="0xABCDEF"/>
+      </register>
+      <register name="EDC_PERIP_AGEN4_0">
+        <field name="MODE_0"
+               value="0"/>
+        <field name="CLR_ABO_0"
+               value="1"/>
+        <field name="ITEM_BYTES_0"
+               value="2"/>
+        <field name="BUS_BYTES_0"
+               value="0"/>
+        <field name="N0_0"
+               value="0"/>
+      </register>
+      <register name="EDC_PERIP_AGEN5_0">
+        <field name="N1_0"
+               value="1"/>
+      </register>
+    </dcpDataBlockGroup>
+
+  </imageSet>
+
+</registerFields>

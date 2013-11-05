@@ -1,0 +1,132 @@
+/****************************************/
+/* Configure the PLL and clock dividers */
+/****************************************/
+
+/* ********** */
+/* 400MHz output from 48MHz Crystal ************* WARNING - if this is modified, please also modify the TIMERCONFIG value below */
+/* ********** */
+MWR 0x02015908 0x00000000 /* CR_TOP_CLKSWITCH   - Ensure Clk source is XTAL not PLL */
+MPAUSE 1000               /* 			- Wait for the switch over to happen*/
+MWR 0x02015954 0x16000002 /* CR_TOP_SYSPLL_CTL1 - Put the PLL into reset */ 
+/* Set dividers first */
+MWR 0x020159AC 0x00000000 /* CR_TOP_DDRCLKDIV   - Set to 1 to divide by 2, or 0 for DDR = Meta Freq */
+MWR 0x02015918 0x00000001 /* CR_TOP_META_CLKDIV - Turn on the clock divide to get 200MHz (UCCs and Peripherals)*/
+MWR 0x02015950 0x01800310 /* CR_TOP_SYSPLL_CTL0 - Part of the Pll config for 400MHz */
+MPAUSE 1000               /* 			- Wait for a bit */ 
+MWR 0x02015954 0x06000002 /* CR_TOP_SYSPLL_CTL1 - Take the PLL out of reset */
+MWR 0x02015954 0x04000002 /* CR_TOP_SYSPLL_CTL1 - Take the PLL out of bypass */
+MPAUSE 2000               /* 			- Wait for a bit more */
+MWR 0x02015908 0x00000002 /* CR_TOP_CLKSWITCH   - Switch from XTAL to PLL */
+
+
+
+/* Frequency Dependant Settings OPTIMIZED for 400MHz  CL=5 MT47H32M16HR-25EF */
+
+
+/*********************************/
+/* Put the DDR block in to reset */
+/*********************************/
+MWR 0x02018E7C 0x00000000
+
+MWR 0x02018D08 0x00000000 /* POWERDOWN_EN                 */
+MWR 0x02018E44 0x00000002 /* BURST8_RDWR                  */
+MWR 0x02018D10 0x00000004 /* RDWR_IDLE_GAP                */
+MWR 0x02018D54 0x0000001F /* POWERDOWN_TO_X32             */
+MWR 0x02018D98 0x00000001 /* REFRESH_TO_X32               */
+MWR 0x02018DA0 0x00000000 /* 2T_DELAY                     */
+MWR 0x02018DA8 0x00000003 /* FINAL_WAIT_X32               */
+
+/*************************************************************************************************/
+/* This block of DDR settings don't exist in the spreadsheet as they are not expected to change. */
+/*************************************************************************************************/
+MWR 0x02018E3C	0x02	 /* CR_REG_DDRC_DLL_CALIB_TO_MIN_X1024       	*/
+MWR 0x02018E40	0x02	 /* CR_REG_DDRC_DLL_CALIB_TO_MAX_X1024       	*/
+MWR 0x02018E84	0x97	 /* CR_REG_DDRC_GO2CRITICAL_HYSTERESIS       	*/
+MWR 0x02018F6C	0x02	 /* CR_PHY_BL              			*/
+MWR 0x02018D3C	0x01	 /* CR_REG_DDRC_REFRESH_UPDATE_LEVEL         	*/
+
+/**************************************************************************************************/
+/* DDR registers from the settings spreadsheet - likely to change with frequency and board layout */
+/**************************************************************************************************/
+MWR 0x02018DE0 	0x08 	 /* CR_REG_DDRC_ADDMAP_BANK_B0   */ 
+MWR 0x02018DE4	0x08	 /* CR_REG_DDRC_ADDMAP_BANK_B1   */ 
+MWR 0x02018DE8	0x0F	 /* CR_REG_DDRC_ADDMAP_BANK_B2	  */
+MWR 0x02018DEC	0x00	 /* CR_REG_DDRC_ADDMAP_COL_B2    */ 
+MWR 0x02018DF0	0x00	 /* CR_REG_DDRC_ADDMAP_COL_B3    */ 
+MWR 0x02018DF4	0x00	 /* CR_REG_DDRC_ADDMAP_COL_B4_6  */ 
+MWR 0x02018DF8	0x00	 /* CR_REG_DDRC_ADDMAP_COL_B7    */ 
+MWR 0x02018DFC	0x00	 /* CR_REG_DDRC_ADDMAP_COL_B8    */ 
+MWR 0x02018E00	0x00	 /* CR_REG_DDRC_ADDMAP_COL_B9    */ 
+MWR 0x02018E04	0x0F	 /* CR_REG_DDRC_ADDMAP_COL_B10   */
+MWR 0x02018E08	0x0F	 /* CR_REG_DDRC_ADDMAP_COL_B11   */
+MWR 0x02018E0C	0x03	 /* CR_REG_DDRC_ADDMAP_ROW_B0    */ 
+MWR 0x02018E10	0x03	 /* CR_REG_DDRC_ADDMAP_ROW_B1    */ 
+MWR 0x02018E14	0x03	 /* CR_REG_DDRC_ADDMAP_ROW_B2_11 */ 
+MWR 0x02018E18	0x03	 /* CR_REG_DDRC_ADDMAP_ROW_B12   */ 
+MWR 0x02018E1C	0x0F	 /* CR_REG_DDRC_ADDMAP_ROW_B13   */
+MWR 0x02018E20	0x0F	 /* CR_REG_DDRC_ADDMAP_ROW_B14   */
+MWR 0x02018E24	0x0F	 /* CR_REG_DDRC_ADDMAP_ROW_B15   */
+
+MWR 0x02018EAC	0x10	 /* CR_REG_DDRC_PADS               		*/ 
+MWR 0x02018E34	0x05	 /* CR_REG_DDRC_RD_ODT_HOLD                  	*/
+MWR 0x02018E38	0x05	 /* CR_REG_DDRC_WR_ODT_HOLD                  	*/
+MWR 0x02018E94	0x0	 /* CR_REG_DDRC_WR_ODT_DELAY         		*/
+MWR 0x02018E28	0x1	 /* CR_REG_DDRC_RD_ODT_DELAY         		*/
+MWR 0x02018E2C	0x04	 /* CR_REG_DDRC_RANK0_RD_ODT                 	*/
+MWR 0x02018E30	0x03	 /* CR_REG_DDRC_RANK0_WR_ODT                 	*/
+MWR 0x02018F7C	0x02	 /* CR_REG_LOCAL_RD_ODT   			*/
+MWR 0x02018F80	0x00	 /* CR_REG_LOCAL_WR_ODT   			*/
+MWR 0x02018F84	0x00	 /* CR_REG_LOCAL_IDLE_ODT 			*/
+
+MWR 0x02018DB0	0x4F	 /* CR_REG_DDRC_PRE_CKE_X1024        */
+MWR 0x02018D4C	0x61	 /* CR_REG_DDRC_T_RFC_NOM_X32        */
+MWR 0x02018D84	0x3	 /* CR_REG_DDRC_T_CKE                */
+MWR 0x02018D40	0x16	 /* CR_REG_DDRC_T_RC                 */
+MWR 0x02018D68	0x3	 /* CR_REG_DDRC_WRITE_LATENCY        */
+MWR 0x02018D58	0x1	 /* CR_REG_DDRC_T_FAW                */
+MWR 0x02018D5C	0x1B	 /* CR_REG_DDRC_T_RAS_MAX            */
+MWR 0x02018D48	0x7	 /* CR_REG_DDRC_POST_SELFREF_GAP_X32 */
+MWR 0x02018D7C	0x3	 /* CR_REG_DDRC_RD2PRE               */
+MWR 0x02018E88	0x2	 /* CR_REG_DDRC_T_MRD                */
+MWR 0x02018D60	0x10	 /* CR_REG_DDRC_T_RAS_MIN            */
+MWR 0x02018D94	0x6	 /* CR_REG_DDRC_T_RP                 */
+MWR 0x02018D88	0x1	 /* CR_REG_DDRC_T_CCD                */
+MWR 0x02018F60	0x4	 /* CR_PHY_FIRST_WR                  */
+MWR 0x02018D50	0xC	 /* CR_REG_DDRC_WR2PRE               */
+MWR 0x02018DB4	0x1	 /* CR_REG_DDRC_POST_CKE_X1024       */
+MWR 0x02018D70	0x9	 /* CR_REG_DDRC_WR2RD                */
+MWR 0x02018D64	0x5	 /* CR_REG_DDRC_READ_LATENCY         */
+MWR 0x02018F64	0x5	 /* CR_PHY_FIRST_RD                  */
+MWR 0x02018D44	0x2A	 /* CR_REG_DDRC_T_RFC_MIN            */
+MWR 0x02018D8C	0x4	 /* CR_REG_DDRC_T_RRD                */
+MWR 0x02018D6C	0x5	 /* CR_REG_DDRC_RD2WR                */
+MWR 0x02018D74	0x2	 /* CR_REG_DDRC_T_XP                 */
+MWR 0x02018D80	0x5	 /* CR_REG_DDRC_T_RCD                */
+
+MWR 0x02018DB8 0x00000B52 /* CR_REG_DDRC_MR                   */
+MWR 0x02018DBC 0x00002042 /* CR_REG_DDRC_EMR                  */
+
+MWR 0x02018E8C 0x00004000 /* EMR2 Reg                     */
+MWR 0x02018E90 0x00006000 /* EMR3 Reg                     */
+  
+ 
+MWR 0x02018F94 0x00000044 /* CR_PHY_WR_SLAVE_RATIO0 */
+MWR 0x02018F98 0x00000038 /* CR_PHY_RD_SLAVE_RATIO0 */
+MWR 0x02018F9C 0x0000003A /* CR_PHY_RD_SLAVE_RATIO1 */
+MWR 0x02018FA0 0x00000044 /* CR_PHY_WR_SLAVE_RATIO1 */
+	 
+/************************************/
+/* Bring the DDR block out of reset */
+/************************************/
+MWR 0x02018E7C 0x00000001
+
+/* MC REQ */
+MWR 0x02018C20 0x2C400000 /* DDR starts at 0xB1000000 */
+MWR 0x02018C24 0x2D400000 /* DDR is 64MB in size - this value is in words, not bytes */
+MWR 0x02018C28 0x00000000 /* Offset into Physical memory */
+MWR 0x02018C2C 0x00000000 /* Port 0 */
+
+MPAUSE 7000
+
+/* Timer Clock Configuration - Must be set to (core clock rate - 1) */
+MWR 0x04830140 399 /* TIMERCONFIG */

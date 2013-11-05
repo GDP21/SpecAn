@@ -1,0 +1,21 @@
+;
+; File      SPECAN_mcposDriver.dcps
+; Brief     Trival "driver" for MCPOS device in the Spectrum Analyser
+;			DCP pipeline.  Just instanciates the required hardware components
+;			to link to the MCPOS input queue.
+;
+; Copyright (c) Imagination Technologies Limited.
+; All Rights Reserved.
+; Strictly Confidential.
+;
+
+driver SPECAN_mcposDriver member mcpos0Group
+    params
+        use
+            ; SCP completion path
+            scpAnd as andflag => $mcposOr
+            scp_mcposJobQ as queue vector=true, priority=-1 => $scpAnd
+            scpCompletionQ as queue => $scpAnd           
+        end
+    end
+end

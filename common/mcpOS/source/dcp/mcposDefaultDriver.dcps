@@ -1,0 +1,17 @@
+;
+; File		mcposDefaultDriver.dcp
+; Brief		Default MCPOS member driver
+;
+; Copyright (c) Imagination Technologies Limited.
+; All Rights Reserved.
+; Strictly Confidential.
+;
+
+driver mcpos0DefaultDriver member mcpos0Group
+
+#if ?MCPOS_DCP_LOGGING
+    channel log as master
+    end
+#endif
+
+end

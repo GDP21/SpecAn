@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    <xs:element name="rbuild">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="rbuildConfig" type="rbuildConfigType" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>    
+
+
+    <xs:complexType name="rbuildConfigType">
+        <xs:sequence>
+            <xs:element name="source" type="sourceType" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="pkgBuildRoot" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="pkgReleaseScript" type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+
+        <xs:attribute use="required" name="publishName" type="xs:string" />
+        <xs:attribute use="required" name="buildNumber" type="xs:integer" />
+        
+    </xs:complexType>
+    
+
+
+    <xs:complexType name="sourceType">
+        <xs:choice>
+            <xs:element name="sourceCVS" type="sourceCVSType"  />
+            <xs:element name="sourceSVS" type="sourceSVSType"  />
+        </xs:choice>
+
+        <xs:attribute use="required" name="description" type="xs:string" />
+    
+    </xs:complexType>
+
+
+    <xs:complexType name="sourceCVSType">
+          <xs:sequence>
+              <xs:element name="cvsRoot" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="cvsLocation" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="cvsTag" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="destination" type="destinationType" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+        
+    </xs:complexType>
+        
+    <xs:complexType name="sourceSVSType">
+        <xs:sequence>
+            <xs:element name="svsRoot" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="svsLocation" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+        <xs:complexType name="destinationType">
+            <xs:sequence>
+                <xs:element name="destinationPath" type="xs:string" minOccurs="1" maxOccurs="1" />
+                <xs:element name="destinationName" type="xs:string" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+            
+
+    </xs:complexType>
+    
+
+    
+    
+   
+    
+</xs:schema>

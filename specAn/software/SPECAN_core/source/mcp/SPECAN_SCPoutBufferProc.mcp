@@ -1,0 +1,111 @@
+//***************************************************************************
+// SPECAN_SCPoutBufferProc.mcp
+// Top-level processing for each SCP output buffer
+//***************************************************************************
+SECTION CODE PARTIAL
+SPECAN_SCPoutBufferProc: FUNCTION
+
+    // Window the input buffer
+    LOADMULTIPLEARGS DBL, SPECAN_windowProc
+    CALL
+    
+    // FFT
+    LOADMULTIPLEARGS DBL, SPECAN_fftProc
+    CALL
+    
+    // Calculate power and accumulate on the inner loop count
+    LOADMULTIPLEARGS DBL, SPECAN_accumPower
+    CALL
+    
+    LOADMULTIPLEARGS DBL, SPECAN_outerLoopProc
+    CALL
+	
+    // Process loop counters, determine if new SCP jobs need to be
+    // queued, and interrupt Meta at end of fragment processing
+    LOADMULTIPLEI DBL, SPECAN_loopCtrl_consts
+	CALL
+    
+    // Remove jobs from the SCP output queues, and queue new jobs
+    // when required
+    LOADMULTIPLEARGS DBL, SPECAN_processSCPqueues
+    CALL
+	
+	RETURN
+FUNCTION END
+SECTION END
+
+// Argchains for this function
+SECTION INITIALISED_DATA PARTIAL
+
+// Argchain for SCP buffer A processing
+SCPoutBufferProc_argChainA:
+	// Note that 2 buffers are queued prior to start of fragment processing, so at the end of each
+	// buffer processing we queue a new job for the same buffer
+    ARGBLOCK SPECAN_windowProc
+        _IN         = SCPoutBufA
+        _WINDOW     = windowFunc
+        _OUT        = windowedDataBuf
+        _LENGTH_PTR = FFTlen
+        _SCALE      = 0    
+    ARGBLOCK END
+    
+    ARGBLOCK SPECAN_fftProc
+        _FFT_LENGTH_LOG2 = FFTlen_log2
+    ARGBLOCK END
+
+    ARGBLOCK SPECAN_accumPower
+        _IN         = FFToutBuf
+        _OUT        = intermediatePowBuf
+        _LENGTH_PTR = FFTlen
+        _SCALE_PTR  = averagingPeriod_innerLoop_log2
+    ARGBLOCK END
+
+    ARGBLOCK SPECAN_outerLoopProc
+        _ENABLE_FLAG = doOuterLoopProc
+        _IN          = intermediatePowBuf
+        _OUT         = outputPowBuf
+        _MULT_PTR    = averagingPeriod_outerLoop_mult
+        _LENGTH_PTR  = FFTlen
+    ARGBLOCK END
+
+    ARGBLOCK SPECAN_processSCPqueues
+        $nextMCPOSjobPtr = SCP_CAPTURE_JOB_BUFA
+        $nextSCPaddressPtr = SCPoutBufA_wordOffset
+    ARGBLOCK END
+    
+// Argchain for SCP buffer B processing
+SCPoutBufferProc_argChainB:
+    ARGBLOCK SPECAN_windowProc
+        _IN         = SCPoutBufB
+        _WINDOW     = windowFunc
+        _OUT        = windowedDataBuf
+        _LENGTH_PTR = FFTlen
+        _SCALE      = 0    
+    ARGBLOCK END
+
+    ARGBLOCK SPECAN_fftProc
+        _FFT_LENGTH_LOG2 = FFTlen_log2        
+    ARGBLOCK END
+    
+    ARGBLOCK SPECAN_accumPower
+        _IN         = FFToutBuf
+        _OUT        = intermediatePowBuf
+        _LENGTH_PTR = FFTlen
+        _SCALE_PTR  = averagingPeriod_innerLoop_log2
+    ARGBLOCK END
+
+    ARGBLOCK SPECAN_outerLoopProc
+        _ENABLE_FLAG = doOuterLoopProc
+        _IN          = intermediatePowBuf
+        _OUT         = outputPowBuf
+        _MULT_PTR    = averagingPeriod_outerLoop_mult
+        _LENGTH_PTR  = FFTlen
+    ARGBLOCK END
+
+    ARGBLOCK SPECAN_processSCPqueues
+        $nextMCPOSjobPtr = SCP_CAPTURE_JOB_BUFB
+        $nextSCPaddressPtr = SCPoutBufB_wordOffset
+    ARGBLOCK END
+    
+SECTION END
+

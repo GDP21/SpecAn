@@ -1,0 +1,60 @@
+//***************************************************************************
+// Shared data structures for the Spectrum Analyser MCP code
+//***************************************************************************
+
+// Initialised L-region data
+SA_sharedLData_init SECTION INITIALISED_DATA PARTIAL LDATA
+	// Inner and outer averaging loop counters, re-initialised
+	// by Meta prior to each capture processing
+    averagingPeriod_innerLoopCount:		0
+    averagingPeriod_outerLoopCount:		0
+    // Averaging period for inner loop, used to re-load counter
+    averagingPeriod_innerLoop:			0
+    averagingPeriod_innerLoop_log2:     0
+    averagingPeriod_outerLoop_mult:     0
+    // FFT length, initialised by Meta
+    FFTlen:								0
+    // Log2 of FFTlen set by Meta
+    FFTlen_log2:                        0
+    // Addresses to use when posting job addresses to the SCP.  These
+    // need to be an absolute word offset in GRAM, rather than an MCP address.
+    SCPoutBufA_wordOffset:				0
+    SCPoutBufB_wordOffset:              0
+    // Value to put into the Meta interrupt queue when fragment completed
+    fragmentCompleteJobID:				0
+    // Flag controlling outer loop processing
+    doOuterLoopProc:					0
+SECTION END
+
+
+//***************************************************************************
+
+// Uninitialised A-region data.  Place aligned, at start of GRAM, due to FFT 
+// placement constraints
+SA_sharedAData_uninit SECTION UNINITIALISED_DATA PARTIAL ADATA ALIGN 16384
+	// FFT input and output buffers
+	windowedDataBuf:					SA_MAX_FFT_LEN
+	FFToutBuf:							SA_MAX_FFT_LEN
+    FFTtmpBuf:                          SA_MAX_FFT_LEN
+    // Intermediate power buffer
+    intermediatePowBuf:                 SA_MAX_FFT_LEN
+    // Window function:
+    windowFunc:							SA_MAX_FFT_LEN
+    // Output power buffer
+    outputPowBuf:                       SA_MAX_FFT_LEN
+	// SCP output buffers
+	SCPoutBufA:							SA_MAX_FFT_LEN
+	SCPoutBufB:							SA_MAX_FFT_LEN
+SECTION END
+
+
+//***************************************************************************
+
+// Uninitialised L-region data.  Note the L region must be used as target of
+// a LOADMULTIPLEI or LOADMULTIPLEARGS instruction.
+SA_sharedLData_uninit SECTION UNINITIALISED_DATA PARTIAL LDATA    
+    // Descriptors for SCP data capture jobs:
+    SCP_CAPTURE_JOB_BUFA:  				MCPOS_JOB_WORDS
+    SCP_CAPTURE_JOB_BUFB:  				MCPOS_JOB_WORDS
+SECTION END
+

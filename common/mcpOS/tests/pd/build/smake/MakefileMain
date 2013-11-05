@@ -1,0 +1,40 @@
+UNIT_TYPE=APP
+UNIT_NAME=mcposPd
+
+SMAKE_ROOT=../../../../../../ensigmaSDK/smake
+UCCP_ROOT=../../../../../uccPlatform
+include $(UCCP_ROOT)/targetSetup.mk
+
+C_SRC=main.c
+
+MCP_DIR1=$(UNIT_DIR)/../../source/mcp
+MCP_DIR2=$(UCC_INST_ROOT)/config/uccps/uccp$(UCCP)
+
+MCP_SRC=uccp$(UCCP)_registers.mcp \
+	    mcpos.mcp \
+        dotProduct.mcp \
+        dotProductJob.mcp \
+        testDP.mcp
+		
+DCP_MAPFILES=main.dcpsys
+
+UNIT_OPTIONS+=DISABLE_DEFAULT_MCPFLAGS
+
+UCC_TOOLKIT_DIR=$(UNIT_DIR)/../../..
+
+MODS=$(UCC_TOOLKIT_DIR)/uccRuntime \
+	 $(UCC_TOOLKIT_DIR)/mcpOS \
+	 $(UCC_TOOLKIT_DIR)/pipelineDriver \
+	 $(UCC_TOOLKIT_DIR)/irqGen \
+	 $(SMAKE_ROOT)/../log
+
+ifeq ($(PROCESSOR),MTX)
+S_SRC=sections_a.s
+S_THEN_C=1
+endif
+
+DCP_ORIGIN=relocatable
+
+PRIMARY_PUBLISH_DIR=$(UNIT_DIR)/../../..
+
+include $(SMAKE_ROOT)/smake.mk

@@ -1,0 +1,12 @@
+/* Declare thread applications and locations */
+EXEC test/thread0.elf	THREAD 0 CODE 0xB7003000 DATA 0xB7040000
+STACK 0x001000   	THREAD 0 BASE 0xB7000000
+HEAP  0x002000   	THREAD 0 BASE 0xB7001000
+
+GBLHEAP			       	 BASE 0xB709E000
+
+/* Create TBI data structure (used by MeOS) */
+TBI INT  THREAD 0
+TBI BGND THREAD 0
+TBI INT  THREAD 1
+TBI BGND THREAD 1

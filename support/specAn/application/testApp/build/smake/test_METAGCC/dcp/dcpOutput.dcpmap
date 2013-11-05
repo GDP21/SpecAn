@@ -1,0 +1,76 @@
+[ EFS resources ]
+mcpos0.mcposOr                        D  OR flag  : 0, 896
+  SCPPipeline.mcpos.yieldAnd          U  AND flag : 0, 768, (0, 0), 2
+    SCPPipeline.mcpos.yieldQ          U  queue D4 : 0,   0, (0, 0), 2
+  SCPPipeline.mcpos.scpAnd            U  AND flag : 1, 769, (0, 1), 2
+    SCPPipeline.mcpos.scpCompletionQ  U  queue D4 : 3,   3, (1, 0), 2
+    SCPPipeline.mcpos.scp_mcposJobQ   U  queue D4 : 4,   4, (1, 1), 2
+  SCPPipeline.mcpos.jobAnd            U  AND flag : 2, 770, (0, 2), 2
+    SCPPipeline.mcpos.jobQ            U  queue D4 : 6,   6, (2, 0), 2
+SCPDevice.scpOut.inOr                 D  OR flag  : 1, 897
+  SCPPipeline.SCP.scpOut.inAnd        U  AND flag : 9, 777, (1, 0), 3
+    SCPPipeline.SCP.scpOut.inJobQ     U  queue D4 : 5,   5, (9, 2), 2
+irqGen0.irqOr                         D  OR flag  : 2, 898
+  SCPPipeline.irqGen.finalAnd         U  AND flag : 6, 774, (2, 0), 2
+    SCPPipeline.irqGen.finalQ         U  queue D4 : 7,   7, (6, 1), 2
+SCPPipeline.SCP.inputAddressQ         U  queue D4 : 1,   1
+SCPPipeline.SCP.inputCaptureLengthQ   U  queue D4 : 2,   2
+SCPPipeline.SCP.inputDiscardLengthQ   U  queue D4 : 8,   8
+
+[ EFS resources per device ]
+SCPDevice
+  AND flag     1  (U=1)
+  OR flag      1  (D=1)
+  queue        4  (U=4)
+    queue D4   4  (U=4)
+
+irqGen0
+  AND flag     1  (U=1)
+  OR flag      1  (D=1)
+  queue        1  (U=1)
+    queue D4   1  (U=1)
+
+mcpos0
+  AND flag     3  (U=3)
+  OR flag      1  (D=1)
+  queue        4  (U=4)
+    queue D4   4  (U=4)
+
+[ Code and data sizes per device ]
+           Code  Data
+SCPDevice   387    90
+
+[ Summary of EFS resources ]
+AND flag    : available = 64, required = 5, max index =  9
+OR flag     : available = 64, required = 3, max index =  2
+queue       : available =  9, required = 9, max index =  8
+  queue D4  : available =  9 (0, 8), required = 9, max index =  8
+  total depth = 36
+selector    : available = 32, required = 0
+
+[ Channels ]
+SCPDevice.scpOut as master : 0
+
+[ Data blocks ]
+(0x01, 1) (0x03,  3)  D  SCPDevice.scpOut.__ma
+(0x02, 8) (0x06, 24)  U  SCPPipeline.SCP.captureConfig
+(0x0A, 1) (0x1E,  3)  U  SCPPipeline.SCP.currentCaptureAddr
+(0x0B, 1) (0x21,  3)  U  SCPPipeline.SCP.currentDiscardLength
+(0x0C, 1) (0x24,  3)  U  SCPPipeline.SCP.currentSymbolIscr
+(0x0D, 1) (0x27,  3)  U  SCPPipeline.SCP.defaultDiscardCount
+(0x0E, 1) (0x2A,  3)  U  SCPPipeline.SCP.defaultDiscardLengthFragment1
+(0x0F, 8) (0x2D, 24)  U  SCPPipeline.SCP.discardConfig
+(0x17, 1) (0x45,  3)  U  SCPPipeline.SCP.lastSymbolIscr
+(0x18, 1) (0x48,  3)  U  SCPPipeline.SCP.nextCaptureAddr
+(0x19, 1) (0x4B,  3)  U  SCPPipeline.SCP.nextDiscardLength
+(0x1A, 1) (0x4E,  3)  U  SCPPipeline.SCP.nextFragment1Size
+(0x1B, 1) (0x51,  3)  U  SCPPipeline.SCP.scpFinalPeriodA
+(0x1C, 1) (0x54,  3)  U  SCPPipeline.SCP.scpIscrControl
+(0x1D, 1) (0x57,  3)  U  SCPPipeline.SCP.scpIscrCounter
+(0x1E, 1) (0x5A,  3)  U  SCPPipeline.SCP.scpTbusControl
+(0x1F, 1) (0x5D,  3)  U  SCPPipeline.SCP.tempSCPFinalPeriodA
+
+[ Code blocks ]
+(0x060,  40)  D  SCPDevice.scpOut.device
+(0x088, 344)  U  SCPPipeline.SCP.scpOut.use
+(0x1E0,   3)  J  SCPPipeline.SCP.scpOut.job[0]

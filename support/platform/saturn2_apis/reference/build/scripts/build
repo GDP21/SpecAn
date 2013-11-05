@@ -1,0 +1,161 @@
+#!/bin/bash 
+###############################################
+###############################################
+##
+## BuildAll Script for Meta
+##
+##	mike@msbrown.com	25/03/2004
+##
+###############################################
+###############################################
+
+
+###############################################
+## vars 
+###############################################
+declare -a apps
+index=0
+
+###############################################
+## functions 
+###############################################
+function build {
+	make -C $1 $2 $3 $4 2>&1 | tee -a $outfile
+}
+
+function log {
+	echo "*******" $1 $2 $3 $4 $5 $6 $7 $8 $9 | tee -a $outfile
+}
+
+function output_header {
+	log ============================================
+	log =====   `date` =======
+	log =====   project: $project
+	log =====   board: $board
+	log ============================================
+}
+
+## build all in $1 except 'check_build' & 'CVS' ;-)
+function buildall {
+	for t in $( ls $1 ); do
+		if [ $t != CVS ] && [ $t != check_build ]; then
+			build $1/$t
+		fi
+	done
+}
+
+function displayhelp {
+	echo "Usage: buildall [OPTIONS] "
+	echo "Invoke META build with specified flags"
+	echo
+	echo "  -p [meson|neutrino_a|neutrino_d]    project"
+	echo "  -b [emu|ts1]		                board"
+	echo "  -t [verification|bring_up]	        test suite"
+	echo "  -a <application>		            application, Multiple applications may be specified"
+	echo "  -o <outfile>                        log file"
+	echo "  -h                                  help"
+	echo
+	echo " Report bugs to mike"
+	exit 1 
+}
+
+##################################################################
+## Process options
+##################################################################
+
+if [ -z $1 ]; then 
+	displayhelp
+else
+	while getopts ":hp:b:t:o:a:" Option
+	do
+		case $Option in
+			h ) displayhelp;;
+
+			p ) case $OPTARG in
+				"meson" | "neutrino_a" | "neutrino_d" )	project=$OPTARG;;
+				* )	echo "Invalid argument '$OPTARG'";
+					displayhelp;;
+				esac;;
+
+			b ) board=$OPTARG;;
+
+			t ) tests=$OPTARG;;
+
+			a ) apps[index]=$OPTARG;
+				let "index = $index + 1";;
+
+			o ) outfile=`cygpath -au $OPTARG`;;
+
+			* ) eval unknown=\$$(($OPTIND -1));
+				echo "Error: Unknown Option '$unknown'";
+				echo;
+				displayhelp;;
+		esac
+	done
+fi
+shift $(($OPTIND -1))
+
+
+##################################################################
+## Verify 
+##################################################################
+###############################################
+## Must specify logfile
+###############################################
+if [ ! $outfile ]; then
+	echo Logfile not specified
+	echo
+	displayhelp
+fi
+
+
+###############################################
+## Create outdir if not exist
+## generate timestamp 
+###############################################
+
+outdir=${outfile%/*.*}
+
+if [ ! -d  $outdir ]; then
+	mkdir -p $outdir
+fi
+
+###############################################
+## generate header (timestamp etc)
+###############################################
+output_header
+
+
+###############################################
+##	Build Libraries
+###############################################
+
+build $IMG_WORKROOT/apps/${project}/${tests}/meta/${board}/check_build libs 
+
+
+###############################################
+##	Build Apps
+###############################################
+
+element_count=${#apps[@]}
+index=0
+
+if [ ${#apps[@]} ]; then
+while [ $index -lt $element_count ]
+do
+	if [ ${apps[$index]} == "all" ]; then
+		log Building All Tests
+		buildall $IMG_WORKROOT/apps/${project}/${tests}/meta/${board}
+	else
+		log Building Test: ${apps[$index]}
+		build $IMG_WORKROOT/apps/${project}/${tests}/meta/${board}/${apps[$index]}
+	fi
+	let "index = $index + 1"
+done
+fi
+
+###############################################
+##	That's all Folks !!
+###############################################
+exit 0
+

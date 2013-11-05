@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "usb_ip_player2", "usb_ip_player2.vcproj", "{FF873B39-8EF5-4E75-A8B3-B25B32CB0058}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF873B39-8EF5-4E75-A8B3-B25B32CB0058}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FF873B39-8EF5-4E75-A8B3-B25B32CB0058}.Debug|Win32.Build.0 = Debug|Win32
+		{FF873B39-8EF5-4E75-A8B3-B25B32CB0058}.Release|Win32.ActiveCfg = Release|Win32
+		{FF873B39-8EF5-4E75-A8B3-B25B32CB0058}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

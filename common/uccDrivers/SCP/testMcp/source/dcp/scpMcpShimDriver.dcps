@@ -1,0 +1,19 @@
+;
+; SCP to MCP shim driver
+;
+
+driver scpMcpShimDriver
+    params
+        device
+            scpOr as orflag mcp=0.0
+        end
+        use
+            scpAnd as andflag => $scpOr
+        
+            outputAddressQ       as queue => $scpAnd
+            outputCaptureLengthQ as queue
+            outputDiscardLengthQ as queue
+            outputIscrQ          as queue
+        end
+    end
+end

@@ -1,0 +1,8 @@
+//***************************************************************************
+// Symbols used by the Spectrum Analyser MCP code
+//***************************************************************************
+
+SA_symbols SECTION SYMBOLS
+    // Maximum supported FFT length
+    SA_MAX_FFT_LEN:		8192
+SECTION END

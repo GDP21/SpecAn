@@ -1,0 +1,57 @@
+<package packageName="specAn" >
+   <cvsPreRequisite name="tvcore">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>uccTVAppShell/software/tvcore</module>
+      <path>../../../../../common</path>
+      <version>APPSHELL_4_1_TAG</version>
+   </cvsPreRequisite>
+   <cvsPreRequisite name="uccframework">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>uccTVAppShell/software/uccframework</module>
+      <path>../../../../../support</path>
+      <version>APPSHELL_4_1_TAG</version>
+   </cvsPreRequisite>
+   <cvsPreRequisite name="mcpOS">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>uccToolkit/mcpOS</module>
+      <path>../../../../../common</path>
+      <version>HEAD</version>
+   </cvsPreRequisite>
+   <cvsPreRequisite name="common">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>mobileTV/support/common</module>
+      <path>../../../../../support</path>
+      <version>HEAD</version>
+   </cvsPreRequisite>
+   <preBuiltPreRequisite name="Saturn2Apis_ES1">
+       <pkgConfig>internal</pkgConfig>
+       <buildNumber>1.00.10.0032</buildNumber>
+       <path>../../../../../support/platform</path>
+       <sourcePath pathType="relative">../saturn2_apis</sourcePath>
+   </preBuiltPreRequisite>
+   <cvsPreRequisite name="agc">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>mobileTV/common/agc</module>
+      <path>../../../../../common</path>
+      <version>HEAD</version>
+   </cvsPreRequisite>
+   <cvsPreRequisite name="maths_funcs">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>mobileTV/common/maths_funcs</module>
+      <path>../../../../../common</path>
+      <version>HEAD</version>
+   </cvsPreRequisite>
+   <cvsPreRequisite name="hostif">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>uccTVAppShell/software/apps/hostapp/hostif</module>
+      <path>../../../../../support/common</path>
+      <version>APPSHELL_4_1_TAG</version>
+   </cvsPreRequisite>
+   <cvsPreRequisite name="hostmsgproc">
+      <cvsRoot>chCVS.ch.imgtec.org:/cvs</cvsRoot>
+      <module>uccTVAppShell/software/apps/hostapp/hostmsgproc</module>
+      <path>../../../../../support/common</path>
+      <version>APPSHELL_4_1_TAG</version>
+   </cvsPreRequisite>
+</package>
+

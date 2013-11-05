@@ -1,0 +1,13 @@
+METAC 2 1
+
+/* Core Memory */
+MEMORY mtp_code_ram	ORIGIN	0x80000000 SIZE 0x10000 	/* 64k  */
+MEMORY mtp_data_ram	ORIGIN	0x82000000 SIZE 0x10000 	/* 64k  */
+
+/* Internal Memory */
+MEMORY	gram		ORIGIN	0xB7000000 SIZE 0x1c3800	/* Although there is only 0xC0000 bytes, we declare a greater region so */
+														/* that LDLK can insert the secondary loader. The loader will appear from */
+														/* 0xB702C000 so the application should be small enough to not overwrite tihs */
+
+/* External Memory */
+MEMORY ext_dram		ORIGIN  0xB0000000 SIZE 0x02000000      /* 32MB */

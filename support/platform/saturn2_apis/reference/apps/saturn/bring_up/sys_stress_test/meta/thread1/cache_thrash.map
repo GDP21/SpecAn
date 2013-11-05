@@ -1,0 +1,1587 @@
+Outputting section <$text> size 3960
+           BA        #+76     ; bytes -> 0x8090004c                    ; 80900000: [a0000260]
+           NOP                                                         ; 80900004: [a0fffffe]
+           MOVT      D1RtP,#0x8090                                     ; 80900008: [03240485]
+           ADD       D1RtP,D1RtP,#0x0                                  ; 8090000c: [03200000]
+           MOVT      A0StP,#0x8090                                     ; 80900010: [82040485]
+           ADD       A0StP,A0StP,#0x2000                               ; 80900014: [82010000]
+           MOVT      A1GbP,#0x8090                                     ; 80900018: [83040485]
+           ADD       A1GbP,A1GbP,#0x1000                               ; 8090001c: [83008000]
+           MOVA      D1Ar1,D0Re0                                       ; 80900020: [a300c440]
+           MOVA      D0Ar2,D1Re0                                       ; 80900024: [a300c820]
+           MOVT      D1Ar3,#0x8090                                     ; 80900028: [03140485]
+           ADD       D1Ar3,D1Ar3,#0xf80                                ; 8090002c: [03107c00]
+           MOVT      D0Ar4,#0x8090                                     ; 80900030: [02140485]
+           ADD       D0Ar4,D0Ar4,#0xf88                                ; 80900034: [02107c40]
+           MOVT      D1RtP,#0x8090                                     ; 80900038: [03240485]
+           ADD       D1RtP,D1RtP,#0x70                                 ; 8090003c: [03200380]
+           MOVT      A1.3,#0x8090                                      ; 80900040: [831c0485]
+           ADD       A1.3,A1.3,#0x724                                  ; 80900044: [83183920]
+           MOVA      PC,A1.3                                           ; 80900048: [a31810a0]
+           MOV       D0Re0,#0x0                                        ; 8090004c: [02000004]
+           MOV       D1Re0,#0x0                                        ; 80900050: [03000004]
+           MOV       D1Ar1,#0x0                                        ; 80900054: [03180004]
+           MOV       D0Ar2,#0x0                                        ; 80900058: [02180004]
+           MOV       D1Ar3,#0x0                                        ; 8090005c: [03100004]
+           MOV       D0Ar4,#0x0                                        ; 80900060: [02100004]
+           MOV       D1Ar5,#0x0                                        ; 80900064: [03080004]
+           MOV       D0Ar6,#0x0                                        ; 80900068: [02080004]
+           BA        #-100    ; bytes -> 0x80900008                    ; 8090006c: [a0fffce0]
+           MSETL     [A0StP++], D0Re0,D0FrT                            ; 80900070: [b9000468]
+           MOVT      D1Ar1,#0x8090                                     ; 80900074: [031c0485]
+           ADD       D1Ar1,D1Ar1,#0xf78                                ; 80900078: [03187bc0]
+           MOVT      D1RtP,#0x8090                                     ; 8090007c: [03240485]
+           CALL      D1RtP,#0x7bc                                      ; 80900080: [ac203de6]
+           GETD      D1Ar1,[A0StP+#-0x10]                              ; 80900084: [a71ffe74]
+           MOV       D0Ar6,#0x0                                        ; 80900088: [02080004]
+           MSETL     [A0StP++], D0Ar6,D0Ar4,D0Ar2                      ; 8090008c: [b90801e8]
+           SWITCH    #0xc30006                                         ; 80900090: [afc30006]
+           BA        #-4      ; bytes -> 0x80900090                    ; 80900094: [a0ffffe0]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 80900098: [b92000e8]
+           ADD       A0StP,A0StP,#0x8                                  ; 8090009c: [82000040]
+           GETD      D0FrT,[A1GbP+#0x38]                               ; 809000a0: [a720070c]
+           CMP       D0FrT,#0x0                                        ; 809000a4: [72200000]
+           BLE       #+88     ; bytes -> 0x80900100                    ; 809000a8: [a00002dc]
+           MOVT      D0FrT,#0x8090                                     ; 809000ac: [02240485]
+           SUB       D1.5,A0StP,#0x8                                   ; 809000b0: [8e280224]
+           ADD       D0FrT,D0FrT,#0x1c4                                ; 809000b4: [02200e20]
+           MOV       D0.5,#0x0                                         ; 809000b8: [02280004]
+           SETD      [A0StP+#-0x8],D0FrT                               ; 809000bc: [a527ff6c]
+           BA        #+16     ; bytes -> 0x809000d0                    ; 809000c0: [a0000080]
+           GETD      D0FrT,[A1GbP+#0x38]                               ; 809000c4: [a720070c]
+           CMP       D0FrT,D0.5                                        ; 809000c8: [70010a00]
+           BLE       #+52     ; bytes -> 0x80900100                    ; 809000cc: [a00001bc]
+           GETD      D0Re0,[A0StP+#-0x8]                               ; 809000d0: [a707ff6c]
+           MOV       D1Ar1,D1.5                                        ; 809000d4: [01180a04]
+           ADD       D0.5,D0.5,#0x1                                    ; 809000d8: [02280008]
+           MOVA      D1RtP,D0Re0                                       ; 809000dc: [a3010440]
+           SWAPA     PC,D1RtP                                          ; 809000e0: [a3200aa0]
+           CMP       D0Re0,#0x0                                        ; 809000e4: [72000000]
+           BGE       #-36     ; bytes -> 0x809000c4                    ; 809000e8: [a0fffef6]
+           MOV       D0Re0,#-0x1                                       ; 809000ec: [0207fffe]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x18]                        ; 809000f0: [a727feee]
+           GETL      D0.5,D1.5,[A0StP+#-0x10]                          ; 809000f4: [a72fff6e]
+           SUB       A0StP,A0StP,#0x18                                 ; 809000f8: [8a0000c0]
+           MOVA      PC,D1RtP                                          ; 809000fc: [a32008a0]
+           MOV       D0Re0,#0x0                                        ; 80900100: [02000004]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x18]                        ; 80900104: [a727feee]
+           GETL      D0.5,D1.5,[A0StP+#-0x10]                          ; 80900108: [a72fff6e]
+           SUB       A0StP,A0StP,#0x18                                 ; 8090010c: [8a0000c0]
+           MOVA      PC,D1RtP                                          ; 80900110: [a32008a0]
+           MSETL     [A0StP++], D0FrT,D0.5,D0.6                        ; 80900114: [b92001e8]
+           GETD      D0.5,[A1GbP+#0x24]                                ; 80900118: [a728048c]
+           GETD      D1Re0,[A1GbP+#0x28]                               ; 8090011c: [a7000514]
+           GETD      D0Ar4,[A1GbP+#0x8]                                ; 80900120: [a710010c]
+           MOVA      D1Ar5,D0.5                                        ; 80900124: [a3284440]
+           ADD       D0FrT,D0.5,D1Re0                                  ; 80900128: [00215001]
+           SUB       D0FrT,D0FrT,#0x10                                 ; 8090012c: [12200080]
+           ADD       D0Ar4,D0Ar4,#0x1                                  ; 80900130: [02100008]
+           CMP       D0.5,D0FrT                                        ; 80900134: [70014800]
+           SETD      [A1GbP+#0x8],D0Ar4                                ; 80900138: [a510010c]
+           BHI       #+112    ; bytes -> 0x809001ac                    ; 8090013c: [a0000392]
+           GETD      D0.6,[A1GbP+#0x48]                                ; 80900140: [a730090c]
+           ADD       D1.5,D0.5,#0x4                                    ; 80900144: [06294124]
+           GETD      D0Ar4,[D1.5+#0x10++]                              ; 80900148: [c61144c3]
+           SUB       D0FrT,D0.5,D1Ar5                                  ; 8090014c: [10215201]
+           ASR       D0FrT,D0FrT,#0x2                                  ; 80900150: [522104c0]
+           CMP       D0Ar4,#0x0                                        ; 80900154: [72100000]
+           LSR       D0Ar6,D0FrT,#0x2                                  ; 80900158: [52090440]
+           BEQ       #+60     ; bytes -> 0x80900198                    ; 8090015c: [a00001e2]
+           GETD      D0Ar4,[D0.5+#0x0]                                 ; 80900160: [c6114022]
+           GETD      D0FrT,[A1GbP+#0x2c]                               ; 80900164: [a720058c]
+           MOV       D0Ar2,D0.5                                        ; 80900168: [00180a04]
+           MOVA      D1Ar3,D0Ar4                                       ; 8090016c: [a3108440]
+           AND       D0Ar4,D0Ar4,D0FrT                                 ; 80900170: [20108800]
+           CMP       D0Ar6,D0Ar4                                       ; 80900174: [70004400]
+           MOVA      D1Ar1,D0.6                                        ; 80900178: [a330c440]
+           BEQ       #+28     ; bytes -> 0x80900198                    ; 8090017c: [a00000e2]
+           CALLR     D1RtP,#+2080   ; bytes -> 0x809009a0              ; 80900180: [ab004114]
+           GETD      D0FrT,[A1GbP+#0xc]                                ; 80900184: [a720018c]
+           GETD      D1Ar5,[A1GbP+#0x24]                               ; 80900188: [a7080494]
+           GETD      D1Re0,[A1GbP+#0x28]                               ; 8090018c: [a7000514]
+           ADD       D0FrT,D0FrT,#0x1                                  ; 80900190: [02200008]
+           SETD      [A1GbP+#0xc],D0FrT                                ; 80900194: [a520018c]
+           ADDA      D0FrT,D1Ar5,D1Re0                                 ; 80900198: [05204020]
+           ADD       D0.5,D0.5,#0x10                                   ; 8090019c: [02280080]
+           SUB       D0FrT,D0FrT,#0x10                                 ; 809001a0: [12200080]
+           CMP       D0FrT,D0.5                                        ; 809001a4: [70010a00]
+           BCC       #-96     ; bytes -> 0x80900148                    ; 809001a8: [a0fffd08]
+           MOV       D0Re0,#0x0                                        ; 809001ac: [02000004]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x18]                        ; 809001b0: [a727feee]
+           GETL      D0.5,D1.5,[A0StP+#-0x10]                          ; 809001b4: [a72fff6e]
+           GETL      D0.6,D1.6,[A0StP+#-0x8]                           ; 809001b8: [a737ffee]
+           SUB       A0StP,A0StP,#0x18                                 ; 809001bc: [8a0000c0]
+           MOVA      PC,D1RtP                                          ; 809001c0: [a32008a0]
+           SETL      [A0StP++], D0FrT,D1RtP                            ; 809001c4: [b72001e3]
+           GETD      D0Ar4,[A1GbP+#0x30]                               ; 809001c8: [a710060c]
+           MOVT      D0FrT,#0x40                                       ; 809001cc: [02200205]
+           ADD       D0FrT,D0FrT,#0x2                                  ; 809001d0: [02200010]
+           ADD       D0Ar4,D0Ar4,D0Ar4                                 ; 809001d4: [00108400]
+           ANDA      D1Ar3,D0Ar4,D0FrT                                 ; 809001d8: [24108840]
+           SETD      [A1GbP+#0x30],D0Ar4                               ; 809001dc: [a510060c]
+           CMP       D1Ar3,D0FrT                                       ; 809001e0: [71009801]
+           BEQ       #+12     ; bytes -> 0x809001f0                    ; 809001e4: [a0000062]
+           CMP       D1Ar3,#0x0                                        ; 809001e8: [73100000]
+           BNE       #+156    ; bytes -> 0x80900288                    ; 809001ec: [a00004e4]
+           GETD      D0Ar2,[A1GbP+#0x34]                               ; 809001f0: [a718068c]
+           MOVT      D0FrT,#0x20                                       ; 809001f4: [02200105]
+           ADD       D0FrT,D0FrT,#0x1                                  ; 809001f8: [02200008]
+           LSR       D0Ar2,D0Ar2,#0x1                                  ; 809001fc: [5218c240]
+           ANDA      D1Ar3,D0Ar2,D0FrT                                 ; 80900200: [2410c840]
+           SETD      [A1GbP+#0x34],D0Ar2                               ; 80900204: [a518068c]
+           CMP       D1Ar3,D0FrT                                       ; 80900208: [71009801]
+           BEQ       #+12     ; bytes -> 0x80900218                    ; 8090020c: [a0000062]
+           CMP       D1Ar3,#0x0                                        ; 80900210: [73100000]
+           BNE       #+128    ; bytes -> 0x80900294                    ; 80900214: [a0000404]
+           GETD      D0FrT,[A1GbP+#0x2c]                               ; 80900218: [a720058c]
+           XOR       D0Ar2,D0Ar2,D0Ar4                                 ; 8090021c: [4018c400]
+           ANDMT     D0Ar2,D0Ar2,#0x7f                                 ; 80900220: [221803fd]
+           GETD      D0Ar4,[A1GbP+#0x24]                               ; 80900224: [a710048c]
+           AND       D0FrT,D0Ar2,D0FrT                                 ; 80900228: [2020c800]
+           LSL       D0FrT,D0FrT,#0x4                                  ; 8090022c: [52210800]
+           ADD       D0Ar6,D0FrT,D0Ar4                                 ; 80900230: [00090400]
+           MOVA      D1Ar3,D0Ar6                                       ; 80900234: [a3088440]
+           SETD      [D1Ar3++], D0Ar2                                  ; 80900238: [b61881c3]
+           GETD      D0FrT,[A1GbP+#0x10]                               ; 8090023c: [a720020c]
+           ADD       D0Ar4,D0FrT,#0x1                                  ; 80900240: [06110062]
+           SETD      [D1Ar3+#0x0], D0FrT                               ; 80900244: [b6208042]
+           SETD      [A1GbP+#0x10],D0Ar4                               ; 80900248: [a510020c]
+           GETD      D0FrT,[D1Ar1+#0x0]                                ; 8090024c: [c620c042]
+           SETD      [D0Ar6+#0x8],D0FrT                                ; 80900250: [a520012d]
+           GETD      D0Ar4,[D0Ar6+#0x0]                                ; 80900254: [a710002d]
+           CMP       D0Ar4,D0Ar2                                       ; 80900258: [70008600]
+           BNE       #+68     ; bytes -> 0x809002a0                    ; 8090025c: [a0000224]
+           GETD      D0FrT,[A1GbP+#0x20]                               ; 80900260: [a720040c]
+           MOV       D1Ar3,#0x0                                        ; 80900264: [03100004]
+           AND       D0FrT,D0Ar4,D0FrT                                 ; 80900268: [20208800]
+           GETD      D0Ar4,[A1GbP+#0x18]                               ; 8090026c: [a710030c]
+           MULD      D0FrT,D0FrT,#0x204                                ; 80900270: [62201024]
+           ADD       D0FrT,D0FrT,D0Ar4                                 ; 80900274: [00210400]
+           SETD      [D1Ar1+#0x0], D0FrT                               ; 80900278: [b620c042]
+           MOVA      D0Re0,D1Ar3                                       ; 8090027c: [a3100820]
+           GETL      D0FrT,D1RtP,[--A0StP]                             ; 80900280: [c7203fe2]
+           MOVA      PC,D1RtP                                          ; 80900284: [a32008a0]
+           OR        D0Ar4,D0Ar4,#0x1                                  ; 80900288: [32100008]
+           SETD      [A1GbP+#0x30],D0Ar4                               ; 8090028c: [a510060c]
+           BA        #-160    ; bytes -> 0x809001f0                    ; 80900290: [a0fffb00]
+           ORT       D0Ar2,D0Ar2,#0x40                                 ; 80900294: [32180201]
+           SETD      [A1GbP+#0x34],D0Ar2                               ; 80900298: [a518068c]
+           BA        #-132    ; bytes -> 0x80900218                    ; 8090029c: [a0fffbe0]
+           GETD      D1Ar1,[A1GbP+#0x4c]                               ; 809002a0: [a7180994]
+           MOVA      D1Ar3,D0Ar6                                       ; 809002a4: [a3088440]
+           CALLR     D1RtP,#+1784   ; bytes -> 0x809009a0              ; 809002a8: [ab0037d4]
+           MOV       D1Ar3,#-0x1                                       ; 809002ac: [0317fffe]
+           BA        #-52     ; bytes -> 0x8090027c                    ; 809002b0: [a0fffe60]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 809002b4: [b92000e8]
+           GETD      D0FrT,[A1GbP+#0x14]                               ; 809002b8: [a720028c]
+           CMP       D0FrT,#0x0                                        ; 809002bc: [72200000]
+           BNE       #+144    ; bytes -> 0x80900350                    ; 809002c0: [a0000484]
+           GETD      D1Ar3,[A1GbP+#0x1c]                               ; 809002c4: [a7100394]
+           MOV       D0.5,#0x0                                         ; 809002c8: [02280004]
+           MOV       D1Ar1,D1Ar3                                       ; 809002cc: [01180404]
+           MOV       D0Ar2,#0x204                                      ; 809002d0: [02181024]
+           SETD      [A1GbP+#0x20],D0.5                                ; 809002d4: [a528040c]
+           CALLR     D1RtP,#+1328   ; bytes -> 0x80900808              ; 809002d8: [ab002994]
+           SUB       D0Re0,D0Re0,#0x1                                  ; 809002dc: [12000008]
+           MOV       D0FrT,D0.5                                        ; 809002e0: [00200a04]
+           MOV       TXRPT,#0x1f                                       ; 809002e4: [a91800f8]
+           ADD       D0FrT,D0FrT,D0FrT                                 ; 809002e8: [00210800]
+           CMP       D0FrT,D0Re0                                       ; 809002ec: [70010000]
+           BCC       #+16     ; bytes -> 0x80900300                    ; 809002f0: [a0000088]
+           OR        D0.5,D0FrT,#0x1                                   ; 809002f4: [36290062]
+           MOV       D0FrT,D0.5                                        ; 809002f8: [00200a04]
+           BAR       #-20     ; bytes -> 0x809002e8                    ; 809002fc: [a0ffff61]
+           GETD      D0FrT,[A1GbP+#0x28]                               ; 80900300: [a720050c]
+           MOV       D0Ar4,#0x0                                        ; 80900304: [02100004]
+           MOVA      D1Ar3,D0Ar4                                       ; 80900308: [a3108440]
+           LSR       D0FrT,D0FrT,#0x4                                  ; 8090030c: [52210840]
+           SETD      [A1GbP+#0x20],D0.5                                ; 80900310: [a528040c]
+           SETD      [A1GbP+#0x2c],D0Ar4                               ; 80900314: [a510058c]
+           SUB       D0FrT,D0FrT,#0x1                                  ; 80900318: [12200008]
+           MOV       TXRPT,#0x1f                                       ; 8090031c: [a91800f8]
+           ADD       D0Ar4,D0Ar4,D0Ar4                                 ; 80900320: [00108400]
+           CMP       D0Ar4,D0FrT                                       ; 80900324: [70008800]
+           BCC       #+16     ; bytes -> 0x80900338                    ; 80900328: [a0000088]
+           OR        D1Ar3,D0Ar4,#0x1                                  ; 8090032c: [36108064]
+           MOVA      D0Ar4,D1Ar3                                       ; 80900330: [a3108820]
+           BAR       #-20     ; bytes -> 0x80900320                    ; 80900334: [a0ffff61]
+           MOV       D0Re0,#0x0                                        ; 80900338: [02000004]
+           SETD      [A1GbP+#0x2c],D1Ar3                               ; 8090033c: [a5100594]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x10]                        ; 80900340: [a727ff6e]
+           GETL      D0.5,D1.5,[A0StP+#-0x8]                           ; 80900344: [a72fffee]
+           SUB       A0StP,A0StP,#0x10                                 ; 80900348: [8a000080]
+           MOVA      PC,D1RtP                                          ; 8090034c: [a32008a0]
+           CALLR     D1RtP,#+1496   ; bytes -> 0x80900928              ; 80900350: [ab002ed4]
+           GETD      D1Ar1,[A1GbP+#0x50]                               ; 80900354: [a7180a14]
+           MOV       D0Ar2,#0x9                                        ; 80900358: [0218004c]
+           MOV       D0.5,D0Re0                                        ; 8090035c: [00280004]
+           CALLR     D1RtP,#+1984   ; bytes -> 0x80900b20              ; 80900360: [ab003e14]
+           CMP       D0Re0,#0x0                                        ; 80900364: [72000000]
+           BNE       #+12     ; bytes -> 0x80900374                    ; 80900368: [a0000064]
+           MOV       D0Re0,#-0x1                                       ; 8090036c: [0207fffe]
+           BA        #-48     ; bytes -> 0x80900340                    ; 80900370: [a0fffe80]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 80900374: [a720002c]
+           GETD      D1Ar1,[A1GbP+#0x54]                               ; 80900378: [a7180a94]
+           MOV       D0Ar2,#0xa                                        ; 8090037c: [02180054]
+           SETD      [A1GbP+#0x38],D0FrT                               ; 80900380: [a520070c]
+           CALLR     D1RtP,#+1948   ; bytes -> 0x80900b20              ; 80900384: [ab003cf4]
+           CMP       D0Re0,#0x0                                        ; 80900388: [72000000]
+           BEQ       #-32     ; bytes -> 0x8090036c                    ; 8090038c: [a0ffff02]
+           GETD      D1Ar3,[D0Re0+#0x0]                                ; 80900390: [a7100034]
+           GETD      D1Ar1,[A1GbP+#0x58]                               ; 80900394: [a7180b14]
+           MOV       D0Ar2,#0xa                                        ; 80900398: [02180054]
+           SETD      [A1GbP+#0x1c],D1Ar3                               ; 8090039c: [a5100394]
+           CALLR     D1RtP,#+1920   ; bytes -> 0x80900b20              ; 809003a0: [ab003c14]
+           CMP       D0Re0,#0x0                                        ; 809003a4: [72000000]
+           BEQ       #-60     ; bytes -> 0x8090036c                    ; 809003a8: [a0fffe22]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 809003ac: [a720002c]
+           ASR       D0Ar2,D0.5,#0x1a                                  ; 809003b0: [521974c0]
+           CMP       D0Ar2,#0x3                                        ; 809003b4: [72180018]
+           SETD      [A1GbP+#0x28],D0FrT                               ; 809003b8: [a520050c]
+           BHI       #+32     ; bytes -> 0x809003dc                    ; 809003bc: [a0000112]
+           LSL       A0.2,D0Ar2,#0x2                                   ; 809003c0: [5610c426]
+           ADD       A0.2,A0.2,#0x4                                    ; 809003c4: [82100020]
+           ADDA      PC,CPC0,A0.2                                      ; 809003c8: [840404a0]
+           BA        #+320    ; bytes -> 0x8090050c                    ; 809003cc: [a0000a00]
+           BA        #+260    ; bytes -> 0x809004d4                    ; 809003d0: [a0000820]
+           BA        #+200    ; bytes -> 0x8090049c                    ; 809003d4: [a0000640]
+           BA        #+20     ; bytes -> 0x809003ec                    ; 809003d8: [a00000a0]
+           GETD      D1Ar1,[A1GbP+#0x7c]                               ; 809003dc: [a7180f94]
+           CALLR     D1RtP,#+1472   ; bytes -> 0x809009a0              ; 809003e0: [ab002e14]
+           MOV       D0Re0,#-0x1                                       ; 809003e4: [0207fffe]
+           BA        #-168    ; bytes -> 0x80900340                    ; 809003e8: [a0fffac0]
+           GETD      D1Ar1,[A1GbP+#0x74]                               ; 809003ec: [a7180e94]
+           MOVT      D0FrT,#0xa0                                       ; 809003f0: [02200505]
+           ADD       D0FrT,D0FrT,#0xa0a0                               ; 809003f4: [02250500]
+           MOV       D0Ar2,#0xa                                        ; 809003f8: [02180054]
+           SETD      [A1GbP+#0x34],D0FrT                               ; 809003fc: [a520068c]
+           SETD      [A1GbP+#0x30],D0FrT                               ; 80900400: [a520060c]
+           CALLR     D1RtP,#+1820   ; bytes -> 0x80900b20              ; 80900404: [ab0038f4]
+           CMP       D0Re0,#0x0                                        ; 80900408: [72000000]
+           BEQ       #-160    ; bytes -> 0x8090036c                    ; 8090040c: [a0fffb02]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 80900410: [a720002c]
+           GETD      D1Ar1,[A1GbP+#0x78]                               ; 80900414: [a7180f14]
+           MOV       D0Ar2,#0xa                                        ; 80900418: [02180054]
+           SETD      [A1GbP+#0x18],D0FrT                               ; 8090041c: [a520030c]
+           CALLR     D1RtP,#+1792   ; bytes -> 0x80900b20              ; 80900420: [ab003814]
+           CMP       D0Re0,#0x0                                        ; 80900424: [72000000]
+           BEQ       #-188    ; bytes -> 0x8090036c                    ; 80900428: [a0fffa22]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 8090042c: [a720002c]
+           GETD      D1Ar3,[A1GbP+#0x28]                               ; 80900430: [a7100514]
+           MOV       D0Ar2,#0x0                                        ; 80900434: [02180004]
+           SETD      [A1GbP+#0x24],D0FrT                               ; 80900438: [a520048c]
+           GETD      D1Ar1,[A1GbP+#0x24]                               ; 8090043c: [a7180494]
+           CALLR     D1RtP,#+2648   ; bytes -> 0x80900e98              ; 80900440: [ab0052d4]
+           GETD      D0.5,[A1GbP+#0x18]                                ; 80900444: [a728030c]
+           GETD      D1Ar3,[A1GbP+#0x1c]                               ; 80900448: [a7100394]
+           MOV       D0Ar4,#0x0                                        ; 8090044c: [02100004]
+           SETD      [A1GbP+#0x14],D0Ar4                               ; 80900450: [a510028c]
+           ADD       D0FrT,D0.5,D1Ar3                                  ; 80900454: [00215401]
+           ADD       D0FrT,D0FrT,#-0x204                               ; 80900458: [0227efe2]
+           CMP       D0.5,D0FrT                                        ; 8090045c: [70014800]
+           BHI       #-408    ; bytes -> 0x809002c8                    ; 80900460: [a0fff352]
+           MOVT      D1.5,#0x8090                                      ; 80900464: [032c0485]
+           ADD       D1.5,D1.5,#0x1c4                                  ; 80900468: [03280e20]
+           MOVA      D1Ar1,D0.5                                        ; 8090046c: [a328c440]
+           MOVA      D0Ar2,D1.5                                        ; 80900470: [a328c820]
+           MOV       D1Ar3,#0x204                                      ; 80900474: [03101024]
+           CALLR     D1RtP,#+2164   ; bytes -> 0x80900cec              ; 80900478: [ab0043b4]
+           GETD      D1Ar3,[A1GbP+#0x1c]                               ; 8090047c: [a7100394]
+           GETD      D0FrT,[A1GbP+#0x18]                               ; 80900480: [a720030c]
+           ADD       D0.5,D0.5,#0x204                                  ; 80900484: [02281020]
+           ADD       D0FrT,D0FrT,D1Ar3                                 ; 80900488: [00211401]
+           ADD       D0FrT,D0FrT,#-0x204                               ; 8090048c: [0227efe2]
+           CMP       D0FrT,D0.5                                        ; 80900490: [70010a00]
+           BCC       #-40     ; bytes -> 0x8090046c                    ; 80900494: [a0fffec8]
+           BA        #-464    ; bytes -> 0x809002c8                    ; 80900498: [a0fff180]
+           GETD      D1Ar1,[A1GbP+#0x6c]                               ; 8090049c: [a7180d94]
+           MOVT      D0FrT,#0xfe                                       ; 809004a0: [022007f5]
+           MOVT      D0Ar4,#0xeb                                       ; 809004a4: [0210075d]
+           ADD       D0FrT,D0FrT,#0x1234                               ; 809004a8: [022091a0]
+           ADD       D0Ar4,D0Ar4,#0x7246                               ; 809004ac: [02139230]
+           MOV       D0Ar2,#0xa                                        ; 809004b0: [02180054]
+           SETD      [A1GbP+#0x30],D0FrT                               ; 809004b4: [a520060c]
+           SETD      [A1GbP+#0x34],D0Ar4                               ; 809004b8: [a510068c]
+           CALLR     D1RtP,#+1636   ; bytes -> 0x80900b20              ; 809004bc: [ab003334]
+           CMP       D0Re0,#0x0                                        ; 809004c0: [72000000]
+           BEQ       #-344    ; bytes -> 0x8090036c                    ; 809004c4: [a0fff542]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 809004c8: [a720002c]
+           GETD      D1Ar1,[A1GbP+#0x70]                               ; 809004cc: [a7180e14]
+           BA        #-184    ; bytes -> 0x80900418                    ; 809004d0: [a0fffa40]
+           GETD      D1Ar1,[A1GbP+#0x64]                               ; 809004d4: [a7180c94]
+           MOVT      D0FrT,#0x4a                                       ; 809004d8: [02200255]
+           MOVT      D0Ar4,#0x12                                       ; 809004dc: [02100095]
+           ADD       D0FrT,D0FrT,#0xbc00                               ; 809004e0: [0225e000]
+           ADD       D0Ar4,D0Ar4,#0x3456                               ; 809004e4: [0211a2b0]
+           MOV       D0Ar2,#0xa                                        ; 809004e8: [02180054]
+           SETD      [A1GbP+#0x30],D0FrT                               ; 809004ec: [a520060c]
+           SETD      [A1GbP+#0x34],D0Ar4                               ; 809004f0: [a510068c]
+           CALLR     D1RtP,#+1580   ; bytes -> 0x80900b20              ; 809004f4: [ab003174]
+           CMP       D0Re0,#0x0                                        ; 809004f8: [72000000]
+           BEQ       #-400    ; bytes -> 0x8090036c                    ; 809004fc: [a0fff382]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 80900500: [a720002c]
+           GETD      D1Ar1,[A1GbP+#0x68]                               ; 80900504: [a7180d14]
+           BA        #-240    ; bytes -> 0x80900418                    ; 80900508: [a0fff880]
+           GETD      D1Ar1,[A1GbP+#0x5c]                               ; 8090050c: [a7180b94]
+           MOVT      D0FrT,#0x12                                       ; 80900510: [02200095]
+           MOVT      D0Ar4,#0x4a                                       ; 80900514: [02100255]
+           ADD       D0FrT,D0FrT,#0x3456                               ; 80900518: [0221a2b0]
+           ADD       D0Ar4,D0Ar4,#0xbc00                               ; 8090051c: [0215e000]
+           MOV       D0Ar2,#0xa                                        ; 80900520: [02180054]
+           SETD      [A1GbP+#0x30],D0FrT                               ; 80900524: [a520060c]
+           SETD      [A1GbP+#0x34],D0Ar4                               ; 80900528: [a510068c]
+           CALLR     D1RtP,#+1524   ; bytes -> 0x80900b20              ; 8090052c: [ab002fb4]
+           CMP       D0Re0,#0x0                                        ; 80900530: [72000000]
+           BEQ       #-456    ; bytes -> 0x8090036c                    ; 80900534: [a0fff1c2]
+           GETD      D0FrT,[D0Re0+#0x0]                                ; 80900538: [a720002c]
+           GETD      D1Ar1,[A1GbP+#0x60]                               ; 8090053c: [a7180c14]
+           BA        #-296    ; bytes -> 0x80900418                    ; 80900540: [a0fff6c0]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 80900544: [b92000e8]
+           CALLR     D1RtP,#+700    ; bytes -> 0x80900804              ; 80900548: [ab0015f4]
+           CALLR     D1RtP,#-664    ; bytes -> 0x809002b4              ; 8090054c: [abffeb54]
+           ADDS      D0.5,D0Re0,#0x0                                   ; 80900550: [0e280022]
+           BEQ       #+32     ; bytes -> 0x80900574                    ; 80900554: [a0000102]
+           GETD      D1Ar1,[A1GbP+#0x80]                               ; 80900558: [a7181014]
+           CALLR     D1RtP,#+1092   ; bytes -> 0x809009a0              ; 8090055c: [ab002234]
+           MOV       D0Re0,D0.5                                        ; 80900560: [00000a04]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x10]                        ; 80900564: [a727ff6e]
+           GETL      D0.5,D1.5,[A0StP+#-0x8]                           ; 80900568: [a72fffee]
+           SUB       A0StP,A0StP,#0x10                                 ; 8090056c: [8a000080]
+           MOVA      PC,D1RtP                                          ; 80900570: [a32008a0]
+           GETD      D1Ar1,[A1GbP+#0x84]                               ; 80900574: [a7181094]
+           CALLR     D1RtP,#+1064   ; bytes -> 0x809009a0              ; 80900578: [ab002154]
+           GETD      D1Ar1,[A1GbP+#0x88]                               ; 8090057c: [a7181114]
+           CALLR     D1RtP,#+1056   ; bytes -> 0x809009a0              ; 80900580: [ab002114]
+           CALLR     D1RtP,#-1260   ; bytes -> 0x80900098              ; 80900584: [abffd8b4]
+           CMP       D0Re0,#0x0                                        ; 80900588: [72000000]
+           BNE       #+16     ; bytes -> 0x8090059c                    ; 8090058c: [a0000084]
+           CALLR     D1RtP,#-1148   ; bytes -> 0x80900114              ; 80900590: [abffdc34]
+           CMP       D0Re0,#0x0                                        ; 80900594: [72000000]
+           BEQ       #-20     ; bytes -> 0x80900584                    ; 80900598: [a0ffff62]
+           MOVT      D0.5,#0x7e57                                      ; 8090059c: [022bf2bd]
+           ADD       D0.5,D0.5,#0xbaad                                 ; 809005a0: [022dd568]
+           MOV       D0Re0,D0.5                                        ; 809005a4: [00000a04]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x10]                        ; 809005a8: [a727ff6e]
+           GETL      D0.5,D1.5,[A0StP+#-0x8]                           ; 809005ac: [a72fffee]
+           SUB       A0StP,A0StP,#0x10                                 ; 809005b0: [8a000080]
+           MOVA      PC,D1RtP                                          ; 809005b4: [a32008a0]
+           MOVA      D0FrT,A0FrP                                       ; 809005b8: [a3090c20]
+           ADD       A0FrP,A0StP,#0x0                                  ; 809005bc: [86080026]
+           MSETL     [A0StP++], D0FrT,D0.5,D0.6,D0.7                   ; 809005c0: [b92003e8]
+           ADD       A0StP,A0StP,#0x10                                 ; 809005c4: [82000080]
+           SUB       D0Re0,A0StP,#0x10                                 ; 809005c8: [8e000422]
+           MSETL     [D0Re0++], A0StP,A0FrP                            ; 809005cc: [b90000b8]
+           SWAPNV    D0Re0,D1Re0                                       ; 809005d0: [a3000a3e]
+           MOVT      D1RtP,#0x8090                                     ; 809005d4: [03240485]
+           CALL      D1RtP,#0x658                                      ; 809005d8: [ac2032c6]
+           SUB       D0Re0,A0StP,#0x10                                 ; 809005dc: [8e000422]
+           MGETL     A0StP,A0FrP,[D0Re0++]                             ; 809005e0: [c90000b8]
+           MGETL     D0FrT,D0.5,D0.6,D0.7,[A0FrP++]                    ; 809005e4: [c92043e8]
+           SUB       A0StP,A0StP,#0x30                                 ; 809005e8: [8a000180]
+           MOVA      A0FrP,D0FrT                                       ; 809005ec: [a3204460]
+           MOVA      PC,D1RtP                                          ; 809005f0: [a32008a0]
+           MOV       D1Re0,D1Ar1                                       ; 809005f4: [01000604]
+           BA        #+8      ; bytes -> 0x80900600                    ; 809005f8: [a0000040]
+           XOR       D1Re0,D1Re0,D1Re0                                 ; 809005fc: [41000000]
+           MOVA      D0FrT,A0FrP                                       ; 80900600: [a3090c20]
+           MOV       A0FrP,A0StP                                       ; 80900604: [80080004]
+           SETL      [A0StP++], D0FrT,D1RtP                            ; 80900608: [b72001e3]
+           XOR       D0Re0,D0Re0,D0Re0                                 ; 8090060c: [40000000]
+           MOVA      TXMASK,D0Re0                                      ; 80900610: [a30044e0]
+           MOVA      D1Ar1,TXENABLE                                    ; 80900614: [a300c040]
+           MOV       D0Re0,#0xdead                                     ; 80900618: [0206f56c]
+           ADDT      D0Re0,D0Re0,#0xdaed                               ; 8090061c: [0206d769]
+           TST       D1Ar1,#0x8000                                     ; 80900620: [7b1c0000]
+           BNE       #+28     ; bytes -> 0x80900640                    ; 80900624: [a00000e4]
+           MOVA      TXL1END,D0Re0                                     ; 80900628: [a3018400]
+           MOVA      TXL2END,D0Re0                                     ; 8090062c: [a3024400]
+           MOVA      TXL1START,D0Re0                                   ; 80900630: [a3014400]
+           MOVA      TXL2START,D0Re0                                   ; 80900634: [a3020400]
+           MOVA      TXL1COUNT,D0Re0                                   ; 80900638: [a301c400]
+           MOVA      TXL2COUNT,D0Re0                                   ; 8090063c: [a3028400]
+           MOVA      TXRPT,D0Re0                                       ; 80900640: [a300c400]
+           MOVA      D0Re0,TXSTAT                                      ; 80900644: [a3001c20]
+           GETL      D0FrT,D1RtP,[A0FrP+#0x0]                          ; 80900648: [a720006f]
+           SUB       A0StP,A0StP,#0x8                                  ; 8090064c: [8a000040]
+           MOVA      A0FrP,D0FrT                                       ; 80900650: [a3204460]
+           MOVA      PC,D1RtP                                          ; 80900654: [a32008a0]
+           MOVA      D1Re0,TXENABLE                                    ; 80900658: [a3000040]
+           MOVA      D0Re0,TXSTATUS                                    ; 8090065c: [a3100020]
+           TST       D1Re0,#0x8000                                     ; 80900660: [7b040000]
+           MOV       D1Re0,#0x0                                        ; 80900664: [03000004]
+           MOV       D0Ar6,#0x0                                        ; 80900668: [02080004]
+           MOV       D1Ar5,#0x0                                        ; 8090066c: [03080004]
+           MOV       D0Ar4,#0x0                                        ; 80900670: [02100004]
+           MOV       D1Ar3,#0x0                                        ; 80900674: [03100004]
+           MOV       D0Ar2,#0x0                                        ; 80900678: [02180004]
+           MOV       D1Ar1,#0x0                                        ; 8090067c: [03180004]
+           MOV       D0FrT,#0x0                                        ; 80900680: [02200004]
+           MOV       D0.5,#0x0                                         ; 80900684: [02280004]
+           MOV       D1.5,#0x0                                         ; 80900688: [03280004]
+           MOV       D0.6,#0x0                                         ; 8090068c: [02300004]
+           MOV       D1.6,#0x0                                         ; 80900690: [03300004]
+           MOV       D0.7,#0x0                                         ; 80900694: [02380004]
+           MOV       D1.7,#0x0                                         ; 80900698: [03380004]
+           MOV       A0FrP,#0x0                                        ; 8090069c: [82080004]
+           MOV       A1LbP,#0x0                                        ; 809006a0: [83080004]
+           MOV       A0.2,#0x0                                         ; 809006a4: [82100004]
+           MOV       A1.2,#0x0                                         ; 809006a8: [83100004]
+           MOV       A0.3,#0x0                                         ; 809006ac: [82180004]
+           MOV       A1.3,#0x0                                         ; 809006b0: [83180004]
+           BNE       #+100    ; bytes -> 0x80900718                    ; 809006b4: [a0000324]
+           MOV       D0.8,#0x0                                         ; 809006b8: [02400004]
+           MOV       D1.8,#0x0                                         ; 809006bc: [03400004]
+           MOV       D0.9,#0x0                                         ; 809006c0: [02480004]
+           MOV       D1.9,#0x0                                         ; 809006c4: [03480004]
+           MOV       D0.10,#0x0                                        ; 809006c8: [02500004]
+           MOV       D1.10,#0x0                                        ; 809006cc: [03500004]
+           MOV       D0.11,#0x0                                        ; 809006d0: [02580004]
+           MOV       D1.11,#0x0                                        ; 809006d4: [03580004]
+           MOV       D0.12,#0x0                                        ; 809006d8: [02600004]
+           MOV       D1.12,#0x0                                        ; 809006dc: [03600004]
+           MOV       D0.13,#0x0                                        ; 809006e0: [02680004]
+           MOV       D1.13,#0x0                                        ; 809006e4: [03680004]
+           MOV       D0.14,#0x0                                        ; 809006e8: [02700004]
+           MOV       D1.14,#0x0                                        ; 809006ec: [03700004]
+           MOV       D0.15,#0x0                                        ; 809006f0: [02780004]
+           MOV       D1.15,#0x0                                        ; 809006f4: [03780004]
+           MOV       A0.4,#0x0                                         ; 809006f8: [82200004]
+           MOV       A1.4,#0x0                                         ; 809006fc: [83200004]
+           MOV       A0.5,#0x0                                         ; 80900700: [82280004]
+           MOV       A1.5,#0x0                                         ; 80900704: [83280004]
+           MOV       A0.6,#0x0                                         ; 80900708: [82300004]
+           MOV       A1.6,#0x0                                         ; 8090070c: [83300004]
+           MOV       A0.7,#0x0                                         ; 80900710: [82380004]
+           MOV       A1.7,#0x0                                         ; 80900714: [83380004]
+           MOVA      TXSTATUS,D0Re0                                    ; 80900718: [a3008400]
+           MOV       D0Re0,#0x0                                        ; 8090071c: [02000004]
+           MOVA      PC,D1RtP                                          ; 80900720: [a32008a0]
+           MOVA      D0FrT,A0StP                                       ; 80900724: [a3010c20]
+           MOV       A0FrP,A0StP                                       ; 80900728: [80080004]
+           SETL      [A0StP++], D0FrT,D1RtP                            ; 8090072c: [b72001e3]
+           MOV       D1.6,D1Ar1                                        ; 80900730: [01300604]
+           MOV       D0.6,D0Ar2                                        ; 80900734: [00300604]
+           MOV       D1.5,D1Ar3                                        ; 80900738: [01280404]
+           MOVA      D1.7,D0Ar4                                        ; 8090073c: [a311c440]
+           MOV       D0.7,D0Ar6                                        ; 80900740: [00380204]
+           MOVT      D0.5,#0x8090                                      ; 80900744: [022c0485]
+           ADD       D0.5,D0.5,#0xf90                                  ; 80900748: [02287c80]
+           SUBT      D0.5,D0.5,#0x8090                                 ; 8090074c: [122c0481]
+           SUB       D0.5,D0.5,#0xf8c                                  ; 80900750: [12287c60]
+           MOV       D1RtP,D1.7                                        ; 80900754: [01200e04]
+           ADD       D1.7,D1.7,D0.5                                    ; 80900758: [0139da01]
+           MOV       D1Ar1,D1.6                                        ; 8090075c: [01180c04]
+           MOV       D0Ar2,D0.6                                        ; 80900760: [00180c04]
+           MOV       D0Ar6,D0.7                                        ; 80900764: [00080e04]
+           SWAPA     PC,D1RtP                                          ; 80900768: [a3200aa0]
+           BA        #-24     ; bytes -> 0x80900754                    ; 8090076c: [a0ffff40]
+           SUBT      D1.7,D1.7,#0x8090                                 ; 80900770: [133c0481]
+           SUBS      D1.7,D1.7,#0xf90                                  ; 80900774: [1b387c80]
+           MOVT      D1.7,#0x8090                                      ; 80900778: [033c0485]
+           ADD       D1.7,D1.7,#0xf88                                  ; 8090077c: [03387c40]
+           BNE       #-44     ; bytes -> 0x80900754                    ; 80900780: [a0fffea4]
+           MOV       D1RtP,D1.5                                        ; 80900784: [01200a04]
+           ADD       D1.5,D1.5,D0.5                                    ; 80900788: [01295a01]
+           SWAPA     PC,D1RtP                                          ; 8090078c: [a3200aa0]
+           BA        #-12     ; bytes -> 0x80900784                    ; 80900790: [a0ffffa0]
+           SUBT      D1.5,D1.5,#0x8090                                 ; 80900794: [132c0481]
+           SUBS      D1.5,D1.5,#0xf84                                  ; 80900798: [1b287c20]
+           MOVT      D1.5,#0x8090                                      ; 8090079c: [032c0485]
+           ADD       D1.5,D1.5,#0xf80                                  ; 809007a0: [03287c00]
+           BNE       #-32     ; bytes -> 0x80900784                    ; 809007a4: [a0ffff04]
+           MOV       D1Ar1,D1.6                                        ; 809007a8: [01180c04]
+           MOV       D0Ar2,D0.6                                        ; 809007ac: [00180c04]
+           GETD      D0Re0,[A1GbP+#0x44]                               ; 809007b0: [a700088c]
+           GETD      D1RtP,[A1GbP+#0x40]                               ; 809007b4: [a7200814]
+           MOVA      PC,D0Re0                                          ; 809007b8: [a30004a0]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 809007bc: [b92000e8]
+           MOV       D1.5,D1Ar1                                        ; 809007c0: [01280604]
+           MOVT      D0.5,#0x8090                                      ; 809007c4: [022c0485]
+           ADD       D0.5,D0.5,#0xf90                                  ; 809007c8: [02287c80]
+           SUBT      D0.5,D0.5,#0x8090                                 ; 809007cc: [122c0481]
+           SUB       D0.5,D0.5,#0xf8c                                  ; 809007d0: [12287c60]
+           MOV       D1RtP,D1.5                                        ; 809007d4: [01200a04]
+           ADD       D1.5,D1.5,D0.5                                    ; 809007d8: [01295a01]
+           SWAPA     PC,D1RtP                                          ; 809007dc: [a3200aa0]
+           BA        #-12     ; bytes -> 0x809007d4                    ; 809007e0: [a0ffffa0]
+           SUBT      D1.5,D1.5,#0x8090                                 ; 809007e4: [132c0481]
+           SUBS      D1.5,D1.5,#0xf7c                                  ; 809007e8: [1b287be0]
+           MOVT      D1.5,#0x8090                                      ; 809007ec: [032c0485]
+           ADD       D1.5,D1.5,#0xf78                                  ; 809007f0: [03287bc0]
+           BNE       #-32     ; bytes -> 0x809007d4                    ; 809007f4: [a0ffff04]
+           GETL      D0.5,D1.5,[--A0StP]                               ; 809007f8: [c7283fe2]
+           GETL      D0FrT,D1RtP,[--A0StP]                             ; 809007fc: [c7203fe2]
+           MOVA      PC,D1RtP                                          ; 80900800: [a32008a0]
+           MOVA      PC,D1RtP                                          ; 80900804: [a32008a0]
+           MOVA      D1Re0,D0Ar2                                       ; 80900808: [a3180440]
+           MOV       D0Re0,#0x0                                        ; 8090080c: [02000004]
+           MOV       D0Ar4,#0x0                                        ; 80900810: [02100004]
+           BA        #+24     ; bytes -> 0x8090082c                    ; 80900814: [a00000c0]
+           MOVA      D1Re0,D0Ar2                                       ; 80900818: [a3180440]
+           MOV       D0Re0,#0x0                                        ; 8090081c: [02000004]
+           XORA      D0Ar4,D1Ar1,D1Re0                                 ; 80900820: [4510c020]
+           ABS       D1Ar1,D1Ar1                                       ; 80900824: [7118c028]
+           ABS       D1Re0,D1Re0                                       ; 80900828: [71000028]
+           CMP       D1Ar1,D1Re0                                       ; 8090082c: [7100c000]
+           LSR       D1Ar3,D1Ar1,#0x2                                  ; 80900830: [5310c440]
+           CMPHI     D1Re0,D1Ar3                                       ; 80900834: [75000412]
+           LSLSHI    D1Ar3,D1Re0,#0x1                                  ; 80900838: [5f100212]
+           BLS       #+44     ; bytes -> 0x80900868                    ; 8090083c: [a0000174]
+           CMP       D1Ar1,D1Ar3                                       ; 80900840: [7100c400]
+           ADDCC     D0Re0,D0Re0,#0x2                                  ; 80900844: [06000088]
+           SUBCC     D1Ar1,D1Ar1,D1Ar3                                 ; 80900848: [1518c448]
+           CMP       D1Ar1,D1Re0                                       ; 8090084c: [7100c000]
+           ADDCC     D0Re0,D0Re0,#0x1                                  ; 80900850: [06000048]
+           SUBCC     D1Ar1,D1Ar1,D1Re0                                 ; 80900854: [1518c048]
+           ORS       D0Ar4,D0Ar4,D0Ar4                                 ; 80900858: [38108400]
+           NEG       D0Ar2,D0Re0                                       ; 8090085c: [10180004]
+           MOVMI     D0Re0,D0Ar2                                       ; 80900860: [a318042a]
+           MOVA      PC,D1RtP                                          ; 80900864: [a32008a0]
+           CMP       D1Ar1,D1Re0                                       ; 80900868: [7100c000]
+           MOV       D0Ar6,#0x1                                        ; 8090086c: [0208000c]
+           BCS       #-12     ; bytes -> 0x80900864                    ; 80900870: [a0ffffa6]
+           FFB       D1Ar5,D1Ar1                                       ; 80900874: [7108c004]
+           ANDMI     D1Ar5,D1Ar5,#0x1f                                 ; 80900878: [270847ca]
+           ORMI      D1Ar5,D1Ar5,#0x1f                                 ; 8090087c: [370847ca]
+           FFB       D1Ar3,D1Re0                                       ; 80900880: [71100004]
+           ANDMI     D1Ar3,D1Ar3,#0x1f                                 ; 80900884: [271087ca]
+           ORMI      D1Ar3,D1Ar3,#0x1f                                 ; 80900888: [371087ca]
+           SUBS      D1Ar3,D1Ar5,D1Ar3                                 ; 8090088c: [19104400]
+           MOVA      D0Ar2,D1Ar3                                       ; 80900890: [a310c820]
+           LSLGT     D1Re0,D1Re0,D1Ar3                                 ; 80900894: [5500041a]
+           LSLGT     D0Ar6,D0Ar6,D0Ar2                                 ; 80900898: [5408461a]
+           CMP       D1Ar1,D1Re0                                       ; 8090089c: [7100c000]
+           ADDCC     D0Re0,D0Re0,D0Ar6                                 ; 809008a0: [04000228]
+           SUBCC     D1Ar1,D1Ar1,D1Re0                                 ; 809008a4: [1518c048]
+           LSRS      D0Ar6,D0Ar6,#0x1                                  ; 809008a8: [5a084240]
+           LSR       D1Re0,D1Re0,#0x1                                  ; 809008ac: [53000240]
+           BNE       #-20     ; bytes -> 0x8090089c                    ; 809008b0: [a0ffff64]
+           ORS       D0Ar4,D0Ar4,D0Ar4                                 ; 809008b4: [38108400]
+           NEG       D0Ar2,D0Re0                                       ; 809008b8: [10180004]
+           MOVMI     D0Re0,D0Ar2                                       ; 809008bc: [a318042a]
+           MOVA      PC,D1RtP                                          ; 809008c0: [a32008a0]
+           GETL      D1Ar3,D0Ar4,[A1GbP+#0x90]                         ; 809008c4: [a7100916]
+           MOVA      D0Re0,TXSTATUS                                    ; 809008c8: [a3100020]
+           CMP       D1Ar1,#0x0                                        ; 809008cc: [73180000]
+           ANDT      D0Re0,D0Re0,#0x0                                  ; 809008d0: [22000001]
+           LSL       D0Re0,D0Re0,#0x8                                  ; 809008d4: [52001000]
+           XOR       D0Ar2,D0Ar2,D0Re0                                 ; 809008d8: [4018c000]
+           MOVNE     D1Ar3,D1Ar1                                       ; 809008dc: [a3188844]
+           ADDS      D0Re0,D1Ar3,#0x0                                  ; 809008e0: [0f008022]
+           MOVEQ     PC,D1RtP                                          ; 809008e4: [a32008a2]
+           GETL      D1Ar3,D0Ar4,[D1Ar3+#0x0]                          ; 809008e8: [c7108044]
+           CMP       D0Ar4,D0Ar2                                       ; 809008ec: [70008600]
+           BNE       #-16     ; bytes -> 0x809008e0                    ; 809008f0: [a0ffff84]
+           TST       D0Re0,D0Re0                                       ; 809008f4: [78000000]
+           MOVA      PC,D1RtP                                          ; 809008f8: [a32008a0]
+           TSTT      D0Ar2,#0x1                                        ; 809008fc: [7a180009]
+           BEQ       #+16     ; bytes -> 0x80900910                    ; 80900900: [a0000082]
+           MOVA      D0Re0,TXMASKI                                     ; 80900904: [a3181c20]
+           XORA      TXMASKI,D1Re0,D1Re0                               ; 80900908: [451800e0]
+           OR        D0Ar2,D0Ar2,D0Re0                                 ; 8090090c: [3018c000]
+           MSETL     [A0StP++], D0Ar6,D0Ar4,D0Ar2                      ; 80900910: [b90801e8]
+           SETL      [A0StP++], D0Ar2,D1Ar1                            ; 80900914: [b71801e3]
+           SWITCH    #0xc20208                                         ; 80900918: [afc20208]
+           GETL      D0Re0,D1Re0,[--A0StP]                             ; 8090091c: [c7003fe2]
+           SUB       A0StP,A0StP,#0x18                                 ; 80900920: [8a0000c0]
+           MOVA      PC,D1RtP                                          ; 80900924: [a32008a0]
+           MOVA      D1Re0,TXSTATUS                                    ; 80900928: [a3100040]
+           MOVA      D0Re0,TXENABLE                                    ; 8090092c: [a3000020]
+           ANDT      D1Re0,D1Re0,#0x1                                  ; 80900930: [23000009]
+           LSL       D1Re0,D1Re0,#0x8                                  ; 80900934: [53001000]
+           AND       D0Re0,D0Re0,#0x700                                ; 80900938: [22003800]
+           LSL       D0Re0,D0Re0,#0x12                                 ; 8090093c: [52002400]
+           MOVA      PC,D1RtP                                          ; 80900940: [a32008a0]
+           GETD      D1Re0,[D0Ar6+#0x0]                                ; 80900944: [a7000035]
+           GETL      A0.3,A1.3,[D0Ar6+#0x38]                           ; 80900948: [a71803bf]
+           FFB       D1Re0,D1Re0                                       ; 8090094c: [71000004]
+           MOV       D1Ar3,#0xb                                        ; 80900950: [0310005c]
+           MOVEQ     PC,A1.3                                           ; 80900954: [a31810a2]
+           MOV       D1Ar3,#0x1                                        ; 80900958: [0310000c]
+           MOVT      A0.2,#0x400                                       ; 8090095c: [82102005]
+           MOV       A1.2,#0x0                                         ; 80900960: [83100004]
+           SWAPA     A1.2,TXMASKI                                      ; 80900964: [a3189e80]
+           LOCK2                                                       ; 80900968: [a8000003]
+           SETD      [A0.2+#0x40], D1RtP                               ; 8090096c: [b6209064]
+           GETD      D1Re0,[D0Ar6+#0x0]                                ; 80900970: [a7000035]
+           FFB       D1Ar5,D1Re0                                       ; 80900974: [71080004]
+           LSL       D1Ar3,D1Ar3,D1Ar5                                 ; 80900978: [51108200]
+           XOR       D1Re0,D1Re0,D1Ar3                                 ; 8090097c: [41000400]
+           SETD      [D0Ar6+#0x0],D1Re0                                ; 80900980: [a5000035]
+           SETD      [A0.2+#0x0], D1RtP                                ; 80900984: [b6208064]
+           LOCK0                                                       ; 80900988: [a8000000]
+           SWAPA     A1.2,TXMASKI                                      ; 8090098c: [a3189e80]
+           MOV       D1Ar3,#0xa                                        ; 80900990: [03100054]
+           LSL       D1Ar5,D1Ar5,#0x2                                  ; 80900994: [53084400]
+           ADD       D1Ar5,D1Ar5,#0x1                                  ; 80900998: [03080008]
+           MOVA      PC,A0.3                                           ; 8090099c: [a3180ca0]
+           MSETL     [A0StP++], D0Ar6,D0Ar4,D0Ar2                      ; 809009a0: [b90801e8]
+           SWITCH    #0xc10020                                         ; 809009a4: [afc10020]
+           MOV       D0Re0,#0x0                                        ; 809009a8: [02000004]
+           SUB       A0StP,A0StP,#0x18                                 ; 809009ac: [8a0000c0]
+           MOVA      PC,D1RtP                                          ; 809009b0: [a32008a0]
+           MOVA      D1Ar3,D0Ar2                                       ; 809009b4: [a3188440]
+           SUB       D1Ar1,D1Ar1,#0x1                                  ; 809009b8: [13180008]
+           GETB      D0Ar4,[++D1Ar1]                                   ; 809009bc: [c210c1c2]
+           GETB      D0FrT,[D1Ar3++]                                   ; 809009c0: [c22081c3]
+           CMP       D0Ar4,D0FrT                                       ; 809009c4: [70008800]
+           BNE       #+16     ; bytes -> 0x809009d8                    ; 809009c8: [a0000084]
+           CMP       D0Ar4,#0x0                                        ; 809009cc: [72100000]
+           BNE       #-20     ; bytes -> 0x809009bc                    ; 809009d0: [a0ffff64]
+           MOVA      D1Ar1,D0Ar4                                       ; 809009d4: [a310c440]
+           MOVA      D0Re0,D1Ar1                                       ; 809009d8: [a3180820]
+           MOVA      PC,D1RtP                                          ; 809009dc: [a32008a0]
+           MSETL     [A0StP++], D0FrT,D0.5,D0.6,D0.7                   ; 809009e0: [b92003e8]
+           SUBS      D1.5,D1Ar3,#0x0                                   ; 809009e4: [1f288024]
+           MOVA      D0Re0,D1Ar1                                       ; 809009e8: [a3180820]
+           MOVA      D1.6,D0Ar2                                        ; 809009ec: [a3198440]
+           BLT       #+248    ; bytes -> 0x80900ae8                    ; 809009f0: [a00007d8]
+           ADDA      D0FrT,D1.6,D1.5                                   ; 809009f4: [05218a20]
+           MOV       D0.6,#0x1                                         ; 809009f8: [0230000c]
+           GETB      D0FrT,[D0FrT+#-0x1]                               ; 809009fc: [c2213f22]
+           CMP       D0FrT,#0x0                                        ; 80900a00: [72200000]
+           SUBEQ     D1.5,D1.5,#0x1                                    ; 80900a04: [17294042]
+           CMP       D0Re0,#0x0                                        ; 80900a08: [72000000]
+           BEQ       #+232    ; bytes -> 0x80900af4                    ; 80900a0c: [a0000742]
+           MOV       D0.5,D0Re0                                        ; 80900a10: [00280004]
+           ADD       D0.7,D1.5,#0x1                                    ; 80900a14: [07394062]
+           GETW      D0FrT,[D0.5+#0x2]                                 ; 80900a18: [c3214122]
+           TST       D0FrT,#0xffff                                     ; 80900a1c: [7a27fff8]
+           ADDEQ     D0.5,D0.5,#0x8                                    ; 80900a20: [06294202]
+           BEQ       #-12     ; bytes -> 0x80900a18                    ; 80900a24: [a0ffffa2]
+           GETW      D0FrT,[D0.5+#0x2]                                 ; 80900a28: [c3214122]
+           XSDW      D0FrT,D0FrT                                       ; 80900a2c: [aa210002]
+           CMP       D0FrT,#0x4500                                     ; 80900a30: [72222800]
+           BEQ       #+88     ; bytes -> 0x80900a8c                    ; 80900a34: [a00002c2]
+           GETW      D0FrT,[D0.5+#0x4]                                 ; 80900a38: [c3214222]
+           XSDW      D0FrT,D0FrT                                       ; 80900a3c: [aa210002]
+           CMP       D1.5,D0FrT                                        ; 80900a40: [71015801]
+           BGT       #+28     ; bytes -> 0x80900a60                    ; 80900a44: [a00000fa]
+           CMP       D0.6,#0x0                                         ; 80900a48: [72300000]
+           BEQ       #+96     ; bytes -> 0x80900aac                    ; 80900a4c: [a0000302]
+           GETW      D0FrT,[D0.5+#0x4]                                 ; 80900a50: [c3214222]
+           XSDW      D0FrT,D0FrT                                       ; 80900a54: [aa210002]
+           CMP       D0FrT,D0.7                                        ; 80900a58: [70010e00]
+           BEQ       #+80     ; bytes -> 0x80900aac                    ; 80900a5c: [a0000282]
+           GETW      D0FrT,[D0.5+#0x0]                                 ; 80900a60: [c3214022]
+           XSDW      D0FrT,D0FrT                                       ; 80900a64: [aa210002]
+           ADD       D0.5,D0.5,D0FrT                                   ; 80900a68: [00294800]
+           GETW      D0FrT,[D0.5+#0x2]                                 ; 80900a6c: [c3214122]
+           TST       D0FrT,#0xffff                                     ; 80900a70: [7a27fff8]
+           ADDEQ     D0.5,D0.5,#0x8                                    ; 80900a74: [06294202]
+           BEQ       #-96     ; bytes -> 0x80900a18                    ; 80900a78: [a0fffd02]
+           GETW      D0FrT,[D0.5+#0x2]                                 ; 80900a7c: [c3214122]
+           XSDW      D0FrT,D0FrT                                       ; 80900a80: [aa210002]
+           CMP       D0FrT,#0x4500                                     ; 80900a84: [72222800]
+           BNE       #-80     ; bytes -> 0x80900a38                    ; 80900a88: [a0fffd84]
+           MOV       D0.5,#0x0                                         ; 80900a8c: [02280004]
+           MOV       D0Re0,D0.5                                        ; 80900a90: [00000a04]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x20]                        ; 80900a94: [a727fe6e]
+           GETL      D0.5,D1.5,[A0StP+#-0x18]                          ; 80900a98: [a72ffeee]
+           GETL      D0.6,D1.6,[A0StP+#-0x10]                          ; 80900a9c: [a737ff6e]
+           GETL      D0.7,D1.7,[A0StP+#-0x8]                           ; 80900aa0: [a73fffee]
+           SUB       A0StP,A0StP,#0x20                                 ; 80900aa4: [8a000100]
+           MOVA      PC,D1RtP                                          ; 80900aa8: [a32008a0]
+           GETW      D0FrT,[D0.5+#0x2]                                 ; 80900aac: [c3214122]
+           XSDW      D0FrT,D0FrT                                       ; 80900ab0: [aa210002]
+           CMP       D0FrT,#0x4700                                     ; 80900ab4: [72223800]
+           BEQ       #-88     ; bytes -> 0x80900a60                    ; 80900ab8: [a0fffd42]
+           MOV       D1Ar1,D1.6                                        ; 80900abc: [01180c04]
+           ADD       D0Ar2,D0.5,#0x8                                   ; 80900ac0: [06194222]
+           CALLR     D1RtP,#-272    ; bytes -> 0x809009b4              ; 80900ac4: [abfff794]
+           CMP       D0Re0,#0x0                                        ; 80900ac8: [72000000]
+           BEQ       #-60     ; bytes -> 0x80900a90                    ; 80900acc: [a0fffe22]
+           CMP       D0.6,#0x0                                         ; 80900ad0: [72300000]
+           BNE       #-116    ; bytes -> 0x80900a60                    ; 80900ad4: [a0fffc64]
+           SUB       D0FrT,D0Re0,D1.6                                  ; 80900ad8: [10201c01]
+           CMP       D1.5,D0FrT                                        ; 80900adc: [71015801]
+           BGT       #-128    ; bytes -> 0x80900a60                    ; 80900ae0: [a0fffc1a]
+           BA        #-84     ; bytes -> 0x80900a90                    ; 80900ae4: [a0fffd60]
+           NEG       D1.5,D1.5                                         ; 80900ae8: [11280a04]
+           MOV       D0.6,#0x0                                         ; 80900aec: [02300004]
+           BA        #-232    ; bytes -> 0x80900a08                    ; 80900af0: [a0fff8c0]
+           MOVA      D1Ar1,D0Re0                                       ; 80900af4: [a300c440]
+           MOVT      D0Ar2,#0x8400                                     ; 80900af8: [021c2005]
+           ADD       D0Ar2,D0Ar2,#0x2e                                 ; 80900afc: [02180170]
+           CALLR     D1RtP,#-572    ; bytes -> 0x809008c4              ; 80900b00: [abffee34]
+           CMP       D0Re0,#0x0                                        ; 80900b04: [72000000]
+           BEQ       #-124    ; bytes -> 0x80900a8c                    ; 80900b08: [a0fffc22]
+           GETD      D0FrT,[D0Re0+#0xc]                                ; 80900b0c: [a72001ac]
+           CMP       D0FrT,#0xf                                        ; 80900b10: [72200078]
+           BLS       #-136    ; bytes -> 0x80900a8c                    ; 80900b14: [a0fffbd4]
+           GETD      D0.5,[D0Re0+#0x10]                                ; 80900b18: [a728022c]
+           BA        #-264    ; bytes -> 0x80900a14                    ; 80900b1c: [a0fff7c0]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 80900b20: [b92000e8]
+           MOV       D1.5,D1Ar1                                        ; 80900b24: [01280604]
+           MOV       D0.5,D0Ar2                                        ; 80900b28: [00280604]
+           MOV       D0Re0,#0x0                                        ; 80900b2c: [02000004]
+           BA        #+32     ; bytes -> 0x80900b50                    ; 80900b30: [a0000100]
+           GETW      D0FrT,[D0Re0+#0x6]                                ; 80900b34: [a72001aa]
+           XSDW      D0FrT,D0FrT                                       ; 80900b38: [aa210002]
+           CMP       D0FrT,#0x5a00                                     ; 80900b3c: [7222d000]
+           BNE       #+56     ; bytes -> 0x80900b78                    ; 80900b40: [a00001c4]
+           GETW      D0FrT,[D0Re0+#0x0]                                ; 80900b44: [a720002a]
+           XSDW      D0FrT,D0FrT                                       ; 80900b48: [aa210002]
+           ADD       D0Re0,D0FrT,D0Re0                                 ; 80900b4c: [00010000]
+           MOVA      D1Ar1,D0Re0                                       ; 80900b50: [a300c440]
+           MOVA      D0Ar2,D1.5                                        ; 80900b54: [a328c820]
+           MOVA      D1Ar3,D0.5                                        ; 80900b58: [a3288440]
+           CALLR     D1RtP,#-380    ; bytes -> 0x809009e0              ; 80900b5c: [abfff434]
+           CMP       D0Re0,#0x0                                        ; 80900b60: [72000000]
+           BNE       #-48     ; bytes -> 0x80900b34                    ; 80900b64: [a0fffe84]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x10]                        ; 80900b68: [a727ff6e]
+           GETL      D0.5,D1.5,[A0StP+#-0x8]                           ; 80900b6c: [a72fffee]
+           SUB       A0StP,A0StP,#0x10                                 ; 80900b70: [8a000080]
+           MOVA      PC,D1RtP                                          ; 80900b74: [a32008a0]
+           GETW      D0FrT,[D0Re0+#0x4]                                ; 80900b78: [a720012a]
+           ADD       D0Ar4,D0Re0,#0x8                                  ; 80900b7c: [06100222]
+           XSDW      D0FrT,D0FrT                                       ; 80900b80: [aa210002]
+           ADD       D0FrT,D0FrT,#0x7                                  ; 80900b84: [02200038]
+           AND       D0FrT,D0FrT,#-0x8                                 ; 80900b88: [2227ffc2]
+           ADD       D0Re0,D0Ar4,D0FrT                                 ; 80900b8c: [00008800]
+           GETL      D0FrT,D1RtP,[A0StP+#-0x10]                        ; 80900b90: [a727ff6e]
+           GETL      D0.5,D1.5,[A0StP+#-0x8]                           ; 80900b94: [a72fffee]
+           SUB       A0StP,A0StP,#0x10                                 ; 80900b98: [8a000080]
+           MOVA      PC,D1RtP                                          ; 80900b9c: [a32008a0]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 80900ba0: [b92000e8]
+           DEFRA     D0.5,TXSTAT                                       ; 80900ba4: [a3016021]
+           MOVA      D1.5,TXDEFR                                       ; 80900ba8: [a3a14040]
+           ANDT      D0.5,D0.5,#0xffff                                 ; 80900bac: [222ffff9]
+           MOV       D1Ar3,D1.5                                        ; 80900bb0: [01100a04]
+           ANDT      D1Ar3,D1Ar3,#0xffff                               ; 80900bb4: [2317fff9]
+           OR        D0Ar4,D1Ar3,#0x8                                  ; 80900bb8: [37108222]
+           OR        D1.5,D1.5,D0.5                                    ; 80900bbc: [31295a01]
+           ANDT      D1Ar3,D1Ar3,#0xbf                                 ; 80900bc0: [231005f9]
+           MOVT      D1Re0,#0x1f                                       ; 80900bc4: [030000fd]
+           MOV       D1RtP,#0x14                                       ; 80900bc8: [032000a4]
+           FFB       D1Ar3,D1Ar3                                       ; 80900bcc: [71108004]
+           CMP       D1Ar3,#0x14                                       ; 80900bd0: [731000a0]
+           MOVLE     D1Ar3,D1RtP                                       ; 80900bd4: [a320885c]
+           MOV       D1RtP,#0x1                                        ; 80900bd8: [0320000c]
+           LSLGT     D1Re0,D1RtP,D1Ar3                                 ; 80900bdc: [5501041a]
+           SUB       D1Ar3,D1Ar3,#0x10                                 ; 80900be0: [13100080]
+           LSL       D0Re0,D1Ar3,#0x2                                  ; 80900be4: [57008422]
+           XOR       D1Re0,D1Re0,#-0x1                                 ; 80900be8: [4307fffa]
+           ADD       D0Re0,D0Re0,#0x10                                 ; 80900bec: [02000080]
+           GETD      D1RtP,[D0Ar6+D0Re0]                               ; 80900bf0: [c4204024]
+           AND       D1.5,D1.5,D1Re0                                   ; 80900bf4: [21294000]
+           MOVA      TXDEFR,D1.5                                       ; 80900bf8: [a32d0800]
+           SWAPA     D1RtP,PC                                          ; 80900bfc: [a3011640]
+           GETL      D0.5,D1.5,[--A0StP]                               ; 80900c00: [c7283fe2]
+           GETL      D0FrT,D1RtP,[--A0StP]                             ; 80900c04: [c7203fe2]
+           MOVA      PC,D1RtP                                          ; 80900c08: [a32008a0]
+           MSETL     [A0StP++], D0FrT,D0.5                             ; 80900c0c: [b92000e8]
+           MOVT      D1RtP,#0x8090                                     ; 80900c10: [03240485]
+           CALL      D1RtP,#0x928                                      ; 80900c14: [ac204946]
+           MOV       D0.5,D0Re0                                        ; 80900c18: [00280004]
+           GETL      D0Ar4,D1Ar3,[A1GbP+#0x90]                         ; 80900c1c: [a710090e]
+           SETD      [A1GbP+#0x3c],D0Ar6                               ; 80900c20: [a508078c]
+           CMP       D0Ar4,#0x0                                        ; 80900c24: [72100000]
+           BEQ       #+68     ; bytes -> 0x80900c6c                    ; 80900c28: [a0000222]
+           ADD       D0Ar2,D0.5,#0x2c                                  ; 80900c2c: [06194b22]
+           MOVA      D1.5,D0.5                                         ; 80900c30: [a3294440]
+           MOV       D1Ar1,#0x0                                        ; 80900c34: [03180004]
+           MOVT      D1RtP,#0x8090                                     ; 80900c38: [03240485]
+           CALL      D1RtP,#0x8c4                                      ; 80900c3c: [ac204626]
+           MOVT      D1RtP,#0x8090                                     ; 80900c40: [03240485]
+           CALL      D1RtP,#0xc78                                      ; 80900c44: [ac2063c6]
+           ADDT      D0.5,D0.5,#0x100                                  ; 80900c48: [02280801]
+           ADD       D0Ar2,D0.5,#0x2c                                  ; 80900c4c: [06194b22]
+           SWAPA     D0.5,D1.5                                         ; 80900c50: [a3294a20]
+           MOV       D1Ar1,#0x0                                        ; 80900c54: [03180004]
+           MOVT      D1RtP,#0x8090                                     ; 80900c58: [03240485]
+           CALL      D1RtP,#0x8c4                                      ; 80900c5c: [ac204626]
+           MOVT      D1RtP,#0x8090                                     ; 80900c60: [03240485]
+           CALL      D1RtP,#0xc78                                      ; 80900c64: [ac2063c6]
+           SETL      [A1GbP+#0x0],D0.5,D1.5                            ; 80900c68: [a528000e]
+           GETL      D0.5,D1.5,[--A0StP]                               ; 80900c6c: [c7283fe2]
+           GETL      D0FrT,D1RtP,[--A0StP]                             ; 80900c70: [c7203fe2]
+           MOVA      PC,D1RtP                                          ; 80900c74: [a32008a0]
+           TST       D0Re0,D0Re0                                       ; 80900c78: [78000000]
+           XOREQ     D1.5,D1.5,D1.5                                    ; 80900c7c: [45294a42]
+           MOVEQ     PC,D1RtP                                          ; 80900c80: [a32008a2]
+           GETD      A0.3,[D0Re0+#0x14]                                ; 80900c84: [a71802bc]
+           MOVT      D1Ar1,#0x480                                      ; 80900c88: [03182405]
+           ADD       D1Ar1,D1Ar1,#0x800                                ; 80900c8c: [03184000]
+           TSTT      D1.5,#0x100                                       ; 80900c90: [7b280801]
+           ANDT      D1.5,D1.5,#0xfc00                                 ; 80900c94: [232fe001]
+           LSR       D1.5,D1.5,#0xe                                    ; 80900c98: [53295c40]
+           ADDNE     D1.5,D1.5,#0x8                                    ; 80900c9c: [07294204]
+           ADD       D1Ar1,D1Ar1,D1.5                                  ; 80900ca0: [0118ca00]
+           MOV       D0Ar2,#0x0                                        ; 80900ca4: [02180004]
+           SETL      [A0.3++], D0Ar2,D1Ar1                             ; 80900ca8: [b718c1e3]
+           MOVA      D1Ar1,D0Re0                                       ; 80900cac: [a300c440]
+           SUB       D1.5,A0.3,#0x8                                    ; 80900cb0: [8e28c224]
+           SETL      [A0.3++], D0Ar2,D1Ar1                             ; 80900cb4: [b718c1e3]
+           MOV       TXRPT,#0xf                                        ; 80900cb8: [a9180078]
+           MOVT      D1Ar3,#0x8090                                     ; 80900cbc: [03140485]
+           ADD       D1Ar3,D1Ar3,#0x8fc                                ; 80900cc0: [031047e0]
+           MOVA      D0Ar4,D1Ar3                                       ; 80900cc4: [a3108820]
+           SETL      [A0.3++], D0Ar4,D1Ar3                             ; 80900cc8: [b710c1e3]
+           BAR       #-4      ; bytes -> 0x80900cc8                    ; 80900ccc: [a0ffffe1]
+           MOVT      D1Ar3,#0x8090                                     ; 80900cd0: [03140485]
+           ADD       D1Ar3,D1Ar3,#0x944                                ; 80900cd4: [03104a20]
+           SETD      [A0.3+#-0x3c], D1Ar3                              ; 80900cd8: [b610f164]
+           MOVT      D1Ar3,#0x8090                                     ; 80900cdc: [03140485]
+           ADD       D1Ar3,D1Ar3,#0xba0                                ; 80900ce0: [03105d00]
+           SETD      [A0.3+#-0x34], D1Ar3                              ; 80900ce4: [b610f364]
+           MOVA      PC,D1RtP                                          ; 80900ce8: [a32008a0]
+           MSETL     [A0StP++], D0.5,D0.6,D0.7                         ; 80900cec: [b92801e8]
+           MOVA      A1.2,D0Ar2                                        ; 80900cf0: [a3188480]
+           MOVA      A0.2,D1Ar1                                        ; 80900cf4: [a3188860]
+           CMP       D1Ar3,#0x8                                        ; 80900cf8: [73100040]
+           BLT       #+372    ; bytes -> 0x80900e70                    ; 80900cfc: [a0000bb8]
+           ANDS      D1Ar5,D1Ar1,#0x7                                  ; 80900d00: [2f08c1e4]
+           BEQ       #+36     ; bytes -> 0x80900d28                    ; 80900d04: [a0000122]
+           GETB      D0Re0,[A1.2++]                                    ; 80900d08: [c2008183]
+           ADD       D1Ar5,D1Ar5,#0x1                                  ; 80900d0c: [03080008]
+           SUB       D1Ar3,D1Ar3,#0x1                                  ; 80900d10: [13100008]
+           SETB      [A0.2++], D0Re0                                   ; 80900d14: [b20081e3]
+           CMP       D1Ar5,#0x8                                        ; 80900d18: [73080040]
+           BNE       #-20     ; bytes -> 0x80900d08                    ; 80900d1c: [a0ffff64]
+           CMP       D1Ar3,#0x8                                        ; 80900d20: [73100040]
+           BLT       #+332    ; bytes -> 0x80900e70                    ; 80900d24: [a0000a78]
+           LSR       D1Ar5,D1Ar3,#0x3                                  ; 80900d28: [53088640]
+           SUB       TXRPT,D1Ar5,#0x1                                  ; 80900d2c: [17184060]
+           MOVA      D0Ar4,A1.2                                        ; 80900d30: [a3109020]
+           ANDS      D0Ar4,D0Ar4,#0x7                                  ; 80900d34: [2a100038]
+           BNE       #+64     ; bytes -> 0x80900d78                    ; 80900d38: [a0000204]
+           LSRS      D1Ar5,D1Ar3,#0x5                                  ; 80900d3c: [5b088a40]
+           BEQ       #+304    ; bytes -> 0x80900e70                    ; 80900d40: [a0000982]
+           SUB       TXRPT,D1Ar5,#0x1                                  ; 80900d44: [17184060]
+           GETL      D0Re0,D1Re0,[A1.2++]                              ; 80900d48: [c7008183]
+           GETL      D0.5,D1.5,[A1.2++]                                ; 80900d4c: [c7288183]
+           GETL      D0.6,D1.6,[A1.2++]                                ; 80900d50: [c7308183]
+           GETL      D0.7,D1.7,[A1.2++]                                ; 80900d54: [c7388183]
+           SETL      [A0.2++], D0Re0,D1Re0                             ; 80900d58: [b70081e3]
+           SETL      [A0.2++], D0.5,D1.5                               ; 80900d5c: [b72881e3]
+           SETL      [A0.2++], D0.6,D1.6                               ; 80900d60: [b73081e3]
+           SETL      [A0.2++], D0.7,D1.7                               ; 80900d64: [b73881e3]
+           BAR       #-32     ; bytes -> 0x80900d48                    ; 80900d68: [a0ffff01]
+           ANDS      D1Ar3,D1Ar3,#0x1f                                 ; 80900d6c: [2b1000f8]
+           BNE       #+256    ; bytes -> 0x80900e70                    ; 80900d70: [a0000804]
+           BA        #+272    ; bytes -> 0x80900e84                    ; 80900d74: [a0000880]
+           MOVA      D0Ar4,A1.2                                        ; 80900d78: [a3109020]
+           MOVA      D0Ar6,A1.2                                        ; 80900d7c: [a3105020]
+           ANDMB     D0Ar4,D0Ar4,#0xfff8                               ; 80900d80: [2217ffc4]
+           MOVA      A1.2,D0Ar4                                        ; 80900d84: [a3108480]
+           SUBS      D0Ar6,D0Ar6,D0Ar4                                 ; 80900d88: [18084400]
+           MOV       D0Ar4,D0Ar6                                       ; 80900d8c: [00100204]
+           BEQ       #-84     ; bytes -> 0x80900d3c                    ; 80900d90: [a0fffd62]
+           GETL      D0Re0,D1Re0,[A1.2+#0x0]                           ; 80900d94: [c7008002]
+           CMP       D0Ar6,#0x4                                        ; 80900d98: [72080020]
+           BLT       #+88     ; bytes -> 0x80900df4                    ; 80900d9c: [a00002d8]
+           BEQ       #+164    ; bytes -> 0x80900e44                    ; 80900da0: [a0000522]
+           SUB       D0Ar6,D0Ar6,#0x4                                  ; 80900da4: [12080020]
+           MULD      D0.6,D0Ar6,#0x8                                   ; 80900da8: [66304223]
+           MOVA      D1.5,D0.6                                         ; 80900dac: [a3314440]
+           MOV       D1.6,#0x20                                        ; 80900db0: [03300104]
+           SUB       D1.6,D1.6,D1.5                                    ; 80900db4: [11318a00]
+           MOVA      D0Re0,D1Re0                                       ; 80900db8: [a3000820]
+           GETL      D0.7,D1.7,[++A1.2]                                ; 80900dbc: [c7388182]
+           LSR       D0Re0,D0Re0,D0.6                                  ; 80900dc0: [50000c40]
+           MOVA      D1Re0,D0.7                                        ; 80900dc4: [a3380440]
+           LSL       D1Re0,D1Re0,D1.6                                  ; 80900dc8: [51000c00]
+           MOVA      D0.5,D1Re0                                        ; 80900dcc: [a3014820]
+           ADD       D0Re0,D0Re0,D0.5                                  ; 80900dd0: [00000a00]
+           LSR       D0.5,D0.7,D0.6                                    ; 80900dd4: [5029cc40]
+           MOVA      D1.5,D0.5                                         ; 80900dd8: [a3294440]
+           LSL       D1Re0,D1.7,D1.6                                   ; 80900ddc: [5101cc00]
+           ADD       D1Re0,D1Re0,D1.5                                  ; 80900de0: [01000a00]
+           SETL      [A0.2++], D0Re0,D1Re0                             ; 80900de4: [b70081e3]
+           MOVA      D0Re0,D1.7                                        ; 80900de8: [a3380820]
+           BAR       #-48     ; bytes -> 0x80900dbc                    ; 80900dec: [a0fffe81]
+           BA        #+108    ; bytes -> 0x80900e5c                    ; 80900df0: [a0000360]
+           MULD      D0.6,D0Ar6,#0x8                                   ; 80900df4: [66304223]
+           MOVA      D1.5,D0.6                                         ; 80900df8: [a3314440]
+           MOV       D1.6,#0x20                                        ; 80900dfc: [03300104]
+           SUB       D1.6,D1.6,D1.5                                    ; 80900e00: [11318a00]
+           GETL      D0.7,D1.7,[++A1.2]                                ; 80900e04: [c7388182]
+           LSR       D0Re0,D0Re0,D0.6                                  ; 80900e08: [50000c40]
+           MOVA      D0.5,D1Re0                                        ; 80900e0c: [a3014820]
+           LSL       D1Re0,D1Re0,D1.6                                  ; 80900e10: [51000c00]
+           MOVA      D0Ar2,D1Re0                                       ; 80900e14: [a300c820]
+           ADD       D0Re0,D0Re0,D0Ar2                                 ; 80900e18: [00000600]
+           LSR       D0.5,D0.5,D0.6                                    ; 80900e1c: [50294c40]
+           MOVA      D1.5,D0.5                                         ; 80900e20: [a3294440]
+           MOVA      D1Re0,D0.7                                        ; 80900e24: [a3380440]
+           LSL       D1Re0,D1Re0,D1.6                                  ; 80900e28: [51000c00]
+           ADD       D1Re0,D1Re0,D1.5                                  ; 80900e2c: [01000a00]
+           SETL      [A0.2++], D0Re0,D1Re0                             ; 80900e30: [b70081e3]
+           MOV       D0Re0,D0.7                                        ; 80900e34: [00000e04]
+           MOV       D1Re0,D1.7                                        ; 80900e38: [01000e04]
+           BAR       #-56     ; bytes -> 0x80900e04                    ; 80900e3c: [a0fffe41]
+           BA        #+28     ; bytes -> 0x80900e5c                    ; 80900e40: [a00000e0]
+           MOVA      D0Re0,D1Re0                                       ; 80900e44: [a3000820]
+           GETL      D0.7,D1.7,[++A1.2]                                ; 80900e48: [c7388182]
+           MOVA      D1Re0,D0.7                                        ; 80900e4c: [a3380440]
+           SETL      [A0.2++], D0Re0,D1Re0                             ; 80900e50: [b70081e3]
+           MOVA      D0Re0,D1.7                                        ; 80900e54: [a3380820]
+           BAR       #-16     ; bytes -> 0x80900e48                    ; 80900e58: [a0ffff81]
+           ANDS      D1Ar3,D1Ar3,#0x7                                  ; 80900e5c: [2b100038]
+           BEQ       #+36     ; bytes -> 0x80900e84                    ; 80900e60: [a0000122]
+           MOVA      D0Ar6,A1.2                                        ; 80900e64: [a3105020]
+           ADDA      D1Ar5,D0Ar4,D0Ar6                                 ; 80900e68: [04088240]
+           MOVA      A1.2,D1Ar5                                        ; 80900e6c: [a3088880]
+           SUBS      TXRPT,D1Ar3,#0x1                                  ; 80900e70: [1f188060]
+           BLT       #+16     ; bytes -> 0x80900e84                    ; 80900e74: [a0000098]
+           GETB      D1Re0,[A1.2++]                                    ; 80900e78: [c2008185]
+           SETB      [A0.2++], D1Re0                                   ; 80900e7c: [b20081e5]
+           BAR       #-8      ; bytes -> 0x80900e78                    ; 80900e80: [a0ffffc1]
+           GETL      D0.7,D1.7,[--A0StP]                               ; 80900e84: [c7383fe2]
+           GETL      D0.6,D1.6,[--A0StP]                               ; 80900e88: [c7303fe2]
+           GETL      D0.5,D1.5,[--A0StP]                               ; 80900e8c: [c7283fe2]
+           MOVA      D0Re0,D1Ar1                                       ; 80900e90: [a3180820]
+           MOVA      PC,D1RtP                                          ; 80900e94: [a32008a0]
+           AND       D0Ar2,D0Ar2,#0xff                                 ; 80900e98: [221807f8]
+           MULW      D0Ar2,D0Ar2,#0x101                                ; 80900e9c: [62180808]
+           ANDS      D0Ar4,D1Ar1,#0x7                                  ; 80900ea0: [2f10c1e2]
+           LSL       D0Re0,D0Ar2,#0x10                                 ; 80900ea4: [5200e000]
+           ADDA      A0.2,D0Ar2,D0Re0                                  ; 80900ea8: [0410c060]
+           MOVA      D0Re0,D1Ar1                                       ; 80900eac: [a3180820]
+           BEQ       #+24     ; bytes -> 0x80900ec8                    ; 80900eb0: [a00000c2]
+           MOV       D0Ar2,#0x8                                        ; 80900eb4: [02180044]
+           SUBA      D1Ar5,D0Ar2,D0Ar4                                 ; 80900eb8: [1408c440]
+           CMP       D1Ar3,D1Ar5                                       ; 80900ebc: [71008200]
+           MOVMI     D1Ar5,D1Ar3                                       ; 80900ec0: [a310484a]
+           BA        #+88     ; bytes -> 0x80900f1c                    ; 80900ec4: [a00002c0]
+           LSRS      D0Ar2,D1Ar3,#0x5                                  ; 80900ec8: [5f188a62]
+           SUB       TXRPT,D0Ar2,#0x1                                  ; 80900ecc: [1618c060]
+           AND       D1Ar3,D1Ar3,#0x1f                                 ; 80900ed0: [231000f8]
+           MOVA      A1.2,A0.2                                         ; 80900ed4: [a3108c80]
+           BEQ       #+32     ; bytes -> 0x80900ef8                    ; 80900ed8: [a0000102]
+           CMP       D1Ar3,#0x0                                        ; 80900edc: [73100000]
+           SETL      [D1Ar1++], A0.2,A1.2                              ; 80900ee0: [b710c1c7]
+           SETL      [D1Ar1++], A0.2,A1.2                              ; 80900ee4: [b710c1c7]
+           SETL      [D1Ar1++], A0.2,A1.2                              ; 80900ee8: [b710c1c7]
+           SETL      [D1Ar1++], A0.2,A1.2                              ; 80900eec: [b710c1c7]
+           BAR       #-16     ; bytes -> 0x80900ee0                    ; 80900ef0: [a0ffff81]
+           MOVEQ     PC,D1RtP                                          ; 80900ef4: [a32008a2]
+           LSRS      D0Ar2,D1Ar3,#0x3                                  ; 80900ef8: [5f188662]
+           SUB       TXRPT,D0Ar2,#0x1                                  ; 80900efc: [1618c060]
+           AND       D1Ar3,D1Ar3,#0x7                                  ; 80900f00: [23100038]
+           MOV       D1Ar5,D1Ar3                                       ; 80900f04: [01080404]
+           BEQ       #+20     ; bytes -> 0x80900f1c                    ; 80900f08: [a00000a2]
+           CMP       D1Ar3,#0x0                                        ; 80900f0c: [73100000]
+           SETL      [D1Ar1++], A0.2,A1.2                              ; 80900f10: [b710c1c7]
+           BAR       #-4      ; bytes -> 0x80900f10                    ; 80900f14: [a0ffffe1]
+           MOVEQ     PC,D1RtP                                          ; 80900f18: [a32008a2]
+           SUBS      D1Ar3,D1Ar3,D1Ar5                                 ; 80900f1c: [19108200]
+           ADD       D1Ar1,D1Ar1,D1Ar5                                 ; 80900f20: [0118c200]
+           MULD      D1Ar5,D1Ar5,#-0x8                                 ; 80900f24: [630fffc6]
+           ADD       D1Ar5,D1Ar5,#0x40                                 ; 80900f28: [03080200]
+           MOVA      A1.2,D1Ar5                                        ; 80900f2c: [a3088880]
+           ADDA      PC,CPC1,A1.2                                      ; 80900f30: [850404a0]
+           NOP                                                         ; 80900f34: [a0fffffe]
+           SETB      [D1Ar1+#-0x7], A0.2                               ; 80900f38: [b210f946]
+           NOP                                                         ; 80900f3c: [a0fffffe]
+           SETB      [D1Ar1+#-0x6], A0.2                               ; 80900f40: [b210fa46]
+           NOP                                                         ; 80900f44: [a0fffffe]
+           SETB      [D1Ar1+#-0x5], A0.2                               ; 80900f48: [b210fb46]
+           NOP                                                         ; 80900f4c: [a0fffffe]
+           SETB      [D1Ar1+#-0x4], A0.2                               ; 80900f50: [b210fc46]
+           NOP                                                         ; 80900f54: [a0fffffe]
+           SETB      [D1Ar1+#-0x3], A0.2                               ; 80900f58: [b210fd46]
+           NOP                                                         ; 80900f5c: [a0fffffe]
+           SETB      [D1Ar1+#-0x2], A0.2                               ; 80900f60: [b210fe46]
+           NOP                                                         ; 80900f64: [a0fffffe]
+           SETB      [D1Ar1+#-0x1], A0.2                               ; 80900f68: [b210ff46]
+           NOP                                                         ; 80900f6c: [a0fffffe]
+           BNE       #-168    ; bytes -> 0x80900ec8                    ; 80900f70: [a0fffac4]
+           MOVA      PC,D1RtP                                          ; 80900f74: [a32008a0]
+
+Outputting section <$dtors> size 8
+           MOVT      A1.3,#0x8090                                      ; 80900f78: [831c0485]
+           JUMP      A1.3,#0x7e4                                       ; 80900f7c: [ac183f20]
+
+Outputting section <$ctors> size 8
+           MOVT      A1.3,#0x8090                                      ; 80900f80: [831c0485]
+           JUMP      A1.3,#0x794                                       ; 80900f84: [ac183ca0]
+
+Outputting section <$bldrs> size 12
+           BA        #-892    ; bytes -> 0x80900c0c                    ; 80900f88: [a0ffe420]
+           MOVT      A1.3,#0x8090                                      ; 80900f8c: [831c0485]
+           JUMP      A1.3,#0x770                                       ; 80900f90: [ac183b80]
+
+Outputting section <$data> size 502
+   80901000: 80900F88 00000000 00000000 00000000
+   80901010: 00000000 00000001 00000000 00000000
+   80901020: 00000000 00000000 00000000 00000000
+   80901030: 00000000 00000000 00000000 80900F88
+   80901040: 80900070 80900544 80901098 809010C8
+   80901050: 809010F0 809010FC 80901108 80901114
+   80901060: 80901120 8090112C 80901138 80901144
+   80901070: 80901150 8090115C 80901168 80901174
+   80901080: 80901188 809011A0 809011BC 00000000
+   80901090: 00000000 00000000 6C696146 50206465
+   809010A0: 20534252 61746164 74616D20 61206863
+   809010B0: 20726464 6C383025 61762078 2065756C
+   809010C0: 6C383025 00000A78 74697257 61662065
+   809010D0: 64656C69 20666F20 6C383025 74612078
+   809010E0: 64646120 73736572 38302520 000A786C
+   809010F0: 4A637442 73706D75 00000000 43637442
+   80901100: 676E6152 00000065 44637442 676E6152
+   80901110: 00000065 43637442 65736142 00000030
+   80901120: 44637442 65736142 00000030 43637442
+   80901130: 65736142 00000031 44637442 65736142
+   80901140: 00000031 43637442 65736142 00000032
+   80901150: 44637442 65736142 00000032 43637442
+   80901160: 65736142 00000033 44637442 65736142
+   80901170: 00000033 61766E49 2064696C 65726874
+   80901180: 25206461 00000A64 74696E49 696C6169
+   80901190: 69746173 66206E6F 656C6961 00000A64
+   809011A0: 68736142 6568742D 6361632D 73206568
+   809011B0: 206B616F 74736574 000A202E 63746157
+   809011C0: 62272068 6C5F6374 5F706F6F 6E756F63
+   809011D0: 61202774 2720646E 5F637462 6C696166
+   809011E0: 756F635F 2027746E 20726F66 676F7270
+   809011F0: 73736572
+
+Outputting section <$tbistr> size 131
+   809011F8: 63744222 73614243
+   80901200: 00223065 63744222 73614244 00223065
+   80901210: 63744222 73614243 00223165 63744222
+   80901220: 73614244 00223165 63744222 73614243
+   80901230: 00223265 63744222 73614244 00223265
+   80901240: 63744222 73614243 00223365 63744222
+   80901250: 73614244 00223365 63744222 6E615243
+   80901260: 00226567 63744222 6E615244 00226567
+   80901270: 63744222 706D754A
+
+Outputting section <$stack> size 0
+
+Outputting section <$debug_aranges> size 160
+   00000000: 00000044 00000002 00040000 00000000
+   00000010: 80900098 00000520 80900098 0000007C
+   00000020: 80900114 000000B0 809001C4 000000F0
+   00000030: 809002B4 00000290 80900544 00000074
+   00000040: 00000000 00000000 0000001C 062D0002
+   00000050: 00040000 00000004 809005B8 000001B4
+   00000060: 00000000 00000000 00000034 071A0002
+   00000070: 00040000 00000000 809009B4 00000320
+   00000080: 809009B4 0000003C 809009E0 00000224
+   00000090: 80900B20 000000C0 00000000 00000000
+
+Outputting section <$debug_pubnames> size 421
+   00000000: 000000FE 00000002 062D0000 017B0000
+   00000010: 75520000 7365546E 01BD0074 65560000
+   00000020: 79666972 74736554 00026E00 696E4900
+   00000030: 73655474 02F40074 616D0000 14006E69
+   00000040: 42000004 42436374 30657361 00044100
+   00000050: 63744200 73614244 6E003065 42000004
+   00000060: 42436374 31657361 00049B00 63744200
+   00000070: 73614244 C8003165 42000004 42436374
+   00000080: 32657361 0004F500 63744200 73614244
+   00000090: 22003265 42000005 42436374 33657361
+   000000A0: 00054F00 63744200 73614244 7C003365
+   000000B0: 42000005 52436374 65676E61 0005A900
+   000000C0: 63744200 6E615244 D6006567 42000005
+   000000D0: 754A6374 0073706D 000005F2 5F637462
+   000000E0: 706F6F6C 756F635F 0F00746E 62000006
+   000000F0: 665F6374 5F6C6961 6E756F63 00000074
+   00000100: 005A0000 00020000 0000062D 000000ED
+   00000110: 00000078 69536E49 6174536D 76457472
+   00000120: 00940074 6E490000 536D6953 45706F74
+   00000130: 66417476 00726574 000000B4 69536E49
+   00000140: 6F74536D 74764570 0000CF00 435F5F00
+   00000150: 6C435452 52726165 00736765 00000000
+   00000160: 00000041 071A0002 00F70000 00A00000
+   00000170: 5F5F0000 43494254 7453706D 00BB0072
+   00000180: 5F5F0000 46494254 53646E69 D8007274
+   00000190: 5F000000 4942545F 6E617254 72745373
+   000001A0: 00000000
+
+Outputting section <$debug_loc> size 690
+   00000000: 80900098 8090009C 20900002 8090009C
+   00000010: 809000A0 20920003 9000A070 90011480
+   00000020: 92000380 00006820 00000000 00BC0000
+   00000030: 00F88090 00018090 9001005A 90010C80
+   00000040: 5A000180 00000000 00000000 80900114
+   00000050: 80900118 20900002 80900118 809001C4
+   00000060: 20920003 00000068 00000000 90011C00
+   00000070: 90018080 5A000180 80900180 80900184
+   00000080: 84560001 B8809001 01809001 00005A00
+   00000090: 00000000 01C40000 01C88090 00028090
+   000000A0: 01C82090 02B48090 00038090 00782092
+   000000B0: 00000000 C4000000 A4809001 01809002
+   000000C0: 00005700 00000000 02200000 02888090
+   000000D0: 00018090 9002A056 9002AC80 56000180
+   000000E0: 00000000 00000000 80900234 80900288
+   000000F0: A0520001 AC809002 01809002 00005200
+   00000100: 00000000 02B40000 02B88090 00028090
+   00000110: 02B82090 05448090 00038090 00702092
+   00000120: 00000000 C8000000 CC809002 01809002
+   00000130: 04485A00 049C8090 00018090 0000005A
+   00000140: 00000000 90036800 90037080 50000180
+   00000150: 80900374 80900388 8C500001 A4809003
+   00000160: 01809003 03A85000 03E48090 00018090
+   00000170: 9003EC50 90040880 50000180 8090040C
+   00000180: 80900424 28500001 44809004 01809004
+   00000190: 049C5000 04C08090 00018090 9004C450
+   000001A0: 9004F880 50000180 809004FC 80900530
+   000001B0: 34500001 44809005 01809005 00005000
+   000001C0: 00000000 03B40000 03E48090 00018090
+   000001D0: 9003EC56 9003FC80 56000180 8090049C
+   000001E0: 809004B4 D4560001 EC809004 01809004
+   000001F0: 050C5600 05248090 00018090 00000056
+   00000200: 00000000 90054400 90054880 90000280
+   00000210: 90054820 9005B880 92000380 00007020
+   00000220: 00000000 05540000 056C8090 00018090
+   00000230: 9005745A 90059080 5A000180 80900590
+   00000240: 80900594 94500001 9C809005 01809005
+   00000250: 059C5A00 05A08090 00018090 9005A050
+   00000260: 9005B080 5A000180 00000000 00000000
+   00000270: 809009E0 809009E4 20900002 809009E4
+   00000280: 80900B20 20920003 00000060 00000000
+   00000290: 900B2000 900B2480 90000280 900B2420
+   000002A0: 900BA080 92000380 00007020 00000000
+
+Outputting section <$debug_frame> size 280
+   00000000: 0000000C FFFFFFFF 04010001 00200C09
+   00000010: 00000022 00000000 80900098 0000007C
+   00000020: 00000404 047C1300 00000004 038B7A13
+   00000030: 0189028A 001F0088 00000000 01140000
+   00000040: 00B08090 04040000 13000000 8C058D7A
+   00000050: 8A038B04 88018902 00001700 00000000
+   00000060: 9001C400 0000F080 00040400 7E130000
+   00000070: 00880189 0000001B 00000000 809002B4
+   00000080: 00000290 00000404 8B7C1300 89028A03
+   00000090: 1B008801 00000000 44000000 74809005
+   000000A0: 04000000 00000004 038B7C13 0189028A
+   000000B0: 000C0088 FFFF0000 0001FFFF 0C090401
+   000000C0: 000C0020 00B20000 09B40000 003C8090
+   000000D0: 00230000 00B20000 09E00000 02248090
+   000000E0: 04040000 13000000 8E078F78 8C058D06
+   000000F0: 8A038B04 88018902 00001B00 0000B200
+   00000100: 900B2000 0000C080 00040400 7C130000
+   00000110: 028A038B 00880189
+
+Outputting section <$debug_str> size 0
+
+Outputting section <$debug_ranges> size 24
+   00000000: 80900350 8090036C 80900374 80900544
+   00000010: 00000000 00000000
+
+Outputting section <$debug_line> size 2274
+   00000000: 000005D2 00310002 01010000 000AF5F6
+   00000010: 01010101 01000000 2E2F2E2E 656D2F2E
+   00000020: 74636174 73747365 6374622F 0077656E
+   00000030: 63746200 0100632E 00000000 05B80205
+   00000040: 01008090 02050001 80900098 0103FE03
+   00000050: A0020500 18809000 AC020500 12809000
+   00000060: C4020500 16809000 D0020500 16809000
+   00000070: D8020500 12809000 DC020500 16809000
+   00000080: F0020500 19809000 00020500 0D809001
+   00000090: 04020500 1B809001 14020500 00809001
+   000000A0: 05000101 90011402 04940380 02050001
+   000000B0: 80900118 0205001B 80900120 02050011
+   000000C0: 80900124 02050017 80900130 02050011
+   000000D0: 80900134 02050017 80900138 02050011
+   000000E0: 8090013C 02050017 8090014C 0205001B
+   000000F0: 80900154 0205000F 80900158 02050019
+   00000100: 8090015C 0205000F 80900160 02050019
+   00000110: 80900168 02050016 80900170 02050012
+   00000120: 80900178 02050016 8090017C 02050012
+   00000130: 80900180 02050016 80900184 02050019
+   00000140: 80900198 00017203 01AC0205 002E8090
+   00000150: 01C40205 01008090 02050001 809001C4
+   00000160: 020500A2 809001C8 0205001F 809001CC
+   00000170: 02050015 809001D4 02050013 809001D8
+   00000180: 02050015 809001DC 02050013 809001E0
+   00000190: 02050015 809001F0 02050019 809001F4
+   000001A0: 02050015 809001FC 02050013 80900200
+   000001B0: 02050015 80900204 02050013 80900208
+   000001C0: 02050015 80900218 02050019 8090021C
+   000001D0: 02050013 80900224 02050015 80900234
+   000001E0: 02050016 8090023C 02050015 8090024C
+   000001F0: 02050015 80900254 02050015 80900260
+   00000200: 0205002A 8090027C 02050017 80900288
+   00000210: 00015903 02940205 001A8090 02A00205
+   00000220: 001E8090 02B40205 01008090 02050001
+   00000230: 809002B4 020500E3 809002B8 02050019
+   00000240: 809002C8 01028E03 CC020500 17809002
+   00000250: D4020500 11809002 D8020500 17809002
+   00000260: F4020500 16809002 F8020500 10809002
+   00000270: 00020500 1E809003 04020500 11809003
+   00000280: 08020500 17809003 10020500 0A809003
+   00000290: 14020500 1B809003 18020500 17809003
+   000002A0: 2C020500 16809003 30020500 10809003
+   000002B0: 40020500 1C809003 50020500 03809003
+   000002C0: 00017DE9 03540205 00308090 035C0205
+   000002D0: 64038090 02050001 80900360 02050030
+   000002E0: 80900364 02050015 8090036C 0101F203
+   000002F0: 74020500 03809003 00017E92 03780205
+   00000300: 00158090 03800205 00138090 03840205
+   00000310: 00158090 03880205 00158090 03900205
+   00000320: 00188090 03940205 00158090 039C0205
+   00000330: 00138090 03A00205 00158090 03A40205
+   00000340: 00158090 03AC0205 00188090 03B00205
+   00000350: 53038090 02050001 809003B4 02050046
+   00000360: 809003B8 0205000F 809003BC 02050019
+   00000370: 809003DC 020500A1 809003EC 00016203
+   00000380: 03F00205 00108090 03F80205 00188090
+   00000390: 03FC0205 00118090 04000205 00138090
+   000003A0: 04040205 00188090 04080205 00158090
+   000003B0: 04100205 00188090 04140205 00238090
+   000003C0: 04180205 BB038090 0500017F 90041C02
+   000003D0: 01710380 20020500 23809004 24020500
+   000003E0: 15809004 2C020500 5D809004 30020500
+   000003F0: 49809004 38020500 03809004 0500014B
+   00000400: 90043C02 05004980 90044402 05001880
+   00000410: 90044C02 05001180 90045402 05001780
+   00000420: 90046C02 05001680 90047C02 05001280
+   00000430: 90049C02 7F8C0380 02050001 809004A0
+   00000440: 02050010 809004A4 02050015 809004A8
+   00000450: 02050013 809004AC 02050015 809004B0
+   00000460: 02050017 809004B4 02050010 809004B8
+   00000470: 02050015 809004BC 02050017 809004C0
+   00000480: 02050015 809004C8 02050018 809004CC
+   00000490: 02050023 809004D4 00014903 04D80205
+   000004A0: 00108090 04DC0205 00158090 04E00205
+   000004B0: 00138090 04E40205 00158090 04E80205
+   000004C0: 00178090 04EC0205 00108090 04F00205
+   000004D0: 00158090 04F40205 00178090 04F80205
+   000004E0: 00158090 05000205 00188090 05040205
+   000004F0: 00238090 050C0205 49038090 02050001
+   00000500: 80900510 02050010 80900514 02050015
+   00000510: 80900518 02050013 8090051C 02050015
+   00000520: 80900520 02050017 80900524 02050010
+   00000530: 80900528 02050015 8090052C 02050017
+   00000540: 80900530 02050015 80900538 02050018
+   00000550: 8090053C 02050023 80900544 00010100
+   00000560: 05440205 B8038090 05000104 90054802
+   00000570: 05000180 90054C02 05001A80 90055002
+   00000580: 05001580 90055802 05001980 90056002
+   00000590: 05004C80 90057402 01620380 7C020500
+   000005A0: 15809005 84020500 1A809005 88020500
+   000005B0: 15809005 90020500 17809005 94020500
+   000005C0: 15809005 A4020500 26809005 B8020500
+   000005D0: 00809005 03080101 00020000 00000020
+   000005E0: F5F60104 0101000A 00000101 2E000100
+   000005F0: 2E2E2F2E 7472632F 00732E73 00000000
+   00000600: B8020500 3C809005 BC020500 15809005
+   00000610: C0020500 15809005 C4020500 17809005
+   00000620: C8020500 18809005 CC020500 15809005
+   00000630: D0020500 18809005 D4020500 18809005
+   00000640: D8020500 15809005 DC020500 18809005
+   00000650: E0020500 15809005 E4020500 18809005
+   00000660: E8020500 15809005 EC020500 15809005
+   00000670: F0020500 15809005 F4020500 1F809005
+   00000680: F8020500 15809005 FC020500 1A809005
+   00000690: 00020500 19809006 04020500 15809006
+   000006A0: 08020500 15809006 0C020500 19809006
+   000006B0: 10020500 15809006 14020500 18809006
+   000006C0: 18020500 15809006 1C020500 15809006
+   000006D0: 20020500 17809006 24020500 15809006
+   000006E0: 28020500 18809006 2C020500 15809006
+   000006F0: 30020500 15809006 34020500 15809006
+   00000700: 38020500 15809006 3C020500 15809006
+   00000710: 40020500 18809006 44020500 18809006
+   00000720: 48020500 18809006 4C020500 15809006
+   00000730: 50020500 15809006 54020500 15809006
+   00000740: 58020500 21809006 5C020500 16809006
+   00000750: 60020500 16809006 64020500 17809006
+   00000760: 68020500 15809006 6C020500 15809006
+   00000770: 70020500 15809006 74020500 15809006
+   00000780: 78020500 15809006 7C020500 15809006
+   00000790: 80020500 15809006 84020500 16809006
+   000007A0: 88020500 15809006 8C020500 15809006
+   000007B0: 90020500 15809006 94020500 15809006
+   000007C0: 98020500 15809006 9C020500 17809006
+   000007D0: A0020500 15809006 A4020500 15809006
+   000007E0: A8020500 15809006 AC020500 15809006
+   000007F0: B0020500 15809006 B4020500 19809006
+   00000800: B8020500 17809006 BC020500 15809006
+   00000810: C0020500 15809006 C4020500 15809006
+   00000820: C8020500 15809006 CC020500 15809006
+   00000830: D0020500 15809006 D4020500 15809006
+   00000840: D8020500 15809006 DC020500 15809006
+   00000850: E0020500 15809006 E4020500 15809006
+   00000860: E8020500 15809006 EC020500 15809006
+   00000870: F0020500 15809006 F4020500 15809006
+   00000880: F8020500 15809006 FC020500 15809006
+   00000890: 00020500 15809007 04020500 15809007
+   000008A0: 08020500 15809007 0C020500 15809007
+   000008B0: 10020500 15809007 14020500 15809007
+   000008C0: 18020500 1A809007 1C020500 15809007
+   000008D0: 20020500 15809007 24020500 00809007
+
+Outputting section <$debug_info> size 2065
+   00000000: 00000629 00000002 01040000 20554E47
+   00000010: 2E342043 20342E32 474D4928 322E312D
+   00000020: 352E322E 00293030 2F2E2E01 6D2F2E2E
+   00000030: 63617465 74736574 74622F73 77656E63
+   00000040: 6374622F 2F00632E 6174656D 6D6F682F
+   00000050: 73722F65 76632F74 656D2F73 2F676174
+   00000060: 69726576 6D2F7966 63617465 74656D2F
+   00000070: 672F3261 656B616D 00000000 00000000
+   00000080: 07040200 69736E75 64656E67 746E6920
+   00000090: 06010200 6E676973 63206465 00726168
+   000000A0: 75080102 6769736E 2064656E 72616863
+   000000B0: 05020200 726F6873 6E692074 02020074
+   000000C0: 6F687307 75207472 6769736E 2064656E
+   000000D0: 00746E69 69050402 0200746E 6F6C0508
+   000000E0: 6C20676E 20676E6F 00746E69 6C070802
+   000000F0: 20676E6F 676E6F6C 736E7520 656E6769
+   00000100: 6E692064 04020074 6E6F6C05 6E692067
+   00000110: 04030074 07040207 676E6F6C 736E7520
+   00000120: 656E6769 6E692064 04040074 000000A0
+   00000130: 63080102 00726168 66040402 74616F6C
+   00000140: 04080200 62756F64 0500656C 444F4370
+   00000150: 554A5F45 545F504D 5F550100 04000001
+   00000160: 00016504 D4010600 75000000 07000001
+   00000170: 00000175 15040400 08000001 6E755201
+   00000180: 74736554 01FF0100 000000D4 80900098
+   00000190: 80900114 00000000 000001BD 01006909
+   000001A0: 00D40200 002E0000 660A0000 6E705F6E
+   000001B0: 01010074 00014B02 10910200 56010800
+   000001C0: 66697265 73655479 15010074 0000D402
+   000001D0: 90011400 9001C480 00004C80 0001FB00
+   000001E0: 70640900 02160100 00000175 0000006D
+   000001F0: 0100690B 00D40217 0C000000 73627250
+   00000200: 6B6C6157 018F0100 000000D4 809001C4
+   00000210: 809002B4 00000096 00000263 646F630D
+   00000220: 756A5F65 0100706D 0001758E 0000B700
+   00000230: 61640E00 705F6174 00736272 01159401
+   00000240: 00CA0000 6F0F0000 65736666 95010074
+   00000250: 00000115 0070640E 02639601 00E80000
+   00000260: 04000000 00026904 01151000 01110000
+   00000270: 74696E49 74736554 D4D00100 B4000000
+   00000280: 44809002 06809005 ED000001 0E000002
+   00000290: 01007063 00012AD2 00012700 6E660F00
+   000002A0: 746E705F 4BD30100 12000001 00000000
+   000002B0: 000002D7 6D54700E D8010070 000002ED
+   000002C0: 00000145 7268540E 00646165 00D4DA01
+   000002D0: 01C60000 13000000 72617473 00707574
+   000002E0: 00D4D101 03050000 80901014 F3040400
+   000002F0: 14000002 616D0108 01006E69 00D40239
+   00000300: 05440000 05B88090 02058090 03230000
+   00000310: 72090000 01007365 00D4023A 02260000
+   00000320: 13000000 65646F63 7361625F 59010065
+   00000330: 00000115 10180305 63138090 5F65646F
+   00000340: 676E6172 5B010065 00000115 101C0305
+   00000350: 63138090 5F65646F 6B73616D 155C0100
+   00000360: 05000001 90102003 61641380 625F6174
+   00000370: 00657361 01155E01 03050000 80901024
+   00000380: 74616413 61725F61 0065676E 01155F01
+   00000390: 03050000 80901028 74616413 616D5F61
+   000003A0: 01006B73 00011560 2C030500 13809010
+   000003B0: 67657273 6477665F 15620100 05000001
+   000003C0: 90103003 72731380 625F6765 01006B63
+   000003D0: 00011563 34030500 13809010 6E756F63
+   000003E0: 64010074 00000115 10100305 6E138090
+   000003F0: 756A5F6F 0073706D 00D46501 03050000
+   00000400: 80901038 00013015 00041400 01121600
+   00000410: 000B0000 63744217 73614243 01003065
+   00000420: 00042C38 03050100 809011F8 00040418
+   00000430: 01301500 04410000 12160000 0B000001
+   00000440: 74421700 61424463 00306573 04593901
+   00000450: 05010000 90120403 04311880 30150000
+   00000460: 6E000001 16000004 00000112 4217000B
+   00000470: 42436374 31657361 863A0100 01000004
+   00000480: 12100305 5E188090 15000004 00000130
+   00000490: 0000049B 00011216 17000B00 44637442
+   000004A0: 65736142 3B010031 000004B3 1C030501
+   000004B0: 18809012 0000048B 00013015 0004C800
+   000004C0: 01121600 000B0000 63744217 73614243
+   000004D0: 01003265 0004E03C 03050100 80901228
+   000004E0: 0004B818 01301500 04F50000 12160000
+   000004F0: 0B000001 74421700 61424463 00326573
+   00000500: 050D3D01 05010000 90123403 04E51880
+   00000510: 30150000 22000001 16000005 00000112
+   00000520: 4217000B 42436374 33657361 3A3E0100
+   00000530: 01000005 12400305 12188090 15000005
+   00000540: 00000130 0000054F 00011216 17000B00
+   00000550: 44637442 65736142 3F010033 00000567
+   00000560: 4C030501 18809012 0000053F 00013015
+   00000570: 00057C00 01121600 000B0000 63744217
+   00000580: 6E615243 01006567 00059445 03050100
+   00000590: 80901258 00056C18 01301500 05A90000
+   000005A0: 12160000 0B000001 74421700 61524463
+   000005B0: 0065676E 05C14601 05010000 90126403
+   000005C0: 05991880 30150000 D6000001 16000005
+   000005D0: 00000112 4217000A 754A6374 0073706D
+   000005E0: 05ED4701 05010000 90127003 05C61880
+   000005F0: 62170000 6C5F6374 5F706F6F 6E756F63
+   00000600: 66010074 000000D4 08030501 17809010
+   00000610: 5F637462 6C696166 756F635F 0100746E
+   00000620: 0000D475 03050100 8090100C 0000E900
+   00000630: 37000200 04000001 2F2E2E01 632F2E2E
+   00000640: 2E737472 6D2F0073 2F617465 656D6F68
+   00000650: 7473722F 7376632F 74656D2F 762F6761
+   00000660: 66697265 656D2F79 2F636174 6174656D
+   00000670: 6D672F32 00656B61 20554E47 2E322043
+   00000680: 322E3539 39393120 32303139 72282034
+   00000690: 61656C65 00296573 9005B802 90072480
+   000006A0: 0005D680 49010200 6D69536E 72617453
+   000006B0: 74764574 B8240100 F4809005 01809005
+   000006C0: 49010250 6D69536E 706F7453 41747645
+   000006D0: 72657466 F4510100 FC809005 01809005
+   000006E0: 49010250 6D69536E 706F7453 00747645
+   000006F0: 05FC5801 06588090 50018090 5F5F0102
+   00000700: 43545243 7261656C 73676552 58920100
+   00000710: 24809006 01809007 00F30050 00020000
+   00000720: 0000015F 4E470104 20432055 2E322E34
+   00000730: 49282034 312D474D 322E322E 3030352E
+   00000740: 2E010029 62742F2E 72747369 2E676E69
+   00000750: 752F0063 2F726573 5F696772 61746164
+   00000760: 65562F32 79666972 6E65432F 2D534F74
+   00000770: 2D382E33 6E72656B 322D6C65 322E342E
+   00000780: 654D2F31 744D6174 6F6F5478 74696B6C
+   00000790: 342E325F 322E302E 322E332E 6F6F722F
+   000007A0: 52532F74 656D2F43 2F676174 2F776F6C
+   000007B0: 6B616D67 00000065 01020000 42545F5F
+   000007C0: 706D4349 00727453 09B42501 09E08090
+   000007D0: 90028090 5F010320 4942545F 646E6946
+   000007E0: 00727453 09E03B01 0B208090 02708090
+   000007F0: 01030000 42545F5F 61725449 7453736E
+   00000800: 83010072 80900B20 80900BA0 00000291
+
+Outputting section <$debug_abbrev> size 405
+   00000000: 25011101 030B1308 52081B08 00061001
+   00000010: 00240200 0B3E0B0B 00000803 0B002403
+   00000020: 000B3E0B 000F0400 13490B0B 16050000
+   00000030: 3A080300 490B3B0B 06000013 0C270115
+   00000040: 13011349 05070000 00134900 012E0800
+   00000050: 08030C3F 053B0B3A 01111349 06400112
+   00000060: 00001301 03003409 3B0B3A08 02134905
+   00000070: 0A000006 08030034 053B0B3A 0A021349
+   00000080: 340B0000 3A080300 49053B0B 0C000013
+   00000090: 0803012E 0B3B0B3A 13490C27 01120111
+   000000A0: 13010640 050D0000 3A080300 490B3B0B
+   000000B0: 00060213 00340E00 0B3A0803 13490B3B
+   000000C0: 00000602 0300340F 3B0B3A08 0013490B
+   000000D0: 00351000 00001349 3F012E11 3A08030C
+   000000E0: 490B3B0B 12011113 01064001 12000013
+   000000F0: 0655010B 00001301 03003413 3B0B3A08
+   00000100: 0213490B 1400000A 00000026 49010115
+   00000110: 00130113 00211600 0B2F1349 34170000
+   00000120: 3A080300 490B3B0B 020C3F13 1800000A
+   00000130: 13490026 01000000 08030111 0825081B
+   00000140: 01110B13 06100112 2E020000 030C3F00
+   00000150: 3B0B3A08 1201110B 000A4001 01000000
+   00000160: 08250111 08030B13 0152081B 2E020000
+   00000170: 030C3F00 3B0B3A08 1201110B 000A4001
+   00000180: 002E0300 08030C3F 0B3B0B3A 01120111
+   00000190: 00000640
+
+
+
+=========================================================================
+  			        	SYMBOL ANALYSIS TABLE
+=========================================================================
+
+  Symbol.Section            [Section]   Module                     Size         Address 
+  ==============            =========   ======                  ==========    ==========
+  ___CRTInit                [$text]     crt2.o(liblow.a)        0x00000044    0x80900724 80900000 80900392
+  ___CRTUnInit              [$text]     crt2.o(liblow.a)        0x00000028    0x809007bc 80900000 809003de
+  __hwstart                 [$text]     crt1.o                  0x0000000c    0x80900000 80900000 80900000
+  __start                   [$text]     crt1.o                  0x0000007c    0x80900008 80900000 80900004
+  __coldstart               [$text]     crt1.o                  0x00000028    0x8090004c 80900000 80900026
+  __exit                    [$text]     crt1.o                  0x00000044    0x80900070 80900000 80900038
+  ___TBILogF                [$text]     tbilogf.o(liblow.a)     0x00000018    0x809009a0 80900000 809004d0
+  ___udivsi3                [$text]     libgcc1.o(liblow.a)     0x00000014    0x80900808 80900000 80900404
+  ___TBIThreadId            [$text]     tbiroot.o(liblow.a)     0x0000002c    0x80900928 80900000 80900494
+  ___TBITransStr            [$text]     tbistring.o(liblow.a)   0x000000c0    0x80900b20 80900000 80900590
+  _memset                   [$text]     lib_a-memset.o(libc.a)  0x0000014c    0x80900e98 80900000 8090074c
+  _memcpy                   [$text]     lib_a-memcpy.o(libc.a)  0x00000028    0x80900cec 80900000 80900676
+  ___main                   [$text]     crt2.o(liblow.a)        0x00000004    0x80900804 80900000 80900402
+  _RunTest                  [$text]     btcdbg.o                0x0000007c    0x80900098 80900000 8090004c
+  _VerifyTest               [$text]     btcdbg.o                0x000000b0    0x80900114 80900000 8090008a
+  _InitTest                 [$text]     btcdbg.o                0x00000290    0x809002b4 80900000 8090015a
+  _main                     [$text]     btcdbg.o                0x00000074    0x80900544 80900000 809002a2
+  _btc_loop_count           [$data]     btcdbg.o                0x00000004    0x80901008 80901000 80901004
+  _btc_fail_count           [$data]     btcdbg.o                0x00000004    0x8090100c 80901000 80901006
+  _BtcCBase0                [$tbistr]   btcdbg.o                0x0000000c    0x809011f8 809011f8 809011f8
+  _BtcDBase0                [$tbistr]   btcdbg.o                0x0000000c    0x80901204 809011f8 809011fe
+  _BtcCBase1                [$tbistr]   btcdbg.o                0x0000000c    0x80901210 809011f8 80901204
+  _BtcDBase1                [$tbistr]   btcdbg.o                0x0000000c    0x8090121c 809011f8 8090120a
+  _BtcCBase2                [$tbistr]   btcdbg.o                0x0000000c    0x80901228 809011f8 80901210
+  _BtcDBase2                [$tbistr]   btcdbg.o                0x0000000c    0x80901234 809011f8 80901216
+  _BtcCBase3                [$tbistr]   btcdbg.o                0x0000000c    0x80901240 809011f8 8090121c
+  _BtcDBase3                [$tbistr]   btcdbg.o                0x0000000c    0x8090124c 809011f8 80901222
+  _BtcCRange                [$tbistr]   btcdbg.o                0x0000000c    0x80901258 809011f8 80901228
+  _BtcDRange                [$tbistr]   btcdbg.o                0x0000000c    0x80901264 809011f8 8090122e
+  _BtcJumps                 [$tbistr]   btcdbg.o                0x0000000b    0x80901270 809011f8 80901234
+  _InSimStopEvt             [$text]     crtsdbg.o               0x00000004    0x809005fc 80900000 809002fe
+  $MINIMDETECT.$bldrs                   crtn.o                  0x00000008    0x80900f8c 80900f88 80900f8a
+  $ENDPOINT.$dtors                      crtn.o                  0x00000008    0x80900f7c 80900f78 80900f7a
+  ___CRTBLDRSN              [$text]     crt2.o(liblow.a)        0x00000028    0x80900770 80900000 809003b8
+  ___CRTCTORSN              [$text]     crt2.o(liblow.a)        0x00000044    0x80900794 80900000 809003ca
+  ___CRTDTORSN              [$text]     crt2.o(liblow.a)        0x0000003c    0x809007e4 80900000 809003f2
+  ___divsi3                 [$text]     libgcc1.o(liblow.a)     0x00000020    0x80900818 80900000 8090040c
+  ___pTBISegs               [$data]     tbicore.o(liblow.a)     0x00000008    0x80901090 80901000 80901048
+  ___TBIFindSeg             [$text]     tbicore.o(liblow.a)     0x00000058    0x809008c4 80900000 80900462
+  ___TBIRootBldr            [$text]     tbirootbldr.o(liblow.a) 0x000000bc    0x80900c0c 80900000 80900606
+  ___pTBIs                  [$data]     tbiroot.o(liblow.a)     0x00000008    0x80901000 80901000 80901000
+  __sbrk_point              [$data]     tbiroot.o(liblow.a)     0x00000004    0x8090103c 80901000 8090101e
+  ___TBIUnExpXXX            [$text]     tbiroot.o(liblow.a)     0x00000044    0x809008fc 80900000 8090047e
+  ___TBIDoStdLWK            [$text]     tbiroot.o(liblow.a)     0x00000088    0x80900944 80900000 809004a2
+  ___TBICmpStr              [$text]     tbistring.o(liblow.a)   0x0000003c    0x809009b4 80900000 809004da
+  ___TBIFindStr             [$text]     tbistring.o(liblow.a)   0x00000224    0x809009e0 80900000 809004f0
+  ___TBIHandleDFR           [$text]     tbidefr.o(liblow.a)     0x000000b0    0x80900ba0 80900000 809005d0
+  ___TBITBIBldr             [$text]     tbirootbldr.o(liblow.a) 0x000000cc    0x80900c78 80900000 8090063c
+  __exit.Ref0               [$data]     crt1.o                  0x00000004    0x80901040 80901000 80901020
+  _main.Ref0                [$data]     btcdbg.o                0x00000004    0x80901044 80901000 80901022
+  _PrbsWalk.btcdbg          [$text]     btcdbg.o                0x000000f0    0x809001c4 80900000 809000e2
+  _count.btcdbg             [$data]     btcdbg.o                0x00000004    0x80901010 80901000 80901008
+  _startup$3180.btcdbg      [$data]     btcdbg.o                0x00000004    0x80901014 80901000 8090100a
+  _code_base.btcdbg         [$data]     btcdbg.o                0x00000004    0x80901018 80901000 8090100c
+  _code_range.btcdbg        [$data]     btcdbg.o                0x00000004    0x8090101c 80901000 8090100e
+  _code_mask.btcdbg         [$data]     btcdbg.o                0x00000004    0x80901020 80901000 80901010
+  _data_base.btcdbg         [$data]     btcdbg.o                0x00000004    0x80901024 80901000 80901012
+  _data_range.btcdbg        [$data]     btcdbg.o                0x00000004    0x80901028 80901000 80901014
+  _data_mask.btcdbg         [$data]     btcdbg.o                0x00000004    0x8090102c 80901000 80901016
+  _sreg_fwd.btcdbg          [$data]     btcdbg.o                0x00000004    0x80901030 80901000 80901018
+  _sreg_bck.btcdbg          [$data]     btcdbg.o                0x00000004    0x80901034 80901000 8090101a
+  _no_jumps.btcdbg          [$data]     btcdbg.o                0x00000004    0x80901038 80901000 8090101c
+  StopNormal.crtsdbg        [$text]     crtsdbg.o               0x00000040    0x80900600 80900000 80900300
+  _InSimStopEvt_GPOnlyThrea [$text]     crtsdbg.o               0x00000018    0x80900640 80900000 80900320
+  ___CRTClearRegs_EarlyEnd. [$text]     crtsdbg.o               0x0000000c    0x80900718 80900000 8090038c
+  ___CRTBLDRSLoop.crt2      [$text]     crt2.o(liblow.a)        0x00000024    0x80900754 80900000 809003aa
+  ___CRTCTORSLoop.crt2      [$text]     crt2.o(liblow.a)        0x00000018    0x80900784 80900000 809003c2
+  ___CRTDTORSLoop.crt2      [$text]     crt2.o(liblow.a)        0x00000018    0x809007d4 80900000 809003ea
+  __IDMCUStart.libgcc1      [$text]     libgcc1.o(liblow.a)     0x00000024    0x8090082c 80900000 80900416
+  __IDMCQuick.libgcc1       [$text]     libgcc1.o(liblow.a)     0x0000003c    0x80900840 80900000 80900420
+  __IDMCRet.libgcc1         [$text]     libgcc1.o(liblow.a)     0x00000004    0x80900864 80900000 80900432
+  __IDMCUSetup.libgcc1      [$text]     libgcc1.o(liblow.a)     0x0000005c    0x80900868 80900000 80900434
+  __IDMCLoop.libgcc1        [$text]     libgcc1.o(liblow.a)     0x00000040    0x8090089c 80900000 8090044e
+  ___TBIRootBldr_Vec.tbiro              tbiroot.o(liblow.a)     0x00000008    0x80900f88 80900f88 80900f88
+  ___align_dst.lib_a-memcpy [$text]     lib_a-memcpy.o(libc.a)  0x00000030    0x80900d08 80900000 80900684
+  ___aligned_dst.lib_a-memc [$text]     lib_a-memcpy.o(libc.a)  0x00000024    0x80900d28 80900000 80900694
+  ___aligned_copy.lib_a-mem [$text]     lib_a-memcpy.o(libc.a)  0x00000018    0x80900d3c 80900000 8090069e
+  ___aligned_32.lib_a-memcp [$text]     lib_a-memcpy.o(libc.a)  0x00000060    0x80900d48 80900000 809006a4
+  ___unaligned_copy.lib_a-m [$text]     lib_a-memcpy.o(libc.a)  0x00000044    0x80900d78 80900000 809006bc
+  ___unaligned_5_6_7.lib_a- [$text]     lib_a-memcpy.o(libc.a)  0x00000020    0x80900da4 80900000 809006d2
+  ___loop_5_6_7.lib_a-memcp [$text]     lib_a-memcpy.o(libc.a)  0x00000050    0x80900dbc 80900000 809006de
+  ___unaligned_1_2_3.lib_a- [$text]     lib_a-memcpy.o(libc.a)  0x00000018    0x80900df4 80900000 809006fa
+  ___loop_1_2_3.lib_a-memcp [$text]     lib_a-memcpy.o(libc.a)  0x00000054    0x80900e04 80900000 80900702
+  ___unaligned_4.lib_a-memc [$text]     lib_a-memcpy.o(libc.a)  0x00000004    0x80900e44 80900000 80900722
+  ___loop_4.lib_a-memcpy    [$text]     lib_a-memcpy.o(libc.a)  0x00000020    0x80900e48 80900000 80900724
+  ___unaligned_end.lib_a-me [$text]     lib_a-memcpy.o(libc.a)  0x00000020    0x80900e5c 80900000 8090072e
+  ___byte_copy.lib_a-memcpy [$text]     lib_a-memcpy.o(libc.a)  0x00000010    0x80900e70 80900000 80900738
+  ___loop_byte.lib_a-memcpy [$text]     lib_a-memcpy.o(libc.a)  0x00000018    0x80900e78 80900000 8090073c
+  ___end.lib_a-memcpy       [$text]     lib_a-memcpy.o(libc.a)  0x00000020    0x80900e84 80900000 80900742
+
+
+=========================================================================
+  			        	MODULE ANALYSIS TABLE
+=========================================================================
+
+Module                         Code        Data       Debug       Other 
+======                         ====        ====       =====       ===== 
+crt1.o                          152           4           0           0 
+btcdbg.o                       1312         579        4542           0 
+crtsdbg.o                       364           0        1183           0 
+crt2.o(liblow.a)                228           0           0           0 
+libgcc1.o(liblow.a)             188           0           0           0 
+tbicore.o(liblow.a)              56           8           0           0 
+tbiroot.o(liblow.a)             168          12           0           0 
+tbilogf.o(liblow.a)              20           0           0           0 
+tbistring.o(liblow.a)           492           0         594           0 
+tbidefr.o(liblow.a)             108           0           0           0 
+tbirootbldr.o(liblow.a)         224           0           0           0 
+lib_a-memcpy.o(libc.a)          428           0           0           0 
+lib_a-memset.o(libc.a)          224           0           0           0 
+crtn.o                           16           0           0           0 
+crtn.o                            8           0           0           0 

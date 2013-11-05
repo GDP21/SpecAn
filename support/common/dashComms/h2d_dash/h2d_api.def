@@ -1,0 +1,13 @@
+LIBRARY h2d_dash.DLL
+
+EXPORTS
+        DllMain
+		H2D_DashBoot
+		H2D_InitDashBuffers
+		H2D_Initialise
+		H2D_Deinitialise
+		H2D_SendCmdGetRsp
+		H2D_QueueBuff
+		H2D_AddCallback
+		H2D_RemoveCallback
+		H2D_SendCmdDisable

@@ -1,0 +1,24 @@
+UNIT_TYPE=APP
+UNIT_SUBTYPE=GLOBAL
+UNIT_NAME=gram
+
+UCCP_ROOT= $(UCCLIB_ROOT)/uccPlatform
+UCCRT_ROOT=$(UCCLIB_ROOT)/uccRuntime
+include $(UCCP_ROOT)/targetSetup.mk
+GLOBAL_INCLUDES+=$(UCCRT_ROOT)/source/generic
+GLOBAL_INCLUDES+=$(UCCRT_ROOT)/source/generic/uccps/uccp$(UCCP)
+
+
+
+SRCDIRS=$(SRCDIR) \
+		$(UNIT_DIR)/$(SMAKE_DIR)/$(OBJSUB)/dcp \
+		$(UNIT_DIR)/$(SMAKE_DIR)/$(OBJSUB)/reg \
+		$(UNIT_DIR)/source/generic
+
+C_SRC=dcpOutput_image.c \
+	  rcdOutput_image.c \
+	  gramBuffers.c
+
+PRIMARY_PUBLISH_DIR	= $(UNIT_DIR)/../../..
+
+include $(SMAKE_ROOT)/smake.mk

@@ -1,0 +1,369 @@
+;
+; SCP driver
+;
+
+include machine.dcps
+include uccp${UCCP}_registers.dcps
+
+; ---------------------------------------------------------------------------
+;
+; SCP data capture driver
+; 
+; Note this SCP driver is designed specifically to avoid the need for the DCP 
+; fetch code in order to schedule another SCP job. Without this then heavy 
+; EDC/GRAM usage can result in stalling of the DCP which results in the 
+; next SCP DMA job being scheduled too late and hence the SCP TBUS FIFO 
+; overlows resulting in a loss of synchronisation.
+;
+; The driver is structured to ensure that the next job is entirely setup 
+; during background activity whilst an SCP DMA job is currently active and 
+; the next job is started using the WAIT/START instruction sequence which
+; is guaranteed to fit within the DCP instruction pre-fetch buffer hence the 
+; job start cannot be stalled by instruction fetches being delayed.
+;
+; Note this results in a complex driver structure and some additional 
+; constraints as follows:
+;
+;   1. Minimum size of capture job (not yet fully characterised, likely to 
+;      be 256-512 samples)
+;
+;   2. Minimum size on discard length (not yet fully characterised, likely 
+;      to be around 64/128 samples)
+;       a. Note back-to-back captures (ie zero length discard jobs) are OK.
+;       b. You may need to increase the capture size and run back-to-back 
+;          jobs if this constraint cannot be met.
+;
+;   3. Discard size of a zero-length capture job is a minimum of 256-512 
+;      samples
+;       a. Discard size=0, capture size=0 is not allowed.
+;       b. Cannot schedule back-to-back zero-length capture jobs.
+;       c. A zero-length capture job cannot follow a zero-length discard job.
+;       d. You will receive the outputAddressQ item immediately (usually 
+;          this is posted after the capture part) and the ISCR returned is 
+;          indeterminate 
+;
+;
+; ---------------------------------------------------------------------------
+
+; SCP_TBUS_CONTROL_ENABLE_TBUS_OUTPUT
+; Register value for SCP_TBUS_CONTROL register
+;     TBUS_OUTPUT_MODE = 1 (output to TBUS)
+;     TBUS_DEBUG_MODE = 0 (output to TBUS)
+;     TBUS_OUTPUT_ENABLE = 1 (enabled at start of next frame)
+const SCP_TBUS_CONTROL_ENABLE_TBUS_OUTPUT   0xa00000
+const SCP_ISCR_ENABLE 0x000100
+
+; SECOND_FRAGMENT_SIZE is the size of the second half of the capture / default discard job in samples.
+const SECOND_FRAGMENT_SIZE      256
+
+const CLEAR_DISCARD_OP_MASK     0xFFDFFF
+const DISCARD_OP_MASK           0x002000
+
+; ---------------------------------------------------------------------------
+
+driver scpDriver member stdPeripGroup
+    params
+        use
+            ; Job input queues
+            inputAddressQ                 as queue
+            inputCaptureLengthQ           as queue
+            inputDiscardLengthQ           as queue
+            
+            ; Job completion queues
+            outputAddressQ                as virtual queue
+            outputCaptureLengthQ          as virtual queue
+            outputDiscardLengthQ          as virtual queue
+            outputIscrQ                   as virtual queue           
+
+            ; DMA configuration blocks
+            captureConfig                 as data dmaConfig=full
+            discardConfig                 as data dmaConfig=full
+
+            ; State data            
+            defaultDiscardLengthFragment1 as data 1
+            nextDiscardLength             as data 1
+            currentDiscardLength          as data 1
+            nextFragment1Size             as data 1
+            nextCaptureAddr               as data 1
+            currentCaptureAddr            as data 1
+            currentSymbolIscr             as data 1
+            lastSymbolIscr                as data 1
+            defaultDiscardCount           as data 1
+            tempSCPFinalPeriodA			  as data 1	
+            
+            ; SCP register addresses
+            scpTbusControl				  as data 1
+            scpIscrControl				  as data 1
+            scpIscrCounter				  as data 1
+            scpFinalPeriodA				  as data 1
+        end
+    end
+
+
+    channel scpOut as master
+        use
+            ; Wait for any active job to complete (for example the driver is restarted)
+            wait        $scpOut                             ; ?? BUG01127 : Not timing critical, workaround not required
+
+            ; Set the SCP output to Tbus and enabled from the next frame
+            setma       SCP_TBUS_CONTROL_ENABLE_TBUS_OUTPUT
+			swpn2
+            ldma   		$scpTbusControl
+            stn2perip
+
+            ; Enable and the ISCR counter
+            setma       SCP_ISCR_ENABLE
+            swpn2
+            ldma   		$scpIscrControl
+            stn2perip
+
+            ; At startup, load the default discard config and start a default discard job
+            setma       0       
+            stma        $nextDiscardLength                  ; Update discard length of next symbol 
+
+            ldfull      $discardConfig                      ; Run a default discard job as the first thing we do
+            start           
+            bra         checkForNewJob
+
+
+
+            ; Prepare for job fragment 1 
+            ; Note there will be a DMA active whilst this code is run. In addition the MA register should 
+            ; contain the value to write to the BASIC0 register for the first fragment. This will contain
+            ; DISCARD_OP set or clear as appropriate 
+            
+prepareJobFrag1:                                            ; MA should contain the value to store in BASIC0 - this will have DISCARD_OP set appropriately
+            swpn2                                           ; Move MA to N2 to preserve.
+            ldmaperip   $scpOut.BASIC0                      ; read BASIC0 register in order to set condition flag is DISCARD_OP is clear
+            andma       DISCARD_OP_MASK                     ; select DISCARD_OP field only
+            setcmaz                                          ; set C if DISCARD_OP clear - this indicates the last job was a capture job so we need to post the job address
+            setma       0                                   ; Set MA==0 - this will clear N2 as required
+            swpn2                                           ; Move BASIC0 field to MA and clear N2
+            stmaperip   $scpOut.BASIC0                      ; Write BASIC0 register in order to set DISCARD_OP appropriately
+            ldma        $nextFragment1Size                  ; read job length
+            orma        0x010000                            ; set TRANSFERS=1
+            stmaperip   $scpOut.BASIC1                      ; Write BASIC1 register in order to set the number of items 
+            ldma        $discardConfig.addr+4               ; load AGEN 4 register value (this includes clr_abo bit set)
+            stmaperip   $scpOut.AGEN4                       ; Write AGEN4 register in order to set clr_abo
+            ldma        $nextCaptureAddr                    ; setup MA register for next capture
+            orma        0                                   ; fence register setup
+            ldmaperip   $scpOut.BASIC3                      ; fence register setup (preserving MA)
+            align       1                                   ; ?? BUG01127 workaround, align wait to 1 byte offset from GRAM word boundary
+            wait        $scpOut                             ; Wait for existing capture job to complete
+            start                                           ; Start job (must be next instruction from WAIT)
+            
+            ; Read ISCR ready to post to output queue
+            ldma		$scpIscrCounter						; load address of the IscrCounter0 register
+			ldn2perip										; load value of IscrCounter0 into N2
+			swpn2											; Swap IscrCounter0 value to MA
+            stma        $currentSymbolIscr                  ; store ISCR of current symbol to SCP register
+
+            ; Sync with SCP hardware to try and ensure synchronised updates happen during the discard period
+            ldma		$scpFinalPeriodA					; load addres of the SCP_FINAL_PERIOD_A register
+            ldn2perip										; load content of register SCP_FINAL_PERIOD_A
+            swpn2											; swap SCP_FINAL_PERIOD_A from N2 to MA
+            stma		$tempSCPFinalPeriodA				; store SCP_FINAL_PERIOD_A temporally into tempScpFinalPeriodA
+            setma       0									; load 0 to MA
+			swpn2										    ; swap 0 to N2
+            ldma   		$scpFinalPeriodA					; load addres of the SCP_FINAL_PERIOD_A register
+            stn2perip										; store 0 to the SCP_FINAL_PERIOD_A register
+
+#if ?SCP_LOGGING
+            ; Log job
+            logjobstart_control
+            setma       $scpOut.use
+            orma        0
+            logjobstart_data
+            logjobend
+#endif
+
+
+            ; Post job completion if required          
+            branc       runJobFrag2                         ; branch over posting of job completion (it has either been done or is not required)
+            ldma        $lastSymbolIscr                     ; load ISCR captured at symbol start
+            stmaperip   $outputIscrQ.tail                   ; Post ISCR close to symbol start
+            ldma        $currentCaptureAddr                 ; Load the address of the capture job which has just completed
+            stmaperip   $outputAddressQ.tail                ; Post job address to indicate completion of the capture job
+
+
+            ; Job fragment 2
+            ; This job fragment is a fixed size (SECOND_FRAGMENT_SIZE), but either be part of a capture job or default discard job 
+            ; depending on whether DISCARD_OP is set in the BASIC0 register (we don't change that between fragment1 and 2)
+            ; Note only BASIC1 (transfer size) and BASIC3 (MA) registers should need updating after the 1st fragment
+            ; The address generator relies on the ABO state preservation to continue writing the output to the correct location
+runJobFrag2:
+            setma       SECOND_FRAGMENT_SIZE | 0x010000     ; Set job size (fixed)
+            stmaperip   $scpOut.BASIC1                      ; Write BASIC1 register in order to set the number of items 
+            ldma		 $tempSCPFinalPeriodA				; load the temporally stored SCP_FINAL_PERIOD_A value
+			swpn2											; swap SCP_FINAL_PERIOD_A value to N2
+			ldma		 $scpFinalPeriodA					; load addres of the SCP_FINAL_PERIOD_A register
+			stn2perip										; store the temporal SCP_FINAL_PERIOD_A value to the SCP_FINAL_PERIOD_A register
+            setma 0											; set 0 to MA
+            swpn2											; set 0 to N2
+            ldma        $nextCaptureAddr                    ; setup MA register (same as 1st fragment as ABO will preserve the offset)
+            orma        0                                   ; fence register setup
+            ldmaperip   $scpOut.BASIC3                      ; fence register setup (preserving MA)
+            align       1                                   ; ?? BUG01127 workaround, align wait to 1 byte offset from GRAM word boundary
+            wait        $scpOut                             ; Wait for existing capture job to complete
+            start                                           ; Start job fragment (must be next instruction from WAIT)
+
+
+
+checkForNewJob:
+
+            ; Update current discard size and capture address before they are overwritten
+            ldma        $nextDiscardLength                  ; Load discard length associated with the currently active job.
+            stma        $currentDiscardLength               ; Save discard length of current job before updating it
+            ldma        $nextCaptureAddr                    ; Load the address of the capture job (which is currently active)
+            stma        $currentCaptureAddr                 ; Store for posting to completionQ when capture job is complete
+            ldma        $currentSymbolIscr                  ; update ISCR of captured symbol start
+            stma        $lastSymbolIscr                     ; 
+
+            ; Monitor input job qddress queue to see if there is a job to schedule or a default discard job.
+            setcef      $inputAddressQ.rflag                ; Query the state of the inputAddress queue (if this contains an item then all other input queues should)
+            branc       runDefaultDiscardNext
+
+            ; Read input capture length and store locally
+            ldmaperip   $inputCaptureLengthQ.head           ; Read job length
+            stmaperip   $inputCaptureLengthQ.head           ; Pop from queue
+            stmaperip   $outputCaptureLengthQ.tail          ; Write length to output queue
+            setcmaz                                         ; Set condition for zero-length capture
+            addma       -SECOND_FRAGMENT_SIZE               ; Reduce by second fragment size as the capture is split in two parts
+            stma        $nextFragment1Size                  ; write job length 
+            
+            ; Read input job address and store locally
+            ldmaperip   $inputAddressQ.head                 ; Read job address from queue
+            stmaperip   $inputAddressQ.head                 ; Pop from queue
+            stma        $nextCaptureAddr                    ; Store address for next capture job
+
+            ; Read discard job size and store locally 
+            ldmaperip   $inputDiscardLengthQ.head           ; Read discard length
+            stmaperip   $inputDiscardLengthQ.head           ; Pop from queue
+            stmaperip   $outputDiscardLengthQ.tail          ; Write length to output queue
+            stma        $nextDiscardLength                  ; Store for use when required on next pass
+            
+            ; Branch to special code to handle a zero-length capture on the next job
+            brac        scheduleZeroLengthCapture
+            
+            ; Skip discard job if back-to-back transfers are required for the current symbol
+            ldma        $currentDiscardLength               ; Load discard length associated with the currently active job.
+            setcmaz                                         ; Set condition flag if back-to-back captures are required.
+            ldma        $captureConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit clear). This needs to be placed in MA and is used immediately following the branch.
+            brac        prepareJobFrag1                     ; If no discard job is required, then jump straight to run the 1st job fragment
+                                                            ; Note this branch is taken in the case of a default discard job currently in progress followed by a new capture job scheduled.
+
+            ; Fallthrough - setup discard job
+
+            ; discardJob
+            ; This job is run when a discard job is associated with a capture job.
+            ; Note it is not run where a default-discard job is active or scheduled for the next symbol
+runDiscardJob:
+            orma        0                                   ; fence ldma to prevent back-to-back loads following brac fallthrough
+            ldma        $currentDiscardLength               ; load discard length of current job 
+            orma        0x010000                            ; set TRANSFERS=1 (MA contains items field for discard length) 
+            stmaperip   $scpOut.BASIC1                      ; Write BASIC1 register in order to set the number of items to discard
+            ldma        $discardConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit set)
+            stmaperip   $scpOut.BASIC0                      ; Write BASIC0 register in order to set DISCARD_OP
+                                                            ; No need to set MA or clr_abo as we're not storing anything. N2 shouldn't have been modified
+
+            ldmaperip   $scpOut.BASIC3                      ; fence register setup 
+            align       1                                   ; ?? BUG01127 workaround, align wait to 1 byte offset from GRAM word boundary
+            wait        $scpOut                             ; Wait for existing capture job to complete
+            start                                           ; Start discard job (must be next instruction from WAIT)
+            ldma        $lastSymbolIscr                     ; load ISCR captured at symbol start
+            stmaperip   $outputIscrQ.tail                   ; Post ISCR close to symbol start
+            ldma        $currentCaptureAddr                 ; Load the address of the capture job which has just completed
+            stmaperip   $outputAddressQ.tail                ; Post job address to indicate completion of the capture job
+            ldma        $captureConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit clear). This needs to be placed in MA and is used immediately following the branch.
+            bra         prepareJobFrag1                     ; Run the 1st job fragment of the next capture job
+            
+
+            ; Prepare for a default discard job (because the input job queues are empty)
+runDefaultDiscardNext:
+            ; Check to see if there is a discard associated with the previous capture to run
+            ldma        $currentDiscardLength               ; load discard length of current job 
+            setcmaz                                         ; Set condition flag if back-to-back captures are required.
+            brac        skipDiscardJob                      ; If no discard job is required, then jump straight to setting up the default discard job
+            orma        0x010000                            ; set TRANSFERS=1
+            stmaperip   $scpOut.BASIC1                      ; Write BASIC1 register in order to set the number of items to discard
+            ldmaperip   $scpOut.BASIC0                      ; read BASIC0 register in order to set condition flag is DISCARD_OP is clear
+            andma       DISCARD_OP_MASK                     ; select DISCARD_OP field only
+            setcmaz                                         ; set C if DISCARD_OP clear - this indicates the last job was a capture job so we need to post the job address
+            ldma        $discardConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit set)
+            stmaperip   $scpOut.BASIC0                      ; Write BASIC0 register in order to set DISCARD_OP
+                                                            ; No need to set MA or clr_abo as we're not storing anything. N2 shouldn't have been modified
+            ldmaperip   $scpOut.BASIC3                      ; fence register setup 
+
+            align       1                                   ; ?? BUG01127 workaround, align wait to 1 byte offset from GRAM word boundary
+            wait        $scpOut                             ; Wait for previous capture job to complete
+            start                                           ; Start discard job (must be next instruction from WAIT)
+            branc       skipDiscardJob                      ; Branch over posting job completion
+            ldma        $lastSymbolIscr                     ; load ISCR captured at symbol start
+            stmaperip   $outputIscrQ.tail                   ; Post ISCR close to symbol start
+            ldma        $currentCaptureAddr                 ; Load the address of the capture job which has just completed
+            stmaperip   $outputAddressQ.tail                ; Post job address to indicate completion of the capture job
+
+skipDiscardJob:
+            setma       0       
+            stma        $nextDiscardLength                  ; Update discard length of next symbol 
+            ldma        $defaultDiscardLengthFragment1      ; Load size of default discard fragment 1
+            stma        $nextFragment1Size                  ; set nextFragment1Size 
+            ldma        $defaultDiscardCount                ; Increment defaultDiscardCount (this is primarily for debug)
+            addma       1
+            stma        $defaultDiscardCount                ; Increment defaultDiscardCount (this is primarily for debug)
+            ldma        $discardConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit set). This needs to be placed in MA and is used immediately following the branch.
+            bra         prepareJobFrag1
+            
+
+            ; Prepare a zero-length capture for the next job (note we are still running fragment 2 of a default discard or regular job)
+scheduleZeroLengthCapture:
+            ldma        $nextDiscardLength                  ; Evaluate discard length of next symbol 
+            addma       -SECOND_FRAGMENT_SIZE               ; Reduce by second fragment size as the capture is split in two parts
+            stma        $nextFragment1Size                  ; write job length 
+            setma       0
+            stma        $nextDiscardLength                  ; The zero-length capture is handled by the normal capture job being forced to be a discard hence there should be no discard associated with it.
+
+            ldma        $currentDiscardLength               ; Load discard length associated with the currently active job.
+            setcmaz                                         ; Set condition flag if no discard job is required (could be default discard or regular job with no discard)
+            brac        skipDiscardJob2
+
+            ; Setup regular job discard job
+            orma        0x010000                            ; set TRANSFERS=1 (MA contains items field for discard length) 
+            stmaperip   $scpOut.BASIC1                      ; Write BASIC1 register in order to set the number of items to discard
+            ldma        $discardConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit set)
+            stmaperip   $scpOut.BASIC0                      ; Write BASIC0 register in order to set DISCARD_OP
+            ldmaperip   $scpOut.BASIC3                      ; fence register setup 
+            align       1                                   ; ?? BUG01127 workaround, align wait to 1 byte offset from GRAM word boundary
+            wait        $scpOut                             ; Wait for existing capture job to complete
+            start                                           ; Start discard job (must be next instruction from WAIT)
+
+            ; Post job completion
+            ldma        $lastSymbolIscr                     ; load ISCR captured at symbol start
+            stmaperip   $outputIscrQ.tail                   ; Post ISCR close to symbol start
+            ldma        $currentCaptureAddr                 ; Load the address of the capture job which has just completed
+            stmaperip   $outputAddressQ.tail                ; Post job address to indicate completion of the capture job
+
+skipDiscardJob2:
+            ; set DISCARD_OP=0 irrespective to force 1st fragment code to post to job completion queues
+            ; Note this fudge means that a zero-length capture job cannot immediately follow a zero-length discard job
+            ldmaperip   $scpOut.BASIC0                      ; Write BASIC0 register in order to set DISCARD_OP
+            andma       CLEAR_DISCARD_OP_MASK               ; Mask out DISCARD_OP field
+            stmaperip   $scpOut.BASIC0                      ; re-write BASIC0
+            
+            ; update currentCaptureAddr as this is what will be posted to indicate completion
+            ldma        $nextCaptureAddr                    ; Load the address of the zero-length capture job which has just been scheduled
+            stma        $currentCaptureAddr                 ; write to currentCaptureAddr as this is what is posted to the completionQ
+            
+            ; Prepare first fragment for discard job
+            ldma        $discardConfig.addr                 ; load BASIC0 register value (this includes DISCARD_OP bit set). This needs to be placed in MA and is used immediately following the branch.
+            bra         prepareJobFrag1                     ; Run the 1st job fragment of the zero-length capture job (ie discard only)
+
+        end
+        
+        job
+            ; Jump to use context
+            setma       $scpOut.use
+            setpc
+        end
+    end
+end

@@ -1,0 +1,78 @@
+//***************************************************************************
+// Spectrum Analyser FFT Process
+//***************************************************************************
+
+// Call the appropriate library function depending on the FFT length
+
+/* Note that order of this table is important. Changing first value requires changing SPECAN_fftFunc_offset */
+SPECAN_fftFuncs_data SECTION INITIALISED_DATA \
+            USES _FFT64 \
+            USES _FFT128 \
+            USES _FFT256 \
+            USES _FFT512 \
+            USES _FFT1024 \
+            USES _FFT2048 \
+            USES _FFT4096 \
+            USES _FFT8192
+    _FFT64
+    _FFT128
+    _FFT256
+    _FFT512
+    _FFT1024
+    _FFT2048
+    _FFT4096
+    _FFT8192
+SECTION END
+
+
+SECTION SYMBOLS PARTIAL
+    SPECAN_fftFunc_offset: 6    /* log2 of first entry in SPECAN_fftFuncs_data */
+SECTION END
+
+SPECAN_fftShifts SECTION INITIALISED_DATA
+    1 << (MEMBITS-6)
+    1 << (MEMBITS-6)
+    1 << (MEMBITS-6)
+    1 << (MEMBITS-6)
+    1 << (MEMBITS-6)
+    0 << (MEMBITS-6)   
+    0 << (MEMBITS-6)   
+SECTION END
+
+SECTION CODE PARTIAL
+SPECAN_fftProc: FUNCTION 
+
+    INTERFACE
+        AP0 = _FFT_LENGTH_LOG2     
+        AP1 = SPECAN_fftFuncs_data - SPECAN_fftFunc_offset
+        AP7 = SPECAN_fftProc_argblocks
+    INTERFACE END
+
+    LOADADDRESS AP0, AP0, INC_Z /* dereference log2 of FFT length */
+             
+    FENCE
+        
+    /* Get a pointer to the appropriate FFT function. */
+    CALCADDR AP1, AP0, AP1      
+        
+    LOADADDRESS SWP, AP1, INC_Z
+        
+    FENCE
+    
+    /* Call the FFT. Note any change to the interface in MCPLib.mcp will require changing the register list */
+    LOADMULTIPLEA DBL, AP7, AP1|AP2|AP3|AP4|AP5
+    CALL
+    
+    RETURN
+FUNCTION END
+SECTION END
+
+/* A bit of polymorphism here: All FFT functions have the same interface so just use one. */
+SPECAN_fftProc_argblocks SECTION INITIALISED_DATA PARTIAL USES _FFT8192
+    ARGBLOCK _FFT8192 /* name doesn't matter */
+        _INBUF  = windowedDataBuf
+        _SHIFTS = SPECAN_fftShifts
+        _OUTBUF = FFToutBuf
+        _TMPBUF = FFTtmpBuf
+    ARGBLOCK END    
+SECTION END

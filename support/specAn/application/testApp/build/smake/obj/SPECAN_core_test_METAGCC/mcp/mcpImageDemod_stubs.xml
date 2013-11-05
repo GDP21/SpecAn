@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<interface>
+ <function name="SPECAN_accumPower">
+  <register name="AP0" expression="_IN"/>
+  <register name="AP1" expression="_OUT-(1*4)"/>
+  <register name="AP2" expression="_LENGTH_PTR"/>
+  <register name="AP4" expression="_SCALE_PTR"/>
+  <register name="AP5" expression="_OUT"/>
+  <register name="AI0" expression="0"/>
+  <register name="L1R" expression="(1*4)"/>
+  <register name="SHO" expression="1"/>
+  <register name="MHO" expression="0"/>
+  <register name="DP0" expression="4&lt;&lt;(MEMBITS-6)"/>
+ </function>
+ <function name="SPECAN_outerLoopProc">
+  <register name="AP0" expression="_ENABLE_FLAG"/>
+  <register name="AP1" expression="_IN"/>
+  <register name="AP2" expression="_OUT"/>
+  <register name="AP3" expression="_MULT_PTR"/>
+  <register name="AP4" expression="_LENGTH_PTR"/>
+  <register name="AP5" expression="_OUT-(1*4)"/>
+  <register name="AP6" expression="_IN-(1*4)"/>
+  <register name="AI0" expression="0"/>
+  <register name="AM0" expression="0"/>
+  <register name="L1R" expression="(1*4)"/>
+  <register name="MHO" expression="0"/>
+ </function>
+ <function name="SPECAN_processSCPqueues">
+  <register name="AP5" expression="$nextSCPaddressPtr"/>
+  <register name="DP2" expression="$nextMCPOSjobPtr"/>
+ </function>
+ <function name="SPECAN_fftProc">
+  <register name="AP0" expression="_FFT_LENGTH_LOG2"/>
+  <register name="AP1" expression="64-6"/>
+  <register name="AP7" expression="79"/>
+ </function>
+ <function name="SPECAN_windowProc">
+  <register name="AP0" expression="_IN"/>
+  <register name="AP1" expression="_WINDOW"/>
+  <register name="AP2" expression="_OUT-4"/>
+  <register name="AP3" expression="_LENGTH_PTR"/>
+  <register name="L1R" expression="4"/>
+  <register name="DS0" expression="(_SCALE)&lt;&lt;(MEMBITS-6)"/>
+ </function>
+ <function name="_FFT1024">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT128">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT2048">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT256">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT4096">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT512">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT64">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <function name="_FFT8192">
+  <register name="AP1" expression="_SHIFTS"/>
+  <register name="AP2" expression="(_TMPBUF-_INBUF)"/>
+  <register name="AP3" expression="_INBUF"/>
+  <register name="AP4" expression="_TMPBUF"/>
+  <register name="AP5" expression="_OUTBUF"/>
+ </function>
+ <gram>
+  <adata base="0x00000000" size="0x00017000" />
+  <bdata base="0x00000000" size="0x00000000" />
+  <ldata base="0x00017000" size="0x00001000" />
+ </gram>
+</interface>
+

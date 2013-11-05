@@ -1,0 +1,59 @@
+//******************************************
+//
+// SPECAN_outerLoopProc
+//
+// Accumulate FFT power buffer on a secondary outer loop
+//
+//*******************************************
+
+SECTION CODE PARTIAL
+SPECAN_outerLoopProc: FUNCTION
+    INTERFACE
+        AP0 = _ENABLE_FLAG
+        AP1 = _IN
+        AP2 = _OUT          /* Result buffer */
+        AP3 = _MULT_PTR
+        AP4 = _LENGTH_PTR     
+        AP5 = _OUT - (1*4)
+        AP6 = _IN - (1*4)
+        AI0 = 0
+        AM0 = 0
+        L1R = (1*4) // 1 priming iteration of 4 samples
+        MHO = 0
+    INTERFACE END
+        
+    // Test doOuterLoopProc flag
+    LOAD DBL, DP0, AP0, INC_Z
+    
+    LOADINDEXED DBL, IMM4, DM0, AP3, AI0, AM0       /* load the scaling factor (set by Meta to 1/outerLoopCount) */
+    DCOND CMP_EQ, CND_FMT_EO, OPADD0, DP0
+
+    LOADADDRESS AP3, AP4, INC_Z     /* Get buffer length into AP3 */
+    
+    RETURNC /* If 0, return */
+    
+    FENCE   /* wait for LOADADDRESS 9 cycle latency */
+         
+    // Run outer loop process
+    CALCADDR L1R, L1R, AP3          /* update the loop counter from AP3 */    
+
+    DSUB OPADD0, DP0, DP0           /* clear opadd0..3 */
+    CALCADDR SHO, CALC_P1, CALC_Z
+    L1START
+    
+        LOADINDEXED DBL, L1, DM4, AP1, L1, MULT_P1     /* i. load the intermediate buffer values */
+        
+        LOADINDEXED DBL, L1, DM8, AP2, L1, MULT_P1      /* i. load current output */
+        DMACTYPE2 CLEAR, DM4, DM0                       /* i. scale input by 1/outerLoopCount */
+        COMBINEDPP OACC0                                /* ii. combine partial products (beware: MAC latency) */
+        
+        DMACTYPE2 ACCUM, DM8, MUL_ONE                   /* i. accumulate output */
+        STOREINDEXED DBL, L1, OCOMB0, AP5, L1, MULT_P1  /* ii. store */
+        
+        STOREINDEXED DBL, L1, OPADD0, AP6, L1, MULT_P1  /* ii. Clear the intermediate buffer */               
+    L1END4
+    LSHODEC
+    RETURN
+    
+FUNCTION END
+SECTION END

@@ -1,0 +1,38 @@
+//***************************************************************************
+// A function called "dotProduct". It has no special placement requirements
+// so it is just placed in the default (partial) code section
+//***************************************************************************
+SECTION CODE PARTIAL
+dotProduct: FUNCTION
+    // The function interface specifies required initial values for six
+    // registers in terms of four arguments. For clarity, we indicate arguments
+    // by starting their names with a '_' - this is not essential however.
+    INTERFACE
+        AP0=_INBUF1
+        AP1=_INBUF2
+        AP2=_OUTBUF
+        L1R=_LENGTH + 4
+        MHO=2
+        SHO=0
+        DS0=_SHIFT << (MEMBITS-6) // scaling shift in top 6 bits of memory word
+	INTERFACE END
+
+    L1START
+
+        LOADINDEXED CMPLX, IMM4, DM0, AP0, INC_P4, MULT_P1  // load INBUF1
+        MACCMPLX  ACCUM, DM0, DM4
+
+        LOADINDEXED CMPLX, IMM4, DM4, AP1, INC_P4, MULT_P1  // load INBUF2
+        LSHODEC
+        L1END4
+
+    COMBINECMPLXCONJ  OACC0                                 // combine partial products
+
+    COMBINESUM OCOMB0, OCOMB0                               // combine sub accumulations
+
+    SCALE EN_1000, OCOMB0, DS0                              // Scaling shift
+
+    STORE CMPLX, OSCALE0, AP2, INC_P1                       // Store result
+    RETURN                                                  // and return
+FUNCTION END
+SECTION END

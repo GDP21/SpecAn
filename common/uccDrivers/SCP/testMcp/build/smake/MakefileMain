@@ -1,0 +1,48 @@
+UNIT_TYPE=APP
+UNIT_NAME=scpDriverTest
+
+BUILD_ROOT=../../../../..
+
+UCC_TOOLKIT_DIR= $(UCCLIB_ROOT)
+UCCP_ROOT= $(UCCLIB_ROOT)/uccPlatform
+UCC_DRIVERS_ROOT= $(BUILD_ROOT)/uccDrivers
+
+include $(UCCP_ROOT)/targetSetup.mk
+include $(UCC_DRIVERS_ROOT)/uccDrivers.mk
+include $(UCC_DRIVERS_ROOT)/SCP/scpDriver.mk
+
+GLOBAL_INLCUDES+=(UCCP_ROOT)/source/generic
+
+GLOBAL_OPERATING_SYSTEM=MEOS
+
+#Required for 4 series toolkit
+UNIT_OPTIONS+=DISABLE_DEFAULT_MCPFLAGS
+
+
+C_SRC=main.c
+
+DCP_SRC=scpMcpShimDriver.dcps
+
+DCP_MAPFILES=main.dcpsys
+
+#DCP_ORIGIN=0x400
+
+MCP_SRC=testScpDriver.mcp \
+        $(UCC_INST_ROOT)/config/uccps/uccp$(UCCP)/uccp$(UCCP)_registers.mcp
+
+REG_DIRL+=$(UCC_DRIVERS_DIRS)
+REG_SRC=scpDmaConfigs
+
+MODS=$(UNIT_DIR)/.. \
+	 $(UCC_TOOLKIT_DIR)/uccRuntime 
+
+ifeq ($(PROCESSOR),MTX)
+S_SRC=sections_a.s
+S_THEN_C=1
+C_SRC+=gramBuffers.c
+endif
+
+
+PRIMARY_PUBLISH_DIR= $(UNIT_DIR)/../..
+
+include $(SMAKE_ROOT)/smake.mk

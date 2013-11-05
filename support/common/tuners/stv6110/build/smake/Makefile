@@ -1,0 +1,8 @@
+UNIT_TYPE=MOD
+UNIT_NAME=stv6110_tuner
+
+C_SRC=stv6110_tuner.c stv6110_scbm$(PORT_DRIVER_SUFFIX).c
+
+#GLOBAL_OPTIONS+=ERROR_ON_WARNING
+
+include $(SMAKE_ROOT)/smake.mk

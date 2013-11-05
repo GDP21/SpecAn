@@ -1,0 +1,79 @@
+;----------------------------------------------------------------------------
+; Installation file for the USBLOOP device
+; Copyright (c) Imagination Technologies 2003
+;----------------------------------------------------------------------------
+
+[Version]
+Signature=$CHICAGO$
+Class=MultiFunction
+ClassGuid={4D36E971-E325-11CE-BFC1-08002BE10318}
+Provider=%MFGNAME%
+DriverVer=07/25/2002,1.0.0.0
+
+[Manufacturer]
+%MFGNAME%=DeviceList
+
+[DestinationDirs]
+DefaultDestDir=10,System32\Drivers
+
+[SourceDisksFiles]
+usbloop.sys=1
+imgwdm.sys=1
+
+[SourceDisksNames]
+1=%INSTDISK%,,,
+
+[DeviceList]
+%DESCRIPTION%=DriverInstall,USB\VID_FFFF&PID_0000
+%DESCRIPTION%=DriverInstall,USB\VID_1C5B&PID_0001
+%DESCRIPTION%=DriverInstall,USB\VID_149A&PID_FFFF
+%DESCRIPTION%=DriverInstall,USB\VID_1C5B&PID_FA11
+%DESCRIPTION%=DriverInstall,USB\VID_1C5B&PID_FFFF
+
+;----------------------------------------------------------------------------
+;  Windows 2000 Sections
+;----------------------------------------------------------------------------
+
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+[DriverCopyFiles]
+usbloop.sys,,,2
+imgwdm.sys,,,2
+
+[DriverInstall.NT.Services]
+AddService=USBLOOP,2,DriverService
+
+[DriverService]
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\usbloop.sys
+
+[DriverInstall.nt.hw]
+AddReg=DriverHwAddReg
+
+;----------------------------------------------------------------------------
+;  Windows 98 Sections
+;----------------------------------------------------------------------------
+
+[DriverInstall]
+AddReg=DriverAddReg
+CopyFiles=DriverCopyFiles
+
+[DriverAddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbloop.sys
+						
+[DriverInstall.hw]
+AddReg=DriverHwAddReg
+
+;----------------------------------------------------------------------------
+;  String Definitions
+;----------------------------------------------------------------------------
+
+[Strings]
+MFGNAME="Imagination Technologies"
+INSTDISK="Usbloop"
+DESCRIPTION="USB Loopback Test"
+

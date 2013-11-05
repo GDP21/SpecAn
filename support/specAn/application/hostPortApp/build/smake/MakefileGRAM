@@ -1,0 +1,14 @@
+UNIT_TYPE=APP
+UNIT_NAME=GRAMApp
+UNIT_SUBTYPE=GLOBAL
+
+SRCDIRS=$(UNIT_DIR)/$(SMAKE_DIR)/$(OBJSUB)/dcp  \
+		$(UNIT_DIR)/$(SMAKE_DIR)/$(OBJSUB)/reg  \
+		$(UNIT_DIR)/source/generic
+
+C_SRC=dcpOutput_image.c \
+	  rcdOutput_image.c
+
+INTERFACES=$(UCCLIB_ROOT)/uccRuntime
+
+include $(SMAKE_ROOT)/smake.mk

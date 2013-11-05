@@ -1,0 +1,31 @@
+; DCP system file for Spectrum Analyser core
+
+pipeline SA_SCPPipeline
+	use
+		SCP		as SCPDevice
+		mcpos	as mcpos0
+		irqGen  as irqGen0
+	end
+	connection
+		SCP.outputAddressQ			=> mcpos.scpCompletionQ
+        SCP.outputCaptureLengthQ	=> NULL
+        SCP.outputDiscardLengthQ	=> NULL
+        SCP.outputIscrQ				=> NULL
+        
+        ; TEMP
+        mcpos.finalQ 				=> irqGen.finalQ
+	end
+end
+
+map
+	device
+		; <device> as <driver> <priority>
+		SCPDevice		as scpDriver 20 ; SCP must be highest-priority
+		mcpos0			as SPECAN_mcposDriver 10
+		irqGen0 		as irqGenDefaultDriver 4
+	end
+	pipeline
+		; <pipeline instance> as <pipeline> <priority>
+		SCPPipeline	as SA_SCPPipeline  1
+	end
+end

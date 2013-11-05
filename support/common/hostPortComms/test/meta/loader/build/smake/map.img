@@ -1,0 +1,11 @@
+MMU TABLE mmu_table
+
+/* MAP <size> FROM <physical> BASE <logical> OFFSET <offset> */
+
+MAP 0x00006000 FROM internal_sram BASE 0x90100000 OFFSET 0x00000000 /* via global cache */
+
+MAP 0x0005A000 FROM internal_sram BASE 0x30006000 THREAD 0 OFFSET 0x00006000 /* via local cache */
+MAP 0x00040000 FROM ucc0_mtx_sram BASE 0x40000000 THREAD 0 OFFSET 0x00000000 /* via local cache */
+MAP 0x04000000 FROM external_dram BASE 0x60000000 THREAD 0 OFFSET 0x00000000 /* via local cache */
+
+MAP 0x0002B800 FROM ucc0_mcp_sram_24bit BASE 0x50000000 THREAD 0 OFFSET 0x00000000 /* via local cache */

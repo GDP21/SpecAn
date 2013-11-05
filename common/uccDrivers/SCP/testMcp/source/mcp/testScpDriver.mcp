@@ -1,0 +1,243 @@
+/*
+** FILE NAME:     $Header: /cvs/uccDrivers/SCP/testMcp/source/mcp/testScpDriver.mcp,v 1.1 2011/06/21 21:59:00 mike.davis Exp $
+**
+** PROJECT:       UCCDrivers
+**
+** AUTHOR:        Mike Davis
+**
+** DESCRIPTION:   MCP test harness for SCP driver module.
+**
+** Copyright (C)  2008 - 2011, Imagination Technologies Ltd.
+**
+*/
+
+//***************************************************************************
+// Main function for SCP test.
+//***************************************************************************
+MAIN SECTION CODE ENTRY
+
+    LOADMULTIPLEI DBL, initConsts               // Load system startup values (e.g. SHO, MHO)
+
+    STOREPERIPH DBL, DP15, AP5, INC_Z           // select the EFS orFlag to connect to WAIT
+
+    FENCE                                       // for EFS select update
+
+
+    /* Post job A */
+    LOADMULTIPLEI DBL, postJobA
+    CALL
+    
+    /* Post job B */
+    LOADMULTIPLEI DBL, postJobB
+    CALL
+    
+    /* ---------------------------*/
+    
+    /* WAIT for job A to complete */
+    WAIT
+    
+    /* Acknowledge job A */
+    LOADMULTIPLEI DBL, readJobN
+    CALL
+    
+    /* Calculate next address */
+    DADD OPADD0, DP0, DP12
+
+    /* Update postJobN function argument */
+    STORE DBL, OPADD0, AP6, INC_Z
+    
+    /* Post job C */
+    LOADMULTIPLEI DBL, postJobN
+    CALL
+
+    /* ---------------------------*/
+
+    /* WAIT for job B to complete */
+    WAIT
+
+    /* Acknowledge job B */
+    LOADMULTIPLEI DBL, readJobN
+    CALL
+    
+    /* Calculate next address */
+    DADD OPADD0, DP0, DP12
+    
+    /* Update postJob function argument */
+    STORE DBL, OPADD0, AP6, INC_Z
+    
+    /* Post job D */
+    LOADMULTIPLEI DBL, postJobN
+    CALL
+
+    /* ---------------------------*/
+
+    /* WAIT for job C to complete */
+    WAIT
+
+    /* Acknowledge job C */
+    LOADMULTIPLEI DBL, readJobN
+    CALL
+
+    /* ---------------------------*/
+
+    /* WAIT for job D to complete */
+    WAIT
+
+    /* Acknowledge job D */
+    LOADMULTIPLEI DBL, readJobN
+    CALL
+
+    FENCE
+    HALT
+    
+    /* Jump back to start for next test */
+    CALCSWPI MAIN
+    
+    JUMP
+    
+SECTION END
+
+
+/*
+** FUNCTION:      postJob
+**
+** DESCRIPTION:   post job to SCP queues
+*/
+SECTION CODE PARTIAL
+postJob: FUNCTION
+    INTERFACE
+        capLength:      DP0 = 0
+        discardLength:  DP1 = 0
+        capAddress:     DP2 = 0
+    INTERFACE END
+    
+    LOADMULTIPLEI DBL, CONSTS_POST_JOB
+   
+    /* Write capture length to queue */
+    STOREPERIPH DBL, DP0, AP0, INC_Z
+
+    /* Write discard length to queue */
+    STOREPERIPH DBL, DP1, AP1, INC_Z
+
+    /* Write address to queue */
+    STOREPERIPH DBL, DP2, AP2, INC_Z
+    
+    RETURN
+FUNCTION END
+SECTION END
+
+CONSTS_POST_JOB SECTION INITIALISED_DATA PARTIAL LDATA
+scpDrvInputCapLenQ:     
+    AP0: _host_patch_
+scpDrvInputDiscLenQ:
+    AP1: _host_patch_
+scpDrvInputAddressQ:
+    AP2: _host_patch_
+SECTION END
+
+/*
+** FUNCTION:      readJob
+**
+** DESCRIPTION:   read job from SCP queues
+**            
+** RETURNS:       DP0 - completed buffer address
+*/
+SECTION CODE PARTIAL
+readJob: FUNCTION
+    INTERFACE
+    INTERFACE END
+    
+    LOADMULTIPLEI DBL, CONSTS_READ_JOB
+   
+    /* read capture length from queue */
+    LOADPERIPH DBL, DP1, AP0, INC_Z
+
+    /* remove from queue */
+    STOREPERIPH DBL, DP1, AP0, INC_Z
+
+    /* read discard length from queue */
+    LOADPERIPH DBL, DP2, AP1, INC_Z
+
+    /* remove from queue */
+    STOREPERIPH DBL, DP2, AP1, INC_Z
+
+    /* read ICSR from queue */
+    LOADPERIPH DBL, DP3, AP2, INC_Z
+
+    /* remove from queue */
+    STOREPERIPH DBL, DP3, AP2, INC_Z
+
+    /* read address from queue */
+    LOADPERIPH DBL, DP0, AP3, INC_Z
+
+    /* remove from queue */
+    STOREPERIPH DBL, DP0, AP3, INC_Z
+
+    /* Leave address in DP0 as return value */
+
+    RETURN
+FUNCTION END
+SECTION END
+
+CONSTS_READ_JOB SECTION INITIALISED_DATA PARTIAL LDATA
+scpDrvOutputCapLenQ:
+    AP0: _host_patch_
+scpDrvOutputDiscLenQ:
+    AP1: _host_patch_
+scpDrvOutputIscrQ:
+    AP2: _host_patch_
+scpDrvOutputAddressQ:
+    AP3: _host_patch_
+SECTION END
+
+
+SECTION SYMBOLS PARTIAL
+    NULL:           0
+    _host_patch_:   0
+SECTION END
+
+SECTION INITIALISED_DATA PARTIAL LDATA
+initConsts:
+    AP5: EFS_MCP0_FLAG_SOURCEN_0        // EFS source select register
+    AP6: postJobN.capAddress
+    SHO: 0
+    MHO: 0    
+twoTimesCapLen:
+    DP12: _host_patch_
+scpOrFlag:
+    DP15: _host_patch_                  // OR-flag to select EFS linked to WAIT (value patched by the host)
+SECTION END
+
+
+SECTION INITIALISED_DATA PARTIAL LDATA
+postJobA:
+    LOADBLOCK postJob
+        capLength       =   _host_patch_
+        discardLength   =   _host_patch_
+        capAddress      =   _host_patch_
+    LOADBLOCK END        
+
+postJobB:
+    LOADBLOCK postJob
+        capLength       =   _host_patch_
+        discardLength   =   _host_patch_
+        capAddress      =   _host_patch_
+    LOADBLOCK END        
+
+postJobN:
+    LOADBLOCK postJob
+        capLength       =   _host_patch_
+        discardLength   =   _host_patch_
+        capAddress      =   _host_patch_
+    LOADBLOCK END        
+
+readJobN:
+    LOADBLOCK readJob
+    LOADBLOCK END        
+
+SECTION END
+
+
+//***************************************************************************
+//*************************     END of File     *****************************
+//***************************************************************************

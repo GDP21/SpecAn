@@ -1,0 +1,90 @@
+//******************************************
+//
+// SPECAN_accumPower     
+// Calculate the power vector from a complex input vector. 
+// Derived from: 
+// _VECabs_cd: double precision absolute values of a complex vector with scaling:
+//             limited precision output result as inputs are only 12 bits.
+//
+// OUT = abs(IN) * 2**SCALE
+//
+// RESTRICTIONS: _LENGTH > 0
+//
+//*******************************************
+#define nDISABLE_PIPELINING
+
+SECTION SYMBOLS PARTIAL
+    SA_POWER_SCALE:                  4
+#ifdef DISABLE_PIPELINING
+    SPECAN_accumPower_pipelineDepth: 0
+#else
+    SPECAN_accumPower_pipelineDepth: 1
+#endif   
+SECTION END
+
+SECTION CODE PARTIAL
+SPECAN_accumPower: FUNCTION
+    INTERFACE
+        AP0 = _IN
+        AP1 = _OUT - (SPECAN_accumPower_pipelineDepth*4)
+        AP2 = _LENGTH_PTR
+        AP4 = _SCALE_PTR
+        AP5 = _OUT
+        AI0 = 0
+        DP0 = SA_POWER_SCALE << (MEMBITS - 6)   /* convert real to double precision */
+        L1R = (SPECAN_accumPower_pipelineDepth*4) // 2 priming iteration of 4 samples
+        MHO = 0
+        SHO = SPECAN_accumPower_pipelineDepth
+    INTERFACE END
+    
+    LOADADDRESS AP3, AP2, INC_Z     /* Get buffer length into AP3 */
+    
+    FENCE   /* wait for LOADADDRESS 9 cycle latency */
+         
+    CALCADDR L1R, L1R, AP3          /* update the loop counter from AP3 */    
+    
+#ifdef DISABLE_PIPELINING
+    LOAD DBL, DP4, AP4, INC_Z       /* load the scale (log2 of buffer length) */
+    
+    DSUB OPADD0, DP0, DP4           /* update DS0 */
+    
+    MOVTOSCALE DS0, OPADD0          /* note there is a 1 cycle delay. */
+    L1START
+    
+        LOADINDEXED CMPLX, L1, DM0, AP0, L1, MULT_P1     // load 0
+    
+        MULCMPLX DM0, DM0                                // mul 0
+
+        COMBINECMPLXCONJ OMUL0                           // combine -1
+
+        DSCALE EN_1111, OCOMB0, DS0                      // scale
+        
+        LOADINDEXED DBL, L1, DP0, AP1, AI0, MULT_P1      // load intermediate
+        
+        DADD OPADD0, DP0, OSCALE0                       // accumulate
+
+        STOREINDEXED DBL, L1, OPADD0, AP1, L1, MULT_P1  // store -2 (as double precision)
+        L1END4
+        RETURN
+
+#else
+    LOAD DBL, DP4, AP4, INC_Z       /* load the scale (log2 of buffer length) */
+    L1START
+
+        DSUB OPADD0, DP0, DP4                            // setup for DS0 (applies on first cycle only)
+        LOADINDEXED CMPLX, L1, DM0, AP0, L1, MULT_P1     // i. load 0
+        DSCALE EN_1111, OCOMB0, DS0                      // ii. scale
+        
+        MOVTOSCALE DS0, OPADD0                           // setup for DS0 (applies on first cycle only)
+        MULCMPLX DM0, DM0                                // i. mul 0
+        LOADINDEXED DBL, L1, DP8, AP5, L1, MULT_P1      // i. load intermediate
+        DADD OPADD0, DP8, OSCALE0                        // ii. accumulate
+
+        COMBINECMPLXCONJ OMUL0                           // i. combine -1
+        STOREINDEXED DBL, L1, OPADD0, AP1, L1, MULT_P1   // ii. store -2 (as double precision)
+        LSHODEC
+        L1END4
+        RETURN
+#endif
+FUNCTION END
+SECTION END

@@ -1,0 +1,21 @@
+UNIT_TYPE=APP
+UNIT_SUBTYPE=GLOBAL
+UNIT_NAME=gram
+
+SMAKE_ROOT=../../../../../../ensigmaSDK/smake
+UCCP_ROOT=../../../../../uccPlatform
+include $(UCCP_ROOT)/targetSetup.mk
+
+INTERFACES=$(UNIT_DIR)/../..
+
+SRCDIRS=$(UNIT_DIR)/$(SMAKE_DIR)/$(OBJSUB)/dcp \
+		$(UNIT_DIR)/$(SMAKE_DIR)/$(OBJSUB)/reg \
+		$(UNIT_DIR)/source/generic
+
+C_SRC=dcpOutput_image.c \
+	  rcdOutput_image.c \
+	  gramBuffers.c
+
+PRIMARY_PUBLISH_DIR=$(UNIT_DIR)/../../..
+
+include $(SMAKE_ROOT)/smake.mk

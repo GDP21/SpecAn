@@ -1,0 +1,20 @@
+/* Declare thread applications and locations */
+EXEC debug/thread0.elf                  THREAD 0 CODE 0xB7030000 DATA 0xB7060000 
+STACK 0x1000                            THREAD 0 BASE 0xB7090000 
+HEAP  0x2000                            THREAD 0 BASE 0xB7091000 
+
+EXEC  /thread1/cache_thrash.elf         THREAD 1 CODE 0xB7020000 DATA 0xB7022000
+STACK 0x1000                            THREAD 1 BASE 0xB7023000 
+HEAP  0x2000                            THREAD 1 BASE 0xB7024000 
+
+/* Global Heap */
+GBLHEAP 0xA000 BASE 0xB7026000  /* This could probably be a lot smaller. */
+
+/* GRAM buffers */
+GLOBAL debug/threadg.elf	BASE 	0xB7080000
+
+/* Create TBI data structure (used by MeOS) */
+TBI INT  THREAD 0
+TBI BGND THREAD 0
+TBI INT  THREAD 1
+TBI BGND THREAD 1

@@ -1,0 +1,12 @@
+//***************************************************************************
+// Job wrapper for dotProduct function
+//***************************************************************************
+SECTION CODE PARTIAL
+dotProductJob: FUNCTION
+
+	LOADMULTIPLEARGS DBL, dotProduct
+	CALL
+    
+    RETURN
+FUNCTION END
+SECTION END

@@ -1,0 +1,8 @@
+debug_MTXGCC
+docs
+include
+lib
+obj
+release_MTXGCC
+test_MTXGCC
+

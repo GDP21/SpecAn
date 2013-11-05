@@ -1,0 +1,68 @@
+//***************************************************************************
+// Spectrum Analyser MCP code
+// This function deals with queueing jobs in and out of the SCP
+//***************************************************************************
+
+SECTION CODE PARTIAL
+SPECAN_processSCPqueues: FUNCTION
+    INTERFACE
+     	// Note that for DP2 we actually load an address into a data register: this address
+    	// gets stored out to mcposSCPjobQtailPtr
+    	DP2 = $nextMCPOSjobPtr
+     	// SCP job address, to store to SCPIN_addressQtailPtr
+    	AP5 = $nextSCPaddressPtr
+    INTERFACE END
+    
+    // Load constant block
+    LOADMULTIPLEI, DBL, SA_processSCPqueues_consts
+    
+    // Write to SCP output address queue head to pop the current job off the queue (the value
+    // written doesn't matter)
+    // (Note that the SCP output capture length queue and discard length queue are not instantiated)
+    STOREPERIPH DBL, DP5, AP4, INC_Z
+    // Return if not posting a new job
+	DCOND CMP_EQ, CND_FMT_EO, OPADD0, DP0
+    
+    RETURNC
+    
+    // Post a new SCP job
+    // .. write capture length
+    STOREPERIPH DBL, DP1, AP2, INC_Z
+    
+    // .. write 0 to discard length
+    STOREPERIPH DBL, DP5, AP3, INC_Z
+    
+    LOAD DBL, DP3, AP5, INC_Z   // Get SCP address into DP3
+    
+    // .. write to address queue.  This must be done after the writes to the other two queues, as this
+    // kicks off the job
+    STOREPERIPH DBL, DP3, AP1, INC_Z
+    
+    // .. write MCPOS job to MCPOS SCP queue
+    STOREPERIPH DBL, DP2, AP0, INC_Z
+
+    RETURN
+FUNCTION END
+SECTION END
+
+
+SA_processSCPqueues_consts SECTION INITIALISED_DATA PARTIAL LDATA
+    // Note all these values are poked in by Meta prior to running
+    mcposSCPjobQtailPtr:
+    AP0:    0   // Pointer to queue tail for MCPOS jobs
+    SCPIN_addressQtailPtr:
+    AP1:    0   // SCP input address queue pointer
+    SCPIN_captureLenQtailPtr:
+    AP2:    0   // SCP input capture length queue pointer
+    SCPIN_discardLenQtailPtr:
+    AP3:    0   // SCP input discard length queue pointer
+    SCPOUT_addressQheadPtr:
+    AP4:    0   // SCP output address queue pointer
+    queueNewSCPJob:
+    DP0:    0   // Flag indicating that we need to queue a new job; set within
+                // SPECAN_loopCtrl
+    SCPcaptureLen:
+    DP1:    0   // SCP capture length (may be different from FFT length
+                // if FFT length is less than a minimum)
+    DP5:    0   // General-purpose 0 value
+SECTION END

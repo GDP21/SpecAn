@@ -1,0 +1,4 @@
+ifneq (,$(findstring SCP_LOGGING,$(FEATURES)))
+UNIT_NAME_SUFFIX=_logging
+UNIT_DEFINES+=SCP_LOGGING
+endif

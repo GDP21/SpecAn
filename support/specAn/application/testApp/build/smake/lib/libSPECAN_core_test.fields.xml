@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registerFields xmlns="http://ch.imgtec.org/uccTools/registerFields-1"
+                version="2">
+
+  <!-- Image set: scpDriver.default -->
+  <imageSet name="scpDriver"
+            paramSet="default"
+            contentVersion="0">
+
+    <dcpDriver file="scpDriver.dcp.xml"/>
+
+    <dcpDataBlockGroup driver="scpDriver"
+                       dataBlock="captureConfig"
+                       context="use">
+      <register name="EDC_PERIP_BASIC0_0">
+        <field name="MEM_BSWAP_0"
+               value="0x00000000"/>
+        <field name="DCP_PRIORITY_0"
+               value="0x00000001"/>
+        <field name="PW_0"
+               value="0x00000002"/>
+        <field name="PALIGN_0"
+               value="0x00000000"/>
+        <field name="BITREV_0"
+               value="0x00000000"/>
+        <field name="INCR_0"
+               value="0x00000000"/>
+        <field name="DISCARD_OP_0"
+               value="0x00000000"/>
+        <field name="EOP_MODE_0"
+               value="0x00000000"/>
+        <field name="TFR_MODE_0"
+               value="0x00000002"/>
+        <field name="PER_BUS_0"
+               value="0x00000000"/>
+        <field name="PULSED_RESET_0"
+               value="0x00000000"/>
+      </register>
+      <register name="EDC_PERIP_BASIC1_0">
+        <field name="TRANSFERS_0"
+               value="0x00000001"/>
+        <field name="ITEMS_0"
+               value="0x00000100"/>
+      </register>
+      <register name="EDC_PERIP_BASIC2_0">
+        <field name="ECN_0"
+               value="0x00000000"/>
+        <field name="PA_0"
+               value="0x00008000"/>
+      </register>
+      <register name="EDC_PERIP_AGEN4_0">
+        <field name="MODE_0"
+               value="0x00000000"/>
+        <field name="CLR_ABO_0"
+               value="0x00000001"/>
+        <field name="ITEM_BYTES_0"
+               value="0x00000002"/>
+        <field name="BUS_BYTES_0"
+               value="0x00000000"/>
+        <field name="N0_0"
+               value="0x00000000"/>
+      </register>
+      <register name="EDC_PERIP_AGEN5_0">
+        <field name="N1_0"
+               value="0x00000001"/>
+      </register>
+    </dcpDataBlockGroup>
+
+    <dcpDataBlockGroup driver="scpDriver"
+                       dataBlock="discardConfig"
+                       context="use">
+      <register name="EDC_PERIP_BASIC0_0">
+        <field name="MEM_BSWAP_0"
+               value="0x00000000"/>
+        <field name="DCP_PRIORITY_0"
+               value="0x00000001"/>
+        <field name="PW_0"
+               value="0x00000002"/>
+        <field name="PALIGN_0"
+               value="0x00000000"/>
+        <field name="BITREV_0"
+               value="0x00000000"/>
+        <field name="INCR_0"
+               value="0x00000000"/>
+        <field name="DISCARD_OP_0"
+               value="0x00000001"/>
+        <field name="EOP_MODE_0"
+               value="0x00000000"/>
+        <field name="TFR_MODE_0"
+               value="0x00000002"/>
+        <field name="PER_BUS_0"
+               value="0x00000000"/>
+        <field name="PULSED_RESET_0"
+               value="0x00000000"/>
+      </register>
+      <register name="EDC_PERIP_BASIC1_0">
+        <field name="TRANSFERS_0"
+               value="0x00000001"/>
+        <field name="ITEMS_0"
+               value="0x00000100"/>
+      </register>
+      <register name="EDC_PERIP_BASIC2_0">
+        <field name="ECN_0"
+               value="0x00000000"/>
+        <field name="PA_0"
+               value="0x00008000"/>
+      </register>
+      <register name="EDC_PERIP_BASIC3_0">
+        <field name="MA_0"
+               value="0x00ABCDEF"/>
+      </register>
+      <register name="EDC_PERIP_AGEN4_0">
+        <field name="MODE_0"
+               value="0x00000000"/>
+        <field name="CLR_ABO_0"
+               value="0x00000001"/>
+        <field name="ITEM_BYTES_0"
+               value="0x00000002"/>
+        <field name="BUS_BYTES_0"
+               value="0x00000000"/>
+        <field name="N0_0"
+               value="0x00000000"/>
+      </register>
+      <register name="EDC_PERIP_AGEN5_0">
+        <field name="N1_0"
+               value="0x00000001"/>
+      </register>
+    </dcpDataBlockGroup>
+
+  </imageSet>
+
+</registerFields>

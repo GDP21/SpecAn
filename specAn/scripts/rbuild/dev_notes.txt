@@ -1,0 +1,3 @@
+example xsltproc transformations:
+
+xsltproc --path './schema' -o temp.bash ./stylesheet/test.xsl audioSDK_config.xml

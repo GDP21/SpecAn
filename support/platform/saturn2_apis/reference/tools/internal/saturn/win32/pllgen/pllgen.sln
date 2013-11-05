@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pllgen", "pllgen.vcproj", "{A0F50CA9-0790-4AF9-A942-09266764C385}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{A0F50CA9-0790-4AF9-A942-09266764C385}.Debug.ActiveCfg = Debug|Win32
+		{A0F50CA9-0790-4AF9-A942-09266764C385}.Debug.Build.0 = Debug|Win32
+		{A0F50CA9-0790-4AF9-A942-09266764C385}.Release.ActiveCfg = Release|Win32
+		{A0F50CA9-0790-4AF9-A942-09266764C385}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

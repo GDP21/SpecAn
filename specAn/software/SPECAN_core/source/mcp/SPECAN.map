@@ -1,0 +1,22 @@
+/* Map file for the spectrum analyser MCP code, defines base addresses (in the MCP address domain) and 
+sizes for the various regions.  This needs to tie up with the amount of GRAM allocated physically
+(defined by _SPECAN_MCP_GRAM_SIZE in SPECAN_private.h) */
+
+/* Number here is words, not bytes.  The sizes here are used by the assembler to check for overflows.
+The locations are not used in the Meta application as they are over-wridden by the MCP_mapMemoryToGRAM
+function.  However they would be used if running MCP code stand-alone, loading via script instead of
+from Meta. */
+CONFIG
+	GRAM_A 0
+	GRAM_B 0
+	GRAM_L 0x17000 /* Place immediately following on from A data.  Needs incrementing if A data size changes. */
+	SIZE_A 0x17000
+	SIZE_B 0
+	SIZE_L 0x01000 /* TBD */
+CONFIG END
+
+/* Place FFT buffers at start of memory since they have an alignment constraint.  Allowing
+them to be placed automatically can result in wasted space. */
+/*ADATA
+    alignedFFTData AT 0
+ADATA END */

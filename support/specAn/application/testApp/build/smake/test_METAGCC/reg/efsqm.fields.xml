@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registerFields xmlns="http://ch.imgtec.org/uccTools/registerFields-1"
+                version="2">
+
+  <!-- Image set: efsqm.default -->
+  <imageSet name="efsqm"
+            paramSet="default">
+
+    <deviceGroup name="efsResources"
+                 block="PMR_UCC_EFS">
+      <register name="UCC_EFS_OFX_INPUT_0_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="OF_SOURCE0_SEL_0"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_1_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="OF_SOURCE1_SEL_0"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_2_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="OF_SOURCE2_SEL_0"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_OFX_SOURCE0_VECTOR_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="OF_SOURCE0_VECTOR_0"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_OFX_SOURCE1_VECTOR_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="OF_SOURCE1_VECTOR_0"
+               value="0x00000004"/>
+      </register>
+      <register name="UCC_EFS_OFX_SOURCE2_VECTOR_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="OF_SOURCE2_VECTOR_0"
+               value="0x00000006"/>
+      </register>
+      <register name="UCC_EFS_MCP0_FLAG_SOURCEN_0">
+        <!-- mcpos0.mcposOr -->
+        <field name="MCP0_FLAG_SOURCE_0"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_0_0">
+        <!-- SCPPipeline.mcpos.yieldAnd -->
+        <field name="AF_SOURCE0_SEL_0"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_1_0">
+        <!-- SCPPipeline.mcpos.yieldAnd -->
+        <field name="AF_SOURCE1_SEL_0"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_2_0">
+        <!-- SCPPipeline.mcpos.yieldAnd -->
+        <field name="AF_SOURCE2_SEL_0"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_0_1">
+        <!-- SCPPipeline.mcpos.scpAnd -->
+        <field name="AF_SOURCE0_SEL_1"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_1_1">
+        <!-- SCPPipeline.mcpos.scpAnd -->
+        <field name="AF_SOURCE1_SEL_1"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_2_1">
+        <!-- SCPPipeline.mcpos.scpAnd -->
+        <field name="AF_SOURCE2_SEL_1"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_0_2">
+        <!-- SCPPipeline.mcpos.jobAnd -->
+        <field name="AF_SOURCE0_SEL_2"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_1_2">
+        <!-- SCPPipeline.mcpos.jobAnd -->
+        <field name="AF_SOURCE1_SEL_2"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_2_2">
+        <!-- SCPPipeline.mcpos.jobAnd -->
+        <field name="AF_SOURCE2_SEL_2"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_0_1">
+        <!-- SCPDevice.scpOut.inOr -->
+        <field name="OF_SOURCE0_SEL_1"
+               value="0x00000003"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_1_1">
+        <!-- SCPDevice.scpOut.inOr -->
+        <field name="OF_SOURCE1_SEL_1"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_2_1">
+        <!-- SCPDevice.scpOut.inOr -->
+        <field name="OF_SOURCE2_SEL_1"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_OFX_SOURCE0_VECTOR_1">
+        <!-- SCPDevice.scpOut.inOr -->
+        <field name="OF_SOURCE0_VECTOR_1"
+               value="0x00000005"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_0_9">
+        <!-- SCPPipeline.SCP.scpOut.inAnd -->
+        <field name="AF_SOURCE0_SEL_9"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_1_9">
+        <!-- SCPPipeline.SCP.scpOut.inAnd -->
+        <field name="AF_SOURCE1_SEL_9"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_2_9">
+        <!-- SCPPipeline.SCP.scpOut.inAnd -->
+        <field name="AF_SOURCE2_SEL_9"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_0_2">
+        <!-- irqGen0.irqOr -->
+        <field name="OF_SOURCE0_SEL_2"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_1_2">
+        <!-- irqGen0.irqOr -->
+        <field name="OF_SOURCE1_SEL_2"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_OFX_INPUT_2_2">
+        <!-- irqGen0.irqOr -->
+        <field name="OF_SOURCE2_SEL_2"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_OFX_SOURCE0_VECTOR_2">
+        <!-- irqGen0.irqOr -->
+        <field name="OF_SOURCE0_VECTOR_2"
+               value="0x00000007"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_0_6">
+        <!-- SCPPipeline.irqGen.finalAnd -->
+        <field name="AF_SOURCE0_SEL_6"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_1_6">
+        <!-- SCPPipeline.irqGen.finalAnd -->
+        <field name="AF_SOURCE1_SEL_6"
+               value="0x00000002"/>
+      </register>
+      <register name="UCC_EFS_AFX_INPUT_2_6">
+        <!-- SCPPipeline.irqGen.finalAnd -->
+        <field name="AF_SOURCE2_SEL_6"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_EFS_MTX_INTERRUPT_SOURCE">
+        <field name="MTX_FLAG_SOURCE"
+               value="0x00000002"/>
+      </register>
+    </deviceGroup>
+
+    <deviceGroup name="numQueues"
+                 block="PMR_UCC_QM">
+      <register name="UCC_QM_PERIP_CONTROL_1">
+        <field name="NUM_D32_QUEUES"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_QM_PERIP_CONTROL_2">
+        <field name="NUM_D16_QUEUES"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_QM_PERIP_CONTROL_3">
+        <field name="NUM_D8_QUEUES"
+               value="0x00000000"/>
+      </register>
+      <register name="UCC_QM_PERIP_CONTROL_4">
+        <field name="NUM_D4_QUEUES"
+               value="0x00000009"/>
+      </register>
+    </deviceGroup>
+
+  </imageSet>
+
+</registerFields>

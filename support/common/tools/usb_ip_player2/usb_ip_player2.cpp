@@ -1,0 +1,11 @@
+// usb_ip_player2.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+
+
+int _tomain(int argc, _TCHAR* argv[])
+{
+	return 0;
+}
+

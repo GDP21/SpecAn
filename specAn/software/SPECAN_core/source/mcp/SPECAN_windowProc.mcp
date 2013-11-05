@@ -1,0 +1,49 @@
+//***************************************************************************
+// Spectrum Analyser window function
+//***************************************************************************
+
+SECTION CODE PARTIAL
+//******************************************
+//
+// Adapted from...
+//
+// _VECmul_cdc: element by element multiply of complex and double precision vectors with scaling
+//
+// OUT = (IN * WINDOW)* 2**SCALE
+//
+// RESTRICTIONS: _LENGTH > 0
+//
+//*******************************************
+SPECAN_windowProc: FUNCTION
+    INTERFACE
+        AP0 = _IN
+        AP1 = _WINDOW
+        AP2 = _OUT - 4
+        AP3 = _LENGTH_PTR
+        DS0 = (_SCALE) << (MEMBITS - 6)
+        L1R = 4
+    INTERFACE END
+    
+    LOADADDRESS AP3, AP3, INC_Z             /* dereference length */
+    
+    FENCE
+    
+    CALCADDR L1R, L1R, AP3
+
+    CALCADDR    SHO, CALC_Z, CALC_P1                    // SHO <-- 1
+    L1START
+
+        LOADINDEXED CMPLX, L1, DM0, AP0, L1, MULT_P1
+        COMBINENULL
+
+        LOADINDEXED DBL, L1, DM4, AP1, L1, MULT_P1
+        SCALE       EN_1111, OCOMB0, DS0
+
+        MULTYPE2     DM0, DM4
+        STOREINDEXED CMPLX, L1, OSCALE0, AP2, L1, MULT_P1
+        LSHODEC
+        L1END4
+        RETURN
+
+FUNCTION END
+SECTION END

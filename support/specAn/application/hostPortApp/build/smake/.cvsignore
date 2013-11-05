@@ -1,0 +1,7 @@
+debug_METAGCC
+test_METAGCC
+release_METAGCC
+docs
+include
+lib
+obj

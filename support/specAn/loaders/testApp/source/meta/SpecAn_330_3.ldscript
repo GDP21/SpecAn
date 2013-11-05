@@ -1,0 +1,49 @@
+/*
+* Linker script file for fine control of 
+* memory placement in typical UCCP systems.
+*/
+SECTIONS
+{
+	.corecode :
+	{
+	}
+	.coredata :
+	{
+		* ( .* : __UFW_fastPool)
+	}
+	.gramcode :
+	{
+	}
+	.grampkdraw :
+	{
+	}
+	.grampkdcached :
+	{
+	} 
+	.gramdbl :
+	{
+		* ( .* : __UFW_gramPool)
+		* ( .* : _traceBufferSpace)
+	}
+	.gramsxt :
+	{
+	}
+	.gramcpx :
+	{
+	}
+	.extcode :
+	{
+	}
+	.extraw :
+	{
+		* ( .* : __UFW_uncachedPool )
+	}
+	.extcached :
+	{
+		* ( .* : __UFW_normalPool )
+		/* * ( .logbuffer ) */
+	}
+	.msgbuffs :
+	{
+	}
+}

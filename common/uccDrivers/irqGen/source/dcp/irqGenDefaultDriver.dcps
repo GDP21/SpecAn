@@ -1,0 +1,10 @@
+;
+; File		irqGenDefaultDriver.dcp
+; Brief		Default irqGen member driver
+;
+; Copyright (c) Imagination Technologies Limited.
+; All Rights Reserved.
+; Strictly Confidential.
+;
+driver irqGenDefaultDriver member irqGenGroup
+end

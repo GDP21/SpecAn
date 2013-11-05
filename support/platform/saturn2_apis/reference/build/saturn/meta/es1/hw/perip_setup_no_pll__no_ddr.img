@@ -1,0 +1,21 @@
+/* Create TBI data structure (used by MeOS) */
+TBI INT  THREAD 0
+TBI BGND THREAD 0
+TBI INT  THREAD 1
+TBI BGND THREAD 1
+
+/* Turn off circular buffers  - DVB-H Link-Layer circular buffering registers (documented in the UCCP320 TRM).  */
+/* They are on by default for backward compatibility reasons, but will default to off for all except DVBH- RS/TS Demux from UCCP330 */
+MWR 0x0200061C 0x00000000
+MWR 0x0200065C 0x00000000
+MWR 0x0200066C 0x00000000
+MWR 0x0200068C 0x00000000
+MWR 0x0200069C 0x00000000
+MWR 0x020006AC 0x00000000
+MWR 0x020006BC 0x00000000
+MWR 0x020006CC 0x00000000
+MWR 0x020006DC 0x00000000
+MWR 0x020006EC 0x00000000
+
+MPAUSE 7000
+

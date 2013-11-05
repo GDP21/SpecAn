@@ -1,0 +1,92 @@
+//***************************************************************************
+// Loop control function for the Spectrum Analyser MCP code
+//***************************************************************************
+
+SECTION CODE PARTIAL
+SPECAN_loopCtrl: FUNCTION
+    // This function has no interface: SPECAN_loopCtrl_consts must be loaded before calling
+	
+    // Store 0 into queueNewSCPJob as a default
+    STORE DBL, DP5, AP2, INC_Z
+	
+	// Decrement inner loop count unconditionally (if wrapping, this will be
+	// over-wridden below)
+    LOAD DBL, DP0, AP0, INC_Z // ..Get inner loop count value in DP0
+	
+    DSUBCOND CMP_EQ, CND_FMT_EO, DP0, DP4 // ..decrement count and set condition flag if result = 0.  Result in OPADD0.
+    STORE DBL, DP5, AP3, INC_Z // Store 0 to doOuterLoopProc as default, may be over-written below
+    
+    CALCSWPI noOuterLoopProcFlagging
+
+    LOAD DBL, DP8, AP1, INC_Z // ..Get outer loop count value in DP8, for use later
+        
+    // ..Store decremented inner loop count value
+    STORE DBL, OPADD0, AP0, INC_Z
+    // Only flag doOuterLoopProc if decremented inner loop counter was 0 (i.e. next iteration
+    // will be iteration 0 of inner loop counter)
+    JUMPNC
+    
+    // If we end up here then inner loop counter is going to wrap next time through
+    
+    STORE DBL, DP4, AP3, INC_Z	// ..Store 1 to doOuterLoopProc
+    // If outer loop counter is on 0 then we are finishing next time around.  Exit here to avoid queueing a new SCP
+    // job.
+    DCOND CMP_EQ, CND_FMT_EO, OPADD4, DP8
+    
+    RETURNC
+    
+noOuterLoopProcFlagging:
+	CALCSWPI innerLoopWrap
+	
+	// Decremented inner loop count is still in OPADD0.  If this is below zero, counter has wrapped
+	DCOND CMP_LT, CND_FMT_EO, OPADD0, OPADD0
+	
+	JUMPC
+	
+	CALCSWPI postNewJob
+	
+	JUMP
+	
+innerLoopWrap:
+	// Inner loop needs to wrap, and outer loop needs to decrement
+    LOAD DBL, DP0, AP4, INC_Z // ..Get inner loop load value in DP0
+	
+	STORE DBL, DP0, AP0, INC_Z // ..store back to averagingPeriod_innerLoopCount
+	
+    DSUBCOND CMP_LT, CND_FMT_EO, DP8, DP4 // ..decrement outer loop count and set condition flag if result < 0.  Result in OPADD0.
+	CALCSWPI postNewJob
+	
+	STORE DBL, OPADD0, AP1, INC_Z // .. store decremented outer loop counter
+	
+	JUMPNC
+	
+	// Outer loop counter has wrapped, interrupt Meta and return without posting a new job
+	LOAD DBL, DP3, AP6, INC_Z // ..get jobID to be placed on interrupt queue
+	
+	STOREPERIPH DBL, DP3, AP5, INC_Z // ..store to interrupt queue
+	
+	RETURN
+
+postNewJob:
+    // Store 1 into queueNewSCPJob, this will cause the job to be queued in SPECAN_processSCPqueues.
+    STORE DBL, DP4, AP2, INC_Z
+	
+    RETURN
+FUNCTION END
+SECTION END
+
+
+SPECAN_loopCtrl_consts SECTION INITIALISED_DATA PARTIAL LDATA
+    AP0: averagingPeriod_innerLoopCount
+    AP1: averagingPeriod_outerLoopCount
+    AP2: queueNewSCPJob
+    AP3: doOuterLoopProc
+    AP4: averagingPeriod_innerLoop
+metaInterruptQptr:
+    AP5: 0  // Value filled in by Meta
+    AP6: fragmentCompleteJobID
+    SHO: 0
+    SWP: SPECAN_loopCtrl
+    DP4: 1
+    DP5: 0
+SECTION END

@@ -1,0 +1,24 @@
+/****************************************/
+/* Configure the PLL and clock dividers */
+/****************************************/
+
+/* ********** */
+/* 199.959MHz output from 24.576 Crystal ************* WARNING - if this is modified, please also modify the TIMERCONFIG value below */
+/* ********** */
+MWR 0x02015908 0x00000000 /* CR_TOP_CLKSWITCH   - Ensure Clk source is XTAL not PLL */
+MPAUSE 1000               /* 			- Wait for the switch over to happen*/
+MWR 0x02015954 0x1600000A /* CR_TOP_SYSPLL_CTL1 - Put the PLL into reset */ 
+/* Set dividers first */
+MWR 0x020159AC 0x00000000 /* CR_TOP_DDRCLKDIV   - Set to 1 to divide by 2, or 0 for DDR = Meta Freq */
+MWR 0x02015918 0x00000001 /* CR_TOP_META_CLKDIV - Turn on the clock divide to get 100MHz (UCCs and Peripherals)*/
+MWR 0x02015950 0x10B02182 /* CR_TOP_SYSPLL_CTL0 - Part of the Pll config for 200MHz */
+MPAUSE 1000               /* 			- Wait for a bit */ 
+MWR 0x02015954 0x0600000A /* CR_TOP_SYSPLL_CTL1 - Take the PLL out of reset */
+MWR 0x02015954 0x0400000A /* CR_TOP_SYSPLL_CTL1 - Take the PLL out of bypass */
+MPAUSE 2000               /* 			- Wait for a bit more */
+MWR 0x02015908 0x00000002 /* CR_TOP_CLKSWITCH   - Switch from XTAL to PLL */
+
+MPAUSE 7000
+
+/* Timer Clock Configuration - Must be set to (core clock rate - 1) */
+MWR 0x04830140 199 /* TIMERCONFIG */

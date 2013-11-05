@@ -1,0 +1,179 @@
+//***************************************************************************
+//
+// File     mcpos.mcp
+// Brief    MCPOS MCP component
+//
+// Copyright (c) Imagination Technologies Limited.
+// All Rights Reserved.
+// Strictly Confidential.
+//
+// This forms the "main" program of an MCP based system.
+//
+// This must be placed at address 0, so it is in its own section with the
+// ENTRY attribute.
+//
+//***************************************************************************
+
+MCPOS_SYMBOLS SECTION SYMBOLS 
+    MCPOS_JOB_WORDS:    	6
+    QUEUE_HEAD_ADDR:    	QM_PERIP_HEAD_0
+    MCPOS_SCRATCH_LENGTH: 	3
+SECTION END
+
+MAIN SECTION CODE ENTRY
+
+    // Load work constants, to make the first time look the same
+    LOADMULTIPLEI DBL, mcposWorkConsts
+
+mcposForever:
+
+    //
+    // Fence the EFS propagation delay.
+    // MCPOS posts into nextQ immediately before branching back to this
+    // dispatcher. We need to ensure the result of this has propagated
+    // through EFS resources before deciding on what to dispatch next. This
+    // fencing is achieved by executing the following sequence of
+    // instructions.
+    //
+    
+    // Load into an address register that's interlocked
+    LOADADDRESSPERIPH L1R, AP3, INC_Z
+    
+    // Make use of what was loaded above
+    CALCADDR L1R, L1R, CALC_Z
+    
+    // Repeat twice ...
+    
+    LOADADDRESSPERIPH L1R, AP3, INC_Z
+    
+    CALCADDR L1R, L1R, CALC_Z
+    
+    LOADADDRESSPERIPH L1R, AP3, INC_Z
+    
+    CALCADDR L1R, L1R, CALC_Z
+
+    // WAIT on the mcposOr flag
+    WAIT
+    
+    // Read from the mcposOr vector register.
+    // This will contain the queue number of the highest priority queue.
+    LOADADDRESSPERIPH AP3, AP0, INC_Z
+    
+    FENCE
+    
+    // Add the base address of the queue head register
+    CALCADDR AP3, AP2, AP3
+    
+    // Read the address of the job block from the queue
+    LOADADDRESSPERIPH AP4, AP3, INC_Z
+    
+    // Fetch item off the queue
+    STOREPERIPH DBL, DP0, AP3, INC_Z
+    
+    FENCE
+    
+    // Load job's AP7, SWP, nextJobData and nextQ
+    LOADMULTIPLEA DBL, AP4, AP7|SWP|DP0|DP1
+
+    /******* ISCR COUNTER READ ***********/
+    // Load the ISCR counter register address
+    CALCADDR AP3, AM0, CALC_Z
+
+    // Load the lowest 24 bits of iscr_counter value 
+    LOADPERIPH DBL, DP8, AP3, INC_P1
+
+    // Store the lowest 24 bits of iscr_counter value in job descriptor 
+    STORE DBL, DP8, AP4, INC_P1
+    
+    // Save address of iscr end counter in scratch buffer
+    STOREADDRESS AP4, AP1, INC_P1
+    
+    // Log the job start
+#ifdef MCPOS_DCP_LOGGING
+	CALCADDR AP5, CALC_Z, AM1
+
+    STOREADDRESSPERIPH SWP, AP5, INC_Z
+#endif
+    
+    // Store nextJob and nextQ for later
+    STOREINDEXED DBL, IMM2, DP0, AP1, AI0, MULT_P1
+    // Call the MCP job
+    CALL
+    
+    // Load work constants
+    LOADMULTIPLEI DBL, mcposWorkConsts
+
+	// Log the job end
+#ifdef MCPOS_DCP_LOGGING
+	CALCADDR AP5, CALC_Z, AM1 
+	
+	STOREPERIPH DBL, DP0, AP5, INC_Z
+#endif
+
+    // Reload nextJob and nextQ
+    LOADMULTIPLEA DBL, AP1, AP4|AP5|AP6
+
+    /******* ISCR COUNTER READ ***********/
+    // Load the ISCR counter register address
+    CALCADDR AP3, AM0, CALC_Z
+
+    // Load the lowest 24 bits of iscr_counter value 
+    LOADPERIPH DBL, DP8, AP3, INC_P1
+
+    // Store the lowest 24 bits of iscr_counter value in job descriptor 
+    STORE DBL, DP8, AP4, INC_P1
+    
+    // Rewind Pointer to mcposScratch
+    CALCADDR AP1, AI2, AP1
+    
+    // Store nextJob into nextQ
+    STOREADDRESSPERIPH AP5, AP6, INC_Z
+    
+    // Loop forever
+    JUMP
+
+SECTION END
+    
+SECTION INITIALISED_DATA PARTIAL LDATA
+
+    mcposWorkConsts:
+        // Address of mcposOr vector register (filled in at run-time)
+        AP0: 0
+        // Address of scratch buffer
+        AP1: mcposScratch
+        // Base address of queue head registers
+        AP2: QUEUE_HEAD_ADDR
+        // Address of QM_PERIP_BUILD_0 register. Used for EFS propagation
+        // delay fencing.
+        AP3: QM_PERIP_BUILD_0
+        // Zero increment
+        AI0: 0
+        // rewind value for mcposScratch
+        AI2: -MCPOS_SCRATCH_LENGTH
+        // Address of the ISCR register
+        AM0: SCP_ISCR_COUNTER0
+#ifdef MCPOS_DCP_LOGGING
+        // Address of the mcposLogQ tail register (filled in at run-time)
+        AM1: 0
+#endif
+        // Need to ensure this is zeroed after a job is run.
+        // Otherwise, if a job returned with a non-zero SHO, this would
+        // inhibit our posting into nextQ. Also, as a policy, ensure this is
+        // zero before any job is called.
+        SHO: 0
+        // PC location to loop forever
+        SWP: mcposForever
+        // As a policy ensure this is zero before any job is called
+        MHO: 0
+#ifdef MCPOS_DCP_LOGGING
+		// Value used to denote a job end
+		DP0: 0xffffff
+#endif
+
+SECTION END
+
+SECTION UNINITIALISED_DATA PARTIAL LDATA
+
+    mcposScratch: MCPOS_SCRATCH_LENGTH
+
+SECTION END

@@ -1,0 +1,8 @@
+UNIT_TYPE=MOD
+UNIT_NAME=max2172_tuner
+
+C_SRC=max2172_tuner.c max_scbm$(PORT_DRIVER_SUFFIX).c 2172_Driver.c
+
+GLOBAL_OPTIONS+=ERROR_ON_WARNING
+
+include $(SMAKE_ROOT)/smake.mk

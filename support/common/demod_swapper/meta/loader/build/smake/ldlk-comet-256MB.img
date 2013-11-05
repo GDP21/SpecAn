@@ -1,0 +1,95 @@
+/******************************************************************************
+*
+*               file : $RCSfile: ldlk-comet-256MB.img,v $
+*             author : $Author: michael.melbourne $
+*  date last revised : $Date: 2011/01/13 14:45:56 $
+*    current version : $Revision: 1.1 $
+*
+*    copyright       : 2009 by Imagination Technologies. All rights reserved.
+*                      No part of this software, either material or conceptual
+*                      may be copied or distributed, transmitted, transcribed,
+*                      stored in a retrieval system or translated into any
+*                      human or computer language in any form by any means,
+*                      electronic, mechanical, manual or otherwise, or
+*                      disclosed to third parties without the express written
+*                      permission of:
+*                        Imagination Technologies, Home Park Estate,
+*                        Kings Langley, Hertfordshire, WD4 8LZ, U.K.
+*
+*        description :  Comet eval board img file
+*
+******************************************************************************/
+
+
+METAC 2 1
+
+MAP 0x0000C000 FROM bootrom	BASE 0xE0000000	 OFFSET 0x00000000 ATTR WM0 /* Map whole of bootrom 1:1 */
+MAP 0x00000200 FROM bootpatch	BASE 0xE0200000	 OFFSET 0x00000000 ATTR WM0 /* Map bootpatch area 1:1 */
+MAP 0x0005FE00 FROM system_sram	BASE 0xE0200200	 OFFSET 0x00000000 ATTR WM0 /* System sram */
+MAP 0x00050000 FROM ucc0_mtx	BASE 0xE0260000  OFFSET 0x00000000 ATTR WM0 /* ucc0 core memory */
+MAP 0x00050000 FROM ucc1_mtx	BASE 0xE0300000  OFFSET 0x00000000 ATTR WM0 /* ucc1 core memory */
+
+/* TBI strings for MTX loading mappins */
+TBI STR META_ON_CHIP_PHYSICAL_BASE	0xE0200000
+TBI STR META_ON_CHIP_LOGICAL_BASE	0xE0200000
+TBI STR META_ON_CHIP_MEMORY_SIZE	0x00150000	/* 0xE0200000 to 0xE0350000, with gaps! */
+
+/* TBI strings for demod_swapper */
+TBI STR UCC0_CORE_LOGICAL_BASE			 0xC0060000	
+TBI STR UCC1_CORE_LOGICAL_BASE			 0xC0100000	
+TBI STR UCC_BULK_LOGICAL_BASE			 0xA0000000	
+
+MAP	0x0EC00000 FROM sdram THREAD 1 BASE 0x40000000 OFFSET 0x00000000 /* Keep to 4MB bound */
+MAP	0x00300000 FROM sdram THREAD 1 BASE 0x60800000 OFFSET 0x0EC00000
+MAP	0x00100000 FROM sdram 	       BASE 0xc0000000 OFFSET 0x0EF00000 ATTR WM0
+
+MAP	0x00400000 FROM sdram_uncached THREAD 0 BASE 0x20880000 OFFSET 0x00000000 ATTR WM0 /* MiniM code space */
+MAP	0x00400000 FROM sdram_uncached	        BASE 0xA0000000 OFFSET 0x00400000 ATTR WM0 /* UCC1 bulk memory */
+MAP	0x00050000 FROM ucc1_mtx                BASE 0xC0100000 OFFSET 0x00000000 ATTR WM0 /* 0xE0300000 for 0x00050000 bytes */
+
+TBI BGND THREAD 1 CCB 64
+TBI INT THREAD 1 CCB 64 
+
+TBI BGND THREAD 0 CCB 64
+TBI INT THREAD 0 CCB 64 
+
+/* Set Caches to 16K */
+
+DCACHE SIZE 0x00004000	
+ICACHE SIZE 0x00004000
+/* 
+   *********** WARNING ****************
+
+   This cache layout is only valid if we esure that T0 never uses any cached memory
+   ie all its PTE's must be marked as uncached (WIN0)
+
+   PARTITION THE CACHES:
+   all for  T0
+   none for T1
+   none for Global Space
+*/
+
+DCACHE	PARTITION  LOCAL  THREAD 1  OFFSET 0x0000 SIZE 0x4000
+ICACHE	PARTITION  LOCAL  THREAD 1  OFFSET 0x0000 SIZE 0x4000
+
+
+THREAD 0 LAYOUT MINIM
+THREAD 1 LAYOUT META
+
+/*EXEC boot.elf		THREAD 1 BASE 0x60800000
+STACK 0x10000		THREAD 1 BASE 0x608d0000*/
+
+EXEC demod_swapper.elf	THREAD 0 BASE 0x20880000
+STACK 0x10000		THREAD 0 BASE 0x20C70000
+
+/*HEAP 0x0EC00000		THREAD 1 BASE 0x40000000 INIT 0*/
+
+GBLHEAP 0x4000		BASE 0xE025B000
+
+OUTPUT boot.ldr
+
+/* Make all executing threads privileged */
+MWR 0x04800010 0x00020000 /* Thread 0 */
+MWR 0x04801010 0x00020000 /* Thread 1 */ 
+
+MWR 0x048010E8 0x00000000

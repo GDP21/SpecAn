@@ -1,0 +1,65 @@
+/* Local thread ELF files */
+EXEC  scpDriverTest.elf THREAD 0 CODE 0x30880000 DATA 0x30C80000
+HEAP  0x018000  THREAD 0 BASE 0x30CA0000
+STACK 0x004000  THREAD 0 BASE 0x30CB8000
+
+GLOBAL gram.elf   BASE 0xb4000000
+
+/*
+ * Setup emulator memory system to model that in SIS device 
+ */
+ 
+/* RETURN_LATENCY = 0x14 = 10 */
+MWR 0x02007108 0x0000000A
+
+/* BURST_GAP = 0x1E = 30
+ * BURST_LEN = 0x20 = 32
+ * BURST_COLLECT = 0 (don't collect bursts over BURST_LEN)
+ * BURST_BREAK = 1 (break burst on non-linear access)
+ * BURST_ENABLE = 1
+ */
+MWR 0x0200710C 0x001E2003
+
+/* 
+ * Setup SOC fabric settings to work well with SIS memory configuration 
+ */
+ 
+/* CR_EXTOPT_UPDATE = 0 */
+MWR 0x02008270 0x00000000
+
+/* CR_EXTOPT_REQ_GRP_CRITICAL = 2 (EDC given highest priority) */
+MWR 0x02008260 0x00000002
+
+/* 
+ * CR_EXTOPT_BURST_LENGTH_MAX_M1_1 = 0x1F (EDC burst length = 32) 
+ * CR_EXTOPT_BURST_TIMEOUT1 = 0xFF (EDC burst timeout = 255)
+ */
+MWR 0x02008224 0x001F00FF
+
+/* CR_EXTOPT_UPDATE = 1 */
+MWR 0x02008270 0x00000001
+
+
+/*
+ * Setup emulator Kuroi layer to specify playout clock rate appropriately 
+ */
+/* OSC_CLK_DIV=8 */
+MWR 0x02008750 0x00000032
+
+/* ADC_FIFO_CTRL, set bit 0 and 9 */
+MWR 0x02008400 0x00000201
+
+/* TIMERCONFIG=999 (running at equivalent of 1GHz) */
+MWR 0x04830140 0x000003e7
+
+/* Not sure why, but we seem to need to pause here for the memory or SOC optimiser config to take effect */
+MPAUSE 1000
+
+/* Place global heap at top of ext RAM */
+GBLHEAP 0x8000 BASE 0xB1FF8000
+
+/* Declare TBI root blocks */
+TBI  BGND  THREAD 0 CCB 32
+TBI  INT   THREAD 0 CCB 32
+TBI  BGND  THREAD 1 CCB 32
+TBI  INT   THREAD 1 CCB 32
