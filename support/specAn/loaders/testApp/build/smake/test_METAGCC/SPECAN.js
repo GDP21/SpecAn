@@ -307,7 +307,7 @@ function PostLoadConfig()
 	thread = GetFirstThread();
 	SelectTarget(thread);
 	// Zero section '.lheap'
-	InitMemory(0x380429C0, 0x4, 0x1000, 0x00000000, 0x00000000);
+	InitMemory(0x380429D8, 0x4, 0x1000, 0x00000000, 0x00000000);
 	// Zero section '.stack'
 	InitMemory(0x82000000, 0x4, 0x800, 0x00000000, 0x00000000);
 	// Zero section '.gheap'

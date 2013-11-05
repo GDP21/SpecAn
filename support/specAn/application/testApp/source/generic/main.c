@@ -158,13 +158,12 @@ typedef struct
     int32_t             RSSICurrent;
     int32_t             RSSI;
     int8_t              rssi; //new variable 05/11/13
-    int8_t              rssimax = 0;
+    int8_t              rssimax; //
     //int32_t             freq_rssi;
     
 } SPECAN_APP_STATUS_T;
 
 volatile SPECAN_APP_STATUS_T appStatus;
-
 /*-----------------------------------------------------------------------------*/
 int32_t testRSSI = 500000;
 static void setupScan()
@@ -261,9 +260,9 @@ int main()
             int8_t rssiTmp;
             rssiTmp = (int8_t)(TVTUNER_readRFPower(SPECAN_topCtx.tvInstance) & 0x000000FF);
             appStatus.rssi = rssiTmp;
-            if (rssiTmp > rssimax)
+            if (rssiTmp > appStatus.rssimax)
             {
-            rssimax = rssiTmp;
+            appStatus.rssimax = rssiTmp;
             }
         }
         
